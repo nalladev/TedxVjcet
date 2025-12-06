@@ -31,8 +31,8 @@ export default function Home() {
 
   // Timer Logic
   useEffect(() => {
-    // Target: Jan 1st, 2026 (Updated to be in the future)
-    const targetDate = new Date('2026-01-01T00:00:00').getTime();
+    // Target: Thursday, December 12, 2025 at 4 PM for website launch
+    const targetDate = new Date('2025-12-12T16:00:00').getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
