@@ -5,10 +5,10 @@ import { Calendar, MapPin, ArrowRight } from "lucide-react";
 
 // Custom Instagram Icon Component (from Simple Icons)
 const InstagramIcon = ({ size = 20, className = "" }) => (
-  <svg 
-    width={size} 
-    height={size} 
-    viewBox="0 0 24 24" 
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
     fill="currentColor"
     className={className}
   >
@@ -57,7 +57,7 @@ export default function Home() {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       clearTimeout(timer);
       window.removeEventListener('mousemove', handleMouseMove);
