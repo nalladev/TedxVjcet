@@ -58,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${firaCode.variable} antialiased font-inter`}
+        className={`${inter.variable} ${firaCode.variable} antialiased`}
       >
         {children}
       </body>

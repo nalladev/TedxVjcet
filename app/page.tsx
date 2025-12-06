@@ -35,10 +35,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-red-50 to-red-600 flex items-center justify-center p-4 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-white via-red-50 to-red-600 flex items-center justify-center p-6 md:p-4 font-inter">
       <div className="text-center max-w-4xl mx-auto">
         {/* TEDx Logo/Branding */}
-        <div className="mb-8">
+        <div className="mb-10 md:mb-12">
           <Image
             src="/tedx/logo-black.png"
             alt="TEDx VJCET Logo"
@@ -50,54 +50,67 @@ export default function Home() {
         </div>
 
         {/* Main Message */}
-        <div className="space-y-8 mb-8">
-          <h2 className="text-4xl md:text-5xl font-extralight text-gray-800 leading-tight tracking-wide">
-            Ideas ❤️ Worth
-            <span className="block text-red-700 font-bold">Spreading</span>
-          </h2>
+        <div className="space-y-6 md:space-y-8 mb-14 md:mb-16">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-800 leading-tight tracking-wide">
+            Ideas❤️ Worth
+            <span className="block text-red-700 font-semibold">Spreading</span>
+          </h1>
 
-          <p className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed font-normal">
             Something extraordinary is coming to VJCET.
-            <span className="block mt-2 text-red-700 font-medium">Stay tuned for an unforgettable experience.</span>
+            <span className="block mt-3 text-red-700 font-semibold">Stay tuned for an unforgettable experience.</span>
           </p>
         </div>
 
         {/* Countdown Timer */}
-        <div className="mb-12">
-          <div className="text-lg text-gray-700 mb-4 font-medium">Event Date: January 3rd, 2026</div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-md mx-auto">
-            <div className="bg-white/20 backdrop-blur-sm border border-red-600/30 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-red-700">{timeLeft.days}</div>
-              <div className="text-sm text-gray-600 font-medium">Days</div>
+        <div className="mb-16">
+          <div className="text-sm md:text-base text-gray-600 mb-6 md:mb-8 font-medium tracking-wide">Website Launch Countdown</div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-lg md:max-w-3xl mx-auto">
+            <div className="text-center bg-white/40 backdrop-blur-sm border border-red-200 rounded-lg p-3 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-xl md:text-4xl font-bold text-red-700 mb-1">
+                {timeLeft.days}
+              </div>
+              <div className="text-xs md:text-sm text-gray-500 font-semibold uppercase tracking-wider">Days</div>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm border border-red-600/30 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-red-700">{timeLeft.hours}</div>
-              <div className="text-sm text-gray-600 font-medium">Hours</div>
+
+            <div className="text-center bg-white/40 backdrop-blur-sm border border-red-200 rounded-lg p-3 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-xl md:text-4xl font-bold text-red-700 mb-1">
+                {timeLeft.hours}
+              </div>
+              <div className="text-xs md:text-sm text-gray-500 font-semibold uppercase tracking-wider">Hours</div>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm border border-red-600/30 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-red-700">{timeLeft.minutes}</div>
-              <div className="text-sm text-gray-600 font-medium">Minutes</div>
+
+            <div className="text-center bg-white/40 backdrop-blur-sm border border-red-200 rounded-lg p-3 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-xl md:text-4xl font-bold text-red-700 mb-1">
+                {timeLeft.minutes}
+              </div>
+              <div className="text-xs md:text-sm text-gray-500 font-semibold uppercase tracking-wider">Minutes</div>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm border border-red-600/30 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-red-700">{timeLeft.seconds}</div>
-              <div className="text-sm text-gray-600 font-medium">Seconds</div>
+
+            <div className="text-center bg-white/40 backdrop-blur-sm border border-red-200 rounded-lg p-3 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-xl md:text-4xl font-bold text-red-700 mb-1">
+                {timeLeft.seconds}
+              </div>
+              <div className="text-xs md:text-sm text-gray-500 font-semibold uppercase tracking-wider">Seconds</div>
             </div>
           </div>
         </div>
 
-        {/* Coming Soon Badge */}
-        <div className="inline-flex items-center gap-3 bg-white/30 border border-red-600/50 rounded-full px-8 py-4 backdrop-blur-sm mb-8">
-          <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
-          <span className="text-red-800 font-semibold text-lg tracking-wide">Website Coming Soon</span>
+        {/* Event Info */}
+        <div className="mb-12 md:mb-14">
+          <div className="text-sm md:text-base text-gray-600 font-medium">
+            Event Date: <span className="text-red-700 font-bold">January 3rd, 2025</span>
+          </div>
         </div>
 
         {/* Social Media Link */}
-        <div className="mb-16">
+        <div className="mb-14 md:mb-16">
           <a
             href="https://www.instagram.com/tedxvjcet/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 font-medium"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 font-semibold text-xs md:text-sm"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -107,9 +120,9 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <div className="mt-20 text-gray-600 text-sm font-light">
+        <div className="text-gray-500 text-xs font-normal">
           <p>Viswajyothi College of Engineering and Technology</p>
-          <p className="mt-1">Get ready to be inspired</p>
+          <p className="mt-2 font-medium text-gray-600">Get ready to be inspired</p>
         </div>
       </div>
 
