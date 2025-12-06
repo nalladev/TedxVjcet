@@ -18,7 +18,7 @@ export default function Home() {
     setMounted(true);
 
     // Mouse movement for subtle parallax
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePos({
         x: (e.clientX / window.innerWidth) * 20 - 10,
         y: (e.clientY / window.innerHeight) * 20 - 10,
@@ -63,8 +63,9 @@ export default function Home() {
         .font-bold-display { font-family: 'Anton', sans-serif; }
 
         .stroke-text {
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
-          color: transparent;
+          -webkit-text-stroke: 3px rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.1);
+          text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .grid-bg {
@@ -89,13 +90,15 @@ export default function Home() {
 
       {/* Massive Background Typography (Parallax) */}
       <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-50 select-none"
+        className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-80 select-none z-[1]"
         style={{ transform: `translate(${-mousePos.x}px, ${-mousePos.y}px)` }}
       >
         <h1 className="text-[20vw] font-bold-display stroke-text whitespace-nowrap leading-none tracking-tighter">
           TEDxVJCET
         </h1>
       </div>
+
+
 
       {/* --- Main Content Grid --- */}
       <main className="relative z-10 min-h-screen flex flex-col justify-between p-6 md:p-12 max-w-7xl mx-auto border-x border-white/5 bg-[#050505]/30 backdrop-blur-sm">
