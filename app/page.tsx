@@ -1,7 +1,20 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { Instagram, Calendar, MapPin, ArrowRight, Terminal } from "lucide-react";
+import { Calendar, MapPin, ArrowRight } from "lucide-react";
+
+// Custom Instagram Icon Component (from Simple Icons)
+const InstagramIcon = ({ size = 20, className = "" }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </svg>
+);
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({
@@ -13,9 +26,27 @@ export default function Home() {
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Set mounted flag using a proper pattern
+    const timer = setTimeout(() => setMounted(true), 0);
+
+    // Check if fonts are loaded
+    const checkFonts = async () => {
+      try {
+        await document.fonts.load('400 16px "Space Mono"');
+        await document.fonts.load('400 16px "Anton"');
+        await document.fonts.ready;
+        setFontsLoaded(true);
+      } catch (error) {
+        // Fallback: wait 2 seconds then proceed
+        setTimeout(() => setFontsLoaded(true), 2000);
+      }
+    };
+
+    checkFonts();
 
     // Mouse movement for subtle parallax
     const handleMouseMove = (e: MouseEvent) => {
@@ -26,8 +57,21 @@ export default function Home() {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
+
+  // Check if everything is ready
+  useEffect(() => {
+    if (mounted && fontsLoaded) {
+      // Small delay to ensure smooth transition
+      const readyTimer = setTimeout(() => setIsReady(true), 100);
+      return () => clearTimeout(readyTimer);
+    }
+  }, [mounted, fontsLoaded]);
 
   // Timer Logic
   useEffect(() => {
@@ -53,8 +97,32 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Loading screen
+  if (!isReady) {
+    return (
+      <div className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden flex items-center justify-center">
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+          .font-tech { font-family: 'Space Mono', monospace; }
+          .font-bold-display { font-family: 'Anton', sans-serif; }
+        `}</style>
+        <div className="text-center space-y-6">
+          <div className="flex items-center justify-center space-x-2">
+            <div className="w-3 h-3 bg-[#e62b1e] rounded-full animate-pulse"></div>
+            <div className="w-3 h-3 bg-[#e62b1e] rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+            <div className="w-3 h-3 bg-[#e62b1e] rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+          </div>
+          <p className="font-tech text-gray-400 text-sm tracking-widest">
+            LOADING_TRANSMISSION...
+          </p>
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-[#e62b1e] to-transparent"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden selection:bg-[#e62b1e] selection:text-black">
+    <div className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden selection:bg-[#e62b1e] selection:text-black opacity-0 animate-[fadeIn_0.5s_ease-in_forwards]">
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
@@ -82,6 +150,11 @@ export default function Home() {
 
         .animate-line {
           animation: pulse-line 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
       `}</style>
 
@@ -206,7 +279,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="group flex items-center gap-4 bg-white text-black px-6 py-3 font-bold font-bold-display tracking-wide hover:bg-[#e62b1e] hover:text-white transition-all duration-300"
             >
-              <Instagram size={20} />
+              <InstagramIcon size={20} />
               <span>FOLLOW PROTOCOL</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
