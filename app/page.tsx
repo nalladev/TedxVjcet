@@ -261,7 +261,7 @@ export default function Home() {
 
           {/* Actions & Details */}
           <div className="flex flex-col md:items-end space-y-6">
-            <div className="flex gap-8 text-sm font-tech text-gray-300">
+            <div className="flex gap-4 md:gap-8 text-sm font-tech text-gray-300">
               <div className="flex items-center gap-2">
                 <Calendar size={16} className="text-[#e62b1e]" />
                 {/* Updated Year to 2026 */}
@@ -269,7 +269,14 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-[#e62b1e]" />
-                <span>VJCET_MBA_SEMINAR_HALL</span>
+                <a
+                  href="https://maps.app.goo.gl/2Ki22FMMpcF1HZuU8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className=" underline"
+                >
+                  VJCET_MBA_SEMINAR_HALL
+                </a>
               </div>
             </div>
 
