@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 // Custom Instagram Icon Component (from Simple Icons)
 const InstagramIcon = ({ size = 20, className = "" }) => (
@@ -163,12 +164,13 @@ export default function Home() {
 
       {/* Massive Background Typography (Parallax) */}
       <div
-        className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-80 select-none z-[1]"
+        className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-50 select-none z-[1]"
         style={{ transform: `translate(${-mousePos.x}px, ${-mousePos.y}px)` }}
       >
-        <h1 className="text-[20vw] font-bold-display stroke-text whitespace-nowrap leading-none tracking-tighter">
+        {/*<h1 className="text-[20vw] font-bold-display stroke-text whitespace-nowrap leading-none tracking-tighter">
           TEDxVJCET
-        </h1>
+        </h1>*/}
+        <Image src="/tedx/logo-white.png" alt="TEDxVJCET Logo" width={1500} height={100}/>
       </div>
 
 
@@ -179,10 +181,8 @@ export default function Home() {
         {/* Header Section */}
         <header className="flex justify-between items-start">
           <div className="flex flex-col">
-            <h2 className="text-3xl md:text-5xl font-bold-display tracking-wide">
-              <span className="text-[#e62b1e]">TEDx</span>VJCET
-            </h2>
-            <div className="flex items-center gap-2 mt-2 text-xs font-tech text-gray-500">
+            <Image src="/tedx/logo-white.png" alt="TEDxVJCET Logo" width={250} height={100} className="-translate-x-5" />
+            <div className="flex items-center gap-2 text-xs font-tech text-gray-500">
               <span className="w-2 h-2 bg-[#e62b1e] rounded-full animate-pulse"></span>
               <span>SYSTEM_STATUS: PRE_LAUNCH</span>
             </div>
@@ -190,7 +190,7 @@ export default function Home() {
 
           {/* Decorative Technical Info */}
           <div className="hidden md:block text-right font-tech text-xs text-gray-600">
-             <p>LAT: 9.9506° N</p>
+             <p>LAT: 9.9508° N</p>
              <p>LNG: 76.6317° E</p>
              <p>ID: 2025_EDITION</p>
           </div>
@@ -269,7 +269,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-[#e62b1e]" />
-                <span>VJCET_AUDITORIUM</span>
+                <span>VJCET_MBA_SEMINAR_HALL</span>
               </div>
             </div>
 
