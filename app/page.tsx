@@ -12,7 +12,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2026-01-03T00:00:00').getTime();
+    const targetDate = new Date('2025-12-11T16:00:00').getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
