@@ -1,307 +1,514 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
-import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import React, { useState, useEffect, useRef } from "react";
+// Removed Next.js Image import to fix build error
+import {
+  Calendar, MapPin, ArrowRight, ChevronDown,
+  Ticket, Quote, Instagram, Linkedin, Twitter, Globe
+} from "lucide-react";
 
-// Custom Instagram Icon Component (from Simple Icons)
-const InstagramIcon = ({ size = 20, className = "" }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-  >
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-  </svg>
-);
+// --- Utility Hooks ---
 
-export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
-
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [mounted, setMounted] = useState(false);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+const useMousePosition = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Set mounted flag using a proper pattern
-    const timer = setTimeout(() => setMounted(true), 0);
-
-    // Check if fonts are loaded
-    const checkFonts = async () => {
-      try {
-        await document.fonts.load('400 16px "Space Mono"');
-        await document.fonts.load('400 16px "Anton"');
-        await document.fonts.ready;
-        setFontsLoaded(true);
-      } catch (error) {
-        // Fallback: wait 2 seconds then proceed
-        setTimeout(() => setFontsLoaded(true), 2000);
-      }
+    const updateMousePosition = (ev) => {
+      setMousePosition({ x: ev.clientX, y: ev.clientY });
     };
-
-    checkFonts();
-
-    // Mouse movement for subtle parallax
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth) * 20 - 10,
-        y: (e.clientY / window.innerHeight) * 20 - 10,
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
+    window.addEventListener('mousemove', updateMousePosition);
+    return () => window.removeEventListener('mousemove', updateMousePosition);
   }, []);
 
-  // Check if everything is ready
+  return mousePosition;
+};
+
+const useScrollProgress = (ref) => {
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    if (mounted && fontsLoaded) {
-      // Small delay to ensure smooth transition
-      const readyTimer = setTimeout(() => setIsReady(true), 100);
-      return () => clearTimeout(readyTimer);
-    }
-  }, [mounted, fontsLoaded]);
+    const handleScroll = () => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const totalDistance = rect.height - windowHeight;
 
-  // Timer Logic
-  useEffect(() => {
-    // Target: Thursday, December 12, 2025 at 4 PM for website launch
-    const targetDate = new Date('2025-12-11T16:00:00').getTime();
+      const topOffset = -rect.top;
 
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000)
-        });
+      // Fix for NaN error: Ensure totalDistance is valid and positive
+      let p = 0;
+      if (totalDistance > 0) {
+        p = topOffset / totalDistance;
       }
+
+      // Clamp and safeguard against NaN
+      p = Math.min(Math.max(p, 0), 1);
+      if (Number.isNaN(p)) p = 0;
+
+      setProgress(p);
     };
 
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [ref]);
 
-  // Loading screen
-  if (!isReady) {
-    return (
-      <div className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden flex items-center justify-center">
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-          .font-tech { font-family: 'Space Mono', monospace; }
-          .font-bold-display { font-family: 'Anton', sans-serif; }
-        `}</style>
-        <div className="text-center space-y-6">
-          <div className="flex items-center justify-center space-x-2">
-            <div className="w-3 h-3 bg-[#e62b1e] rounded-full animate-pulse"></div>
-            <div className="w-3 h-3 bg-[#e62b1e] rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-3 h-3 bg-[#e62b1e] rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-          </div>
-          <p className="font-tech text-gray-400 text-sm tracking-widest">
-            LOADING_TRANSMISSION...
-          </p>
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-[#e62b1e] to-transparent"></div>
-        </div>
-      </div>
-    );
-  }
+  return progress;
+};
+
+// --- Reusable Components ---
+
+const ParallaxBackground = ({ text, direction = 1, speed = 0.2, className = "", opacity = "opacity-[0.03]", textColor = "text-white" }) => {
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setOffset(window.scrollY * speed * direction);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [direction, speed]);
 
   return (
-    <div className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden selection:bg-[#e62b1e] selection:text-black opacity-0 animate-[fadeIn_0.5s_ease-in_forwards]">
-
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-
-        .font-tech { font-family: 'Space Mono', monospace; }
-        .font-bold-display { font-family: 'Anton', sans-serif; }
-
-        .stroke-text {
-          -webkit-text-stroke: 3px rgba(255, 255, 255, 0.8);
-          color: rgba(255, 255, 255, 0.1);
-          text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .grid-bg {
-          background-size: 50px 50px;
-          background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        }
-
-        @keyframes pulse-line {
-          0% { height: 0%; opacity: 0; }
-          50% { height: 100%; opacity: 1; }
-          100% { height: 100%; opacity: 0; }
-        }
-
-        .animate-line {
-          animation: pulse-line 3s ease-in-out infinite;
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-      `}</style>
-
-      {/* --- Dynamic Background Layer --- */}
-      <div className="absolute inset-0 z-0 grid-bg pointer-events-none"></div>
-
-      {/* Massive Background Typography (Parallax) */}
-      <div
-        className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-50 select-none z-[1]"
-        style={{ transform: `translate(${-mousePos.x}px, ${-mousePos.y}px)` }}
+    <div className={`absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0 ${className}`}>
+      <span
+        className={`text-[25vw] font-bold-display whitespace-nowrap will-change-transform leading-none ${textColor} ${opacity}`}
+        style={{ transform: `translateX(${offset}px)` }}
       >
-        {/*<h1 className="text-[20vw] font-bold-display stroke-text whitespace-nowrap leading-none tracking-tighter">
-          TEDxVJCET
-        </h1>*/}
-        <Image src="/tedx/logo-white.png" alt="TEDxVJCET Logo" width={1500} height={100}/>
-      </div>
+        {text}
+      </span>
+    </div>
+  );
+};
 
+const Spotlight = () => {
+  const { x, y } = useMousePosition();
+  return (
+    <div
+      className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300"
+      style={{
+        background: `radial-gradient(600px circle at ${x}px ${y}px, rgba(230, 43, 30, 0.06), transparent 40%)`
+      }}
+    />
+  );
+};
 
+// --- Main Application ---
 
-      {/* --- Main Content Grid --- */}
-      <main className="relative z-10 min-h-screen flex flex-col justify-between p-6 md:p-12 max-w-7xl mx-auto border-x border-white/5 bg-[#050505]/30 backdrop-blur-sm">
+export default function TEDxWebsite() {
+  const [loading, setLoading] = useState(true);
 
-        {/* Header Section */}
-        <header className="flex justify-between items-start">
-          <div className="flex flex-col">
-            <Image src="/tedx/logo-white.png" alt="TEDxVJCET Logo" width={250} height={100} className="-translate-x-5" />
-            <div className="flex items-center gap-2 text-xs font-tech text-gray-500">
-              <span className="w-2 h-2 bg-[#e62b1e] rounded-full animate-pulse"></span>
-              <span>SYSTEM_STATUS: PRE_LAUNCH</span>
-            </div>
-          </div>
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
-          {/* Decorative Technical Info */}
-          <div className="hidden md:block text-right font-tech text-xs text-gray-600">
-             <p>LAT: 9.9508° N</p>
-             <p>LNG: 76.6317° E</p>
-             <p>ID: 2025_EDITION</p>
-          </div>
-        </header>
+  if (loading) return <LoadingScreen />;
 
+  return (
+    <div className="bg-[#050505] text-white font-sans overflow-x-hidden selection:bg-[#e62b1e] selection:text-white cursor-default">
+      <GlobalStyles />
+      <Spotlight />
 
-        {/* Centerpiece */}
-        <div className="flex flex-col items-center justify-center flex-grow py-20 relative">
-
-           {/* Animated Red Line Connector */}
-           <div className="absolute top-0 w-px h-20 bg-gradient-to-b from-transparent to-[#e62b1e]/50"></div>
-
-           <div className="text-center space-y-8 relative">
-             <div className="inline-block relative">
-                <h3 className="font-tech text-[#e62b1e] text-sm md:text-base tracking-[0.3em] uppercase mb-4">
-                  Incoming Transmission
-                </h3>
-                {/* Decorative brackets */}
-                <div className="absolute -left-4 -top-4 w-4 h-4 border-l border-t border-gray-700"></div>
-                <div className="absolute -right-4 -bottom-4 w-4 h-4 border-r border-b border-gray-700"></div>
-             </div>
-
-             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold-display leading-[0.9] tracking-tight mix-blend-difference">
-               IDEAS<br />
-               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-gray-600">WORTH</span><br />
-               SPREADING
-             </h1>
-
-             <p className="font-tech text-gray-400 max-w-md mx-auto text-xs md:text-sm leading-relaxed border-l-2 border-[#e62b1e] pl-4 text-left">
-               &gt; Initiating sequence...<br/>
-               &gt; Loading extraordinary concepts...<br/>
-               &gt; Prepare for impact.
-             </p>
-           </div>
-        </div>
-
-
-        {/* Bottom Section: Countdown & Info */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end border-t border-white/10 pt-8">
-
-          {/* Countdown Display */}
-          <div className="space-y-4">
-            <p className="font-tech text-xs text-gray-500 uppercase tracking-widest">
-              T-Minus to Website Launch
-            </p>
-            <div className="flex gap-4 md:gap-8 font-tech text-3xl md:text-5xl">
-              <div className="flex flex-col">
-                <span className="text-white">{String(timeLeft.days).padStart(2, '0')}</span>
-                <span className="text-[10px] text-gray-600 mt-1">DAYS</span>
-              </div>
-              <span className="text-[#e62b1e] animate-pulse">:</span>
-              <div className="flex flex-col">
-                <span className="text-white">{String(timeLeft.hours).padStart(2, '0')}</span>
-                <span className="text-[10px] text-gray-600 mt-1">HRS</span>
-              </div>
-               <span className="text-[#e62b1e] animate-pulse">:</span>
-              <div className="flex flex-col">
-                <span className="text-white">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                <span className="text-[10px] text-gray-600 mt-1">MIN</span>
-              </div>
-               <span className="text-[#e62b1e] animate-pulse">:</span>
-              <div className="flex flex-col">
-                <span className="text-[#e62b1e]">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                <span className="text-[10px] text-gray-600 mt-1">SEC</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Actions & Details */}
-          <div className="flex flex-col md:items-end space-y-6">
-            <div className="flex gap-4 md:gap-8 text-sm font-tech text-gray-300">
-              <div className="flex items-center gap-2">
-                <Calendar size={16} className="text-[#e62b1e]" />
-                {/* Updated Year to 2026 */}
-                <span>JAN 03, 2026</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin size={16} className="text-[#e62b1e]" />
-                <a
-                  href="https://maps.app.goo.gl/2Ki22FMMpcF1HZuU8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className=" underline"
-                >
-                  VJCET_MBA_SEMINAR_HALL
-                </a>
-              </div>
-            </div>
-
-            <a
-              href="https://www.instagram.com/tedxvjcet/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 bg-white text-black px-6 py-3 font-bold font-bold-display tracking-wide hover:bg-[#e62b1e] hover:text-white transition-all duration-300"
-            >
-              <InstagramIcon size={20} />
-              <span>FOLLOW PROTOCOL</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-
-        </div>
-
-      </main>
-
-      {/* Decorative Corners */}
-      <div className="fixed top-6 left-6 w-4 h-4 border-l-2 border-t-2 border-[#e62b1e] pointer-events-none"></div>
-      <div className="fixed top-6 right-6 w-4 h-4 border-r-2 border-t-2 border-[#e62b1e] pointer-events-none"></div>
-      <div className="fixed bottom-6 left-6 w-4 h-4 border-l-2 border-b-2 border-[#e62b1e] pointer-events-none"></div>
-      <div className="fixed bottom-6 right-6 w-4 h-4 border-r-2 border-b-2 border-[#e62b1e] pointer-events-none"></div>
-
+      <HeroSection />
+      <AboutSection />
+      <SpeakersSection />
+      <QuotesSection />
+      <OrganizersSection />
+      <RegistrationSection />
     </div>
   );
 }
+
+// --- Sections ---
+
+const HeroSection = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const { x, y } = useMousePosition();
+  const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+        setWindowSize({ w: window.innerWidth, h: window.innerHeight });
+    }
+
+    const handleScroll = () => setScrollY(window.scrollY);
+    const handleResize = () => setWindowSize({ w: window.innerWidth, h: window.innerHeight });
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Scroll Parallax
+  const scale = Math.max(1 - scrollY / 1000, 0.8);
+  const opacity = Math.max(1 - scrollY / 800, 0);
+  const translateY = scrollY * 0.5;
+
+  // Enhanced Mouse Parallax (Restored: disabled on screens smaller than 768px)
+  const parallaxX = windowSize.w > 768 ? (x - windowSize.w / 2) / 30 : 0;
+  const parallaxY = windowSize.w > 768 ? (y - windowSize.h / 2) / 30 : 0;
+
+  return (
+    <div className="relative h-screen w-full flex items-center justify-center sticky top-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+      <div className="absolute inset-0 grid-bg opacity-30"></div>
+
+      {/* Background Blobs (Inverse Movement) */}
+      <div
+         className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#e62b1e] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-pulse transition-transform duration-100 ease-out"
+         style={{ transform: `translate(${parallaxX * -2}px, ${parallaxY * -2}px)` }}
+      ></div>
+      <div
+         className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-pulse transition-transform duration-100 ease-out"
+         style={{ animationDelay: "1s", transform: `translate(${parallaxX * -2}px, ${parallaxY * -2}px)` }}
+      ></div>
+
+      <div
+        className="relative z-10 text-center p-6 will-change-transform"
+        style={{
+            opacity,
+            transform: `scale(${scale}) translateY(${translateY}px) translate(${parallaxX}px, ${parallaxY}px)`
+        }}
+      >
+        <div className="inline-flex items-center gap-2 mb-8 border border-white/10 bg-white/5 px-4 py-2 rounded-full backdrop-blur-md hover:border-[#e62b1e]/50 transition-colors">
+           <span className="w-2 h-2 bg-[#e62b1e] rounded-full animate-ping"></span>
+           <span className="text-[#e62b1e] font-tech tracking-widest text-xs uppercase">Transmission Live</span>
+        </div>
+
+        <div className="mb-8 flex justify-center transform hover:scale-105 transition-transform duration-500 relative h-24 md:h-32 w-64 md:w-96">
+            <img
+              src="/tedx/logo-white.png"
+              alt="TEDxVJCET"
+              className="w-full h-full object-contain drop-shadow-2xl"
+            />
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm font-tech text-gray-400 mt-8">
+          <div className="flex items-center gap-2">
+            <Calendar size={16} />
+            <span>DEC 11, 2025</span>
+          </div>
+          <div className="hidden md:block w-px h-4 bg-gray-600"></div>
+          <div className="flex items-center gap-2">
+            <MapPin size={16} />
+            <span>KERALA, INDIA</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 transition-opacity duration-300"
+        style={{ opacity: Math.max(1 - scrollY / 200, 0) }}
+      >
+        <span className="text-[10px] tracking-widest uppercase text-white/60">Scroll to Initialize</span>
+        <ChevronDown size={20} className="text-white animate-bounce" />
+      </div>
+    </div>
+  );
+};
+
+const AboutSection = () => {
+  return (
+    <div className="relative z-10 bg-[#050505] min-h-[100vh] shadow-[0_-50px_100px_rgba(0,0,0,1)] overflow-hidden border-t border-white/5">
+      <ParallaxBackground text="IDEAS" direction={-1} speed={0.3} />
+
+      <div className="sticky top-0 min-h-screen flex flex-col items-center justify-center p-6">
+        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-20">
+          <div className="space-y-8">
+             <div className="overflow-hidden">
+                <h2 className="text-4xl md:text-7xl font-bold-display uppercase leading-[0.9] animate-slide-up">
+                  What is <br/><span className="text-[#e62b1e]">TEDx?</span>
+                </h2>
+             </div>
+             <p className="font-tech text-gray-400 text-sm md:text-base border-l-2 border-[#e62b1e] pl-6 max-w-md">
+               In the spirit of ideas worth spreading, TEDx is a program of local, self-organized events that bring people together to share a TED-like experience.
+             </p>
+          </div>
+
+          <div className="grid gap-6">
+            <FeatureCard number="01" title="EVOLVE THINKING" desc="Engage with keynotes from industry experts that challenge the status quo." />
+            <FeatureCard number="02" title="EXPAND TOOLBOX" desc="Hands-on workshops designed to give you practical, actionable skills." />
+            <FeatureCard number="03" title="ELEVATE CAREER" desc="Network with visionaries and find your next big breakthrough." />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SpeakerCard = ({ speaker, index }) => {
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, {
+      threshold: 0.3,
+      rootMargin: '0px 0px -100px 0px'
+    });
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`group relative aspect-[3/4] bg-gray-100 overflow-hidden cursor-pointer transition-all duration-1000 ease-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <img
+        src={speaker.img}
+        alt={speaker.name}
+        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+      <div className="absolute bottom-0 left-0 w-full p-6 text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+         <div className="w-10 h-1 bg-[#e62b1e] mb-4 w-0 group-hover:w-10 transition-all duration-300"></div>
+         <h3 className="text-2xl font-bold-display uppercase leading-none mb-1">{speaker.name}</h3>
+         <p className="font-tech text-xs text-gray-300 uppercase tracking-widest">{speaker.role}</p>
+      </div>
+      <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#e62b1e] transition-colors duration-300 pointer-events-none m-2"></div>
+    </div>
+  );
+};
+
+const SpeakersSection = () => {
+  const speakers = [
+    { id: 1, name: "Nivin K Sunil", role: "Tech Visionary", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80" },
+    { id: 2, name: "Sarah Connor", role: "AI Ethicist", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80" },
+    { id: 3, name: "David Chen", role: "Urban Planner", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" },
+    { id: 4, name: "Elena V", role: "Quantum Physicist", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80" },
+  ];
+
+  return (
+    <div className="relative z-20 bg-white text-black py-24 md:py-32 px-6 overflow-hidden min-h-[80vh]">
+      <ParallaxBackground text="SPEAKERS" direction={1} speed={0.2} className="top-20" textColor="text-black" opacity="opacity-[0.05]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-end border-b-4 border-black pb-6">
+         <div>
+            <span className="font-tech text-sm font-bold bg-[#e62b1e] text-white px-3 py-1 mb-4 inline-block tracking-widest">CONFIRMED LINEUP</span>
+            <h2 className="text-5xl md:text-8xl font-bold-display tracking-tighter uppercase">Speakers</h2>
+         </div>
+         <div className="text-right hidden md:block">
+            <p className="font-tech text-sm font-bold">BATCH: 2026</p>
+            <p className="font-tech text-sm text-gray-500">4 / 8 REVEALED</p>
+         </div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {speakers.map((speaker, index) => (
+          <SpeakerCard key={speaker.id} speaker={speaker} index={index} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const QuotesSection = () => {
+  const quotes = [
+    { id: 1, text: "Technology is best when it brings people together. We are building the future, one connection at a time.", author: "Nivin K Sunil", role: "TECH VISIONARY", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&q=80" },
+    { id: 2, text: "The only way to predict the future is to create it yourself. Innovation distinguishes between a leader and a follower.", author: "Sarah Connor", role: "AI ETHICIST", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80" },
+    { id: 3, text: "Sustainable design isn't just about the environment; it's about designing systems that allow humanity to thrive.", author: "David Chen", role: "URBAN PLANNER", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80" }
+  ];
+
+  return (
+    <div className="relative bg-[#050505] z-20">
+
+      {/* Background Parallax Text - Fixed Position Behind content */}
+      <ParallaxBackground text="VOICES" direction={-1} speed={0.4} />
+
+      <div className="relative max-w-5xl px-6 w-full mx-auto py-24">
+
+         <div className="text-center mb-16 relative z-10">
+            <Quote size={48} className="text-[#e62b1e] mx-auto mb-4" />
+            <h2 className="text-2xl font-tech text-gray-400">TRANSMISSIONS FROM THE FUTURE</h2>
+         </div>
+
+         {/* NATIVE CSS STICKY STACK - ROBUST & UNBREAKABLE */}
+         <div className="flex flex-col gap-12 pb-24">
+           {quotes.map((quote, index) => (
+             <div
+                key={quote.id}
+                className="sticky top-32 md:top-48 z-10" // Sticky top creates the stack effect naturally
+                style={{ zIndex: index + 10 }}
+             >
+                <div className="bg-[#111] border border-white/10 p-8 md:p-12 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-lg transform transition-transform hover:scale-[1.02] border-t-2 border-t-white/20">
+                    <div className="flex flex-col md:flex-row items-center gap-8">
+                       <div className="relative w-24 h-24 flex-shrink-0">
+                           <img
+                             src={quote.img}
+                             alt={quote.author}
+                             className="w-full h-full rounded-full border-2 border-[#e62b1e] object-cover"
+                           />
+                       </div>
+                       <div className="text-center md:text-left">
+                          <p className="text-xl md:text-3xl lg:text-4xl font-bold font-sans leading-tight mb-6 text-white">"{quote.text}"</p>
+                          <div>
+                             <p className="font-bold text-[#e62b1e] tracking-wider text-lg">{quote.author}</p>
+                             <p className="text-sm text-gray-500 font-tech">{quote.role}</p>
+                          </div>
+                       </div>
+                    </div>
+                </div>
+             </div>
+           ))}
+         </div>
+      </div>
+    </div>
+  );
+};
+
+const OrganizersSection = () => {
+  const organizers = [
+    { name: "Alex Morgan", role: "Lead Organizer", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80" },
+    { name: "Sam Alt", role: "Curator", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" },
+    { name: "Lisa Su", role: "Design Head", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80" },
+  ];
+
+  return (
+    <div className="bg-[#111] py-24 border-t border-white/10 relative z-30 overflow-hidden">
+      <ParallaxBackground text="TEAM" direction={1} speed={0.15} />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+           <h2 className="text-4xl md:text-6xl font-bold-display uppercase mb-4">The Team</h2>
+           <div className="w-24 h-1 bg-[#e62b1e] mx-auto"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           {organizers.map((org, i) => (
+              <div key={i} className="group relative bg-[#050505] p-1 border border-white/10 hover:border-[#e62b1e] transition-colors duration-300">
+                 <div className="absolute top-2 left-2 z-10 font-tech text-[10px] bg-black/50 backdrop-blur px-2 text-white border border-white/20">
+                    PLAYER_0{i+1}
+                 </div>
+                 <div className="aspect-square overflow-hidden mb-4 relative">
+                    <img
+                      src={org.img}
+                      alt={org.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:brightness-110 grayscale group-hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_4px,3px_100%] pointer-events-none"></div>
+                 </div>
+                 <div className="p-4 text-center">
+                    <h3 className="text-xl font-bold uppercase tracking-wider">{org.name}</h3>
+                    <p className="text-[#e62b1e] font-tech text-xs mt-1">{org.role}</p>
+                 </div>
+              </div>
+           ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RegistrationSection = () => {
+  return (
+    <div className="relative z-30 bg-[#e62b1e] text-white min-h-[90vh] flex flex-col items-center justify-center text-center p-6 overflow-hidden">
+       {/* Restored customized background text settings from user */}
+       <ParallaxBackground text="TICKETS" direction={0.3} speed={0.3} opacity="opacity-20 -translate-y-50" className="z-0" />
+
+       <div className="max-w-4xl space-y-10 relative z-10">
+         <div className="inline-block bg-white text-[#e62b1e] px-6 py-2 font-tech text-sm uppercase tracking-[0.2em] mb-4 border border-white/20 shadow-lg animate-pulse">
+            Status: Registration Open
+         </div>
+         <h2 className="text-6xl md:text-9xl font-bold-display leading-[0.85] tracking-tighter hover:scale-105 transition-transform duration-500 cursor-default">
+           SECURE YOUR<br/>SEAT
+         </h2>
+         <p className="font-sans text-xl md:text-3xl opacity-90 max-w-2xl mx-auto font-light">
+           Event Date: <span className="font-bold underline decoration-4 decoration-black underline-offset-4">DEC 11, 2025</span>. <br/>Don't miss the future.
+         </p>
+         <div className="pt-8">
+            <a href="https://www.ted.com/tedx/events/64560" target="_blank" rel="noopener noreferrer" className="relative overflow-hidden bg-black text-white px-20 py-8 text-2xl font-bold hover:bg-white hover:text-[#e62b1e] transition-all duration-300 flex items-center gap-4 mx-auto group shadow-2xl inline-flex rounded-sm ring-4 ring-transparent hover:ring-black/20">
+               <span className="relative z-10 flex items-center gap-3">
+                 <Ticket size={32} />
+                 BOOK TICKETS
+                 <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+               </span>
+            </a>
+         </div>
+       </div>
+
+       <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col md:flex-row justify-between items-end text-xs font-tech text-white/80 border-t border-black/10 mt-20 bg-gradient-to-t from-black/20 to-transparent relative z-10">
+          <div className="text-left space-y-2 mb-4 md:mb-0">
+            <p className="font-bold text-lg">TEDxVJCET © 2026</p>
+            <p className="max-w-xs">This independent TEDx event is operated under license from TED.</p>
+            <a href="https://www.tedxvjcet.in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-black mt-2"><Globe size={14} /> Official Website</a>
+          </div>
+          <div className="flex gap-6 text-2xl">
+            <a href="https://www.instagram.com/tedxvjcet/" target="_blank" rel="noopener noreferrer" className="hover:text-black hover:scale-110 transition-all"><Instagram size={24} /></a>
+            <a href="https://www.linkedin.com/company/tedxvjcet" target="_blank" rel="noopener noreferrer" className="hover:text-black hover:scale-110 transition-all"><Linkedin size={24} /></a>
+            <a href="https://www.ted.com/tedx/events/64560" target="_blank" rel="noopener noreferrer" className="hover:text-black hover:scale-110 transition-all"><Globe size={24} /></a>
+          </div>
+       </div>
+    </div>
+  );
+};
+
+const FeatureCard = ({ number, title, desc }) => (
+  <div className="group flex gap-6 items-start p-6 border border-white/5 hover:bg-white/5 transition-all duration-300 hover:border-[#e62b1e]/50 rounded-lg">
+    <div className="font-bold-display text-4xl text-gray-700 group-hover:text-[#e62b1e] transition-colors">{number}</div>
+    <div>
+      <h4 className="font-bold text-xl mb-2 tracking-wide text-white group-hover:translate-x-2 transition-transform">{title}</h4>
+      <p className="text-gray-500 leading-relaxed group-hover:text-gray-300 transition-colors">{desc}</p>
+    </div>
+  </div>
+);
+
+const LoadingScreen = () => (
+  <div className="fixed inset-0 bg-[#050505] z-50 flex items-center justify-center">
+    <div className="text-center">
+       <div className="relative w-24 h-24 mx-auto mb-8">
+          <div className="absolute inset-0 border-4 border-[#e62b1e]/30 rounded-full"></div>
+          <div className="absolute inset-0 border-4 border-[#e62b1e] border-t-transparent rounded-full animate-spin"></div>
+       </div>
+       <div className="font-tech text-2xl text-white tracking-[0.2em] animate-pulse">INITIALIZING</div>
+       <div className="mt-2 text-[#e62b1e] text-xs font-tech">VJCET SYSTEM V2.0</div>
+    </div>
+  </div>
+);
+
+const GlobalStyles = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap');
+
+    .font-tech { font-family: 'Space Mono', monospace; }
+    .font-bold-display { font-family: 'Anton', sans-serif; }
+    .font-sans { font-family: 'Inter', sans-serif; }
+
+    .grid-bg {
+      background-size: 50px 50px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+
+    @keyframes slide-up {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .animate-slide-up {
+      animation: slide-up 0.8s ease-out forwards;
+    }
+
+    /* Hide Scrollbar but allow scroll */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050505;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #e62b1e;
+    }
+  `}</style>
+);
