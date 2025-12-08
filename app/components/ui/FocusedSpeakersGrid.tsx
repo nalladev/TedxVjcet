@@ -73,7 +73,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                         !isFocused ? 'grayscale brightness-75 scale-110' : 'grayscale-0 scale-100'
                       }`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60"></div>
                   </>
                 )}
 
@@ -122,7 +122,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
               >
                 {isPlaceholderCard ? (
                   // Placeholder card
-                  <div className={`w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-between px-4 transition-all duration-500 ${
+                  <div className={`w-full h-full bg-linear-to-br from-gray-800 to-gray-900 flex items-center justify-between px-4 transition-all duration-500 ${
                     !isFocused ? 'grayscale brightness-50' : ''
                   }`}>
                     <div className="flex items-center">
@@ -159,7 +159,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                           !isFocused ? 'grayscale brightness-75' : 'grayscale-0'
                         }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+                      <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/30 to-transparent"></div>
                     </div>
 
                     {/* Content overlay */}

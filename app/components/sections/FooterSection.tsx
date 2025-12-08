@@ -20,7 +20,7 @@ export const FooterSection = () => {
 
             <div className="space-y-4">
               <div className="flex items-start gap-4">
-                <MapPin size={20} className="text-white mt-1 flex-shrink-0" />
+                <MapPin size={20} className="text-white mt-1 shrink-0" />
                 <div>
                   <p className="font-tech text-sm font-bold mb-1">VENUE</p>
                   <p className="text-sm leading-relaxed">
@@ -32,7 +32,7 @@ export const FooterSection = () => {
               </div>
 
               <div className="flex items-start gap-4">
-                <Mail size={20} className="text-white mt-1 flex-shrink-0" />
+                <Mail size={20} className="text-white mt-1 shrink-0" />
                 <div>
                   <p className="font-tech text-sm font-bold mb-1">EMAIL</p>
                   <a href={`mailto:${CONTACT_INFO.email}`} className="text-sm hover:text-black transition-colors">
@@ -42,7 +42,7 @@ export const FooterSection = () => {
               </div>
 
               <div className="flex items-start gap-4">
-                <Phone size={20} className="text-white mt-1 flex-shrink-0" />
+                <Phone size={20} className="text-white mt-1 shrink-0" />
                 <div>
                   <p className="font-tech text-sm font-bold mb-1">CONTACT</p>
                   <a href={`tel:${CONTACT_INFO.phone}`} className="text-sm hover:text-black transition-colors">
@@ -52,7 +52,7 @@ export const FooterSection = () => {
               </div>
 
               <div className="flex items-start gap-4">
-                <Globe size={20} className="text-white mt-1 flex-shrink-0" />
+                <Globe size={20} className="text-white mt-1 shrink-0" />
                 <div>
                   <p className="font-tech text-sm font-bold mb-1">WEBSITE</p>
                   <a href={CONTACT_INFO.website} className="text-sm hover:text-black transition-colors">

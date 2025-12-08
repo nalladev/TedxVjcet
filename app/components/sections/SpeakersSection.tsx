@@ -121,7 +121,7 @@ export const SpeakersSection = () => {
               {speakers.map((speaker, index) => (
                 <div
                   key={speaker.id}
-                  className={`absolute w-full flex max-w-5xl mx-auto p-4 md:p-6 rounded-lg shadow-lg transition-all duration-500 ease-in-out border-[2px] shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-white`}
+                  className={`absolute w-full flex max-w-5xl mx-auto p-4 md:p-6 rounded-lg transition-all duration-500 ease-in-out border-2 shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-white`}
                   style={getCardStyle(index)}
                 >
                   {!speaker.name.startsWith('SPEAKER') && speaker.role !== 'TO BE REVEALED' ? (

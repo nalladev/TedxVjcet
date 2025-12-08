@@ -27,10 +27,10 @@ export const SpeakerCard = ({ speaker, index }: SpeakerCardProps) => {
     return (
       <div
         ref={ref}
-        className={`group relative aspect-[3/4] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden transition-all duration-1000 ease-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}
+        className={`group relative aspect-3/4 bg-linear-to-br from-gray-800 to-gray-900 overflow-hidden transition-all duration-1000 ease-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}
         style={{ transitionDelay: `${index * 100}ms` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6">
           <div className="w-20 h-20 border-4 border-[#e62b1e] rounded-full flex items-center justify-center mb-6">
             <svg className="w-10 h-10 text-[#e62b1e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,7 +53,7 @@ export const SpeakerCard = ({ speaker, index }: SpeakerCardProps) => {
   return (
     <div
       ref={ref}
-      className={`group relative aspect-[3/4] bg-gray-100 overflow-hidden cursor-pointer transition-all duration-1000 ease-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}
+      className={`group relative aspect-3/4 bg-gray-100 overflow-hidden cursor-pointer transition-all duration-1000 ease-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <Image
@@ -63,9 +63,9 @@ export const SpeakerCard = ({ speaker, index }: SpeakerCardProps) => {
         height={400}
         className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+      <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
       <div className="absolute bottom-0 left-0 w-full p-6 text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-         <div className="w-10 h-1 bg-[#e62b1e] mb-4 w-0 group-hover:w-10 transition-all duration-300"></div>
+         <div className="h-1 bg-[#e62b1e] mb-4 w-0 group-hover:w-10 transition-all duration-300"></div>
          <h3 className="text-2xl font-bold-display uppercase leading-none mb-1">{speaker.name}</h3>
          <p className="font-tech text-xs text-gray-300 uppercase tracking-widest">{speaker.role}</p>
       </div>

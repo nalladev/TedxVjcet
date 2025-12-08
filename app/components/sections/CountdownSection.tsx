@@ -37,11 +37,13 @@ export const CountdownSection = () => {
       }
     };
 
-    setTimeLeft(calculateTimeLeft());
-
-    const timer = setInterval(() => {
+    const updateTime = () => {
       setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    };
+
+    updateTime(); // Initial calculation
+
+    const timer = setInterval(updateTime, 1000);
 
     return () => clearInterval(timer);
   }, []);
@@ -54,7 +56,7 @@ export const CountdownSection = () => {
   ];
 
   return (
-    <section id="countdown" className="relative bg-gradient-to-b from-[#050505] via-[#0a0a0a] to-[#050505] py-20 overflow-hidden">
+    <section id="countdown" className="relative bg-linear-to-b from-[#050505] via-[#0a0a0a] to-[#050505] py-20 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
       <div className="absolute inset-0 grid-bg opacity-20"></div>
@@ -74,7 +76,7 @@ export const CountdownSection = () => {
           </div>
 
           {/* Section Title */}
-          <h2 className="text-4xl md:text-6xl font-anton tracking-tight mb-4 bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-6xl font-anton tracking-tight mb-4 bg-linear-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
             {isEventPassed ? 'EVENT COMPLETE' : 'COUNTDOWN TO IDEAS'}
           </h2>
 
@@ -91,7 +93,7 @@ export const CountdownSection = () => {
           <>
             {/* Countdown Display */}
             <div className="grid grid-cols-4 gap-3 md:gap-8 mb-12 max-w-4xl mx-auto">
-              {timeUnits.map((unit, index) => (
+              {timeUnits.map((unit) => (
                 <div
                   key={unit.label}
                   className="countdown-card group bg-white/5 border border-white/10 rounded-lg p-3 md:p-5 backdrop-blur-md hover:border-[#e62b1e]/50 transition-all duration-300 hover:bg-white/10"
@@ -130,7 +132,7 @@ export const CountdownSection = () => {
                 href="https://www.ted.com/tedx/events/64560"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 bg-gradient-to-r from-[#e62b1e] to-red-600 hover:from-red-600 hover:to-[#e62b1e] text-white font-tech px-8 py-4 rounded-xl border border-[#e62b1e]/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e62b1e]/20 text-sm tracking-wider uppercase"
+                className="group inline-flex items-center gap-4 bg-linear-to-r from-[#e62b1e] to-red-600 hover:from-red-600 hover:to-[#e62b1e] text-white font-tech px-8 py-4 rounded-xl border border-[#e62b1e]/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e62b1e]/20 text-sm tracking-wider uppercase"
               >
                 <Ticket size={20} className="group-hover:rotate-12 transition-transform duration-300" />
                 <span>Book Your Ticket</span>

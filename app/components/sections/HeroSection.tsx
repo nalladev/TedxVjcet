@@ -43,7 +43,7 @@ export const HeroSection = () => {
   const parallaxY = windowSize.w > 768 ? (y - windowSize.h / 2) / 30 : 0;
 
   return (
-    <div className="relative h-screen w-full flex items-center justify-center sticky top-0 z-0 overflow-hidden">
+    <div className="h-screen w-full flex items-center justify-center sticky top-0 z-0 overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
       <div className="absolute inset-0 grid-bg opacity-30"></div>
 
