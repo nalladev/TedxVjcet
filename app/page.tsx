@@ -13,7 +13,7 @@ const useMousePosition = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const updateMousePosition = (ev) => {
+    const updateMousePosition = (ev: MouseEvent) => {
       setMousePosition({ x: ev.clientX, y: ev.clientY });
     };
     window.addEventListener('mousemove', updateMousePosition);
@@ -23,7 +23,7 @@ const useMousePosition = () => {
   return mousePosition;
 };
 
-const useScrollProgress = (ref) => {
+const useScrollProgress = (ref: React.RefObject<HTMLElement>) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -58,7 +58,16 @@ const useScrollProgress = (ref) => {
 
 // --- Reusable Components ---
 
-const ParallaxBackground = ({ text, direction = 1, speed = 0.2, className = "", opacity = "opacity-[0.03]", textColor = "text-white" }) => {
+interface ParallaxBackgroundProps {
+  text: string;
+  direction?: number;
+  speed?: number;
+  className?: string;
+  opacity?: string;
+  textColor?: string;
+}
+
+const ParallaxBackground = ({ text, direction = 1, speed = 0.2, className = "", opacity = "opacity-[0.03]", textColor = "text-white" }: ParallaxBackgroundProps) => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
@@ -240,7 +249,19 @@ const AboutSection = () => {
   );
 };
 
-const SpeakerCard = ({ speaker, index }) => {
+interface Speaker {
+  id: number;
+  name: string;
+  role: string;
+  img: string;
+}
+
+interface SpeakerCardProps {
+  speaker: Speaker;
+  index: number;
+}
+
+const SpeakerCard = ({ speaker, index }: SpeakerCardProps) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -280,10 +301,10 @@ const SpeakerCard = ({ speaker, index }) => {
 
 const SpeakersSection = () => {
   const speakers = [
-    { id: 1, name: "Nivin K Sunil", role: "Tech Visionary", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80" },
-    { id: 2, name: "Sarah Connor", role: "AI Ethicist", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80" },
-    { id: 3, name: "David Chen", role: "Urban Planner", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" },
-    { id: 4, name: "Elena V", role: "Quantum Physicist", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80" },
+    { id: 1, name: "Nivin K Sunil", role: "Tech Visionary", img: "/placeholder.jpeg" },
+    { id: 2, name: "Sarah Connor", role: "AI Ethicist", img: "/placeholder.jpeg" },
+    { id: 3, name: "David Chen", role: "Urban Planner", img: "/placeholder.jpeg" },
+    { id: 4, name: "Elena V", role: "Quantum Physicist", img: "/placeholder.jpeg" },
   ];
 
   return (
@@ -312,9 +333,9 @@ const SpeakersSection = () => {
 
 const QuotesSection = () => {
   const quotes = [
-    { id: 1, text: "Technology is best when it brings people together. We are building the future, one connection at a time.", author: "Nivin K Sunil", role: "TECH VISIONARY", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&q=80" },
-    { id: 2, text: "The only way to predict the future is to create it yourself. Innovation distinguishes between a leader and a follower.", author: "Sarah Connor", role: "AI ETHICIST", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80" },
-    { id: 3, text: "Sustainable design isn't just about the environment; it's about designing systems that allow humanity to thrive.", author: "David Chen", role: "URBAN PLANNER", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80" }
+    { id: 1, text: "Technology is best when it brings people together. We are building the future, one connection at a time.", author: "Nivin K Sunil", role: "TECH VISIONARY", img: "/placeholder.jpeg" },
+    { id: 2, text: "The only way to predict the future is to create it yourself. Innovation distinguishes between a leader and a follower.", author: "Sarah Connor", role: "AI ETHICIST", img: "/placeholder.jpeg" },
+    { id: 3, text: "Sustainable design isn't just about the environment; it's about designing systems that allow humanity to thrive.", author: "David Chen", role: "URBAN PLANNER", img: "/placeholder.jpeg" }
   ];
 
   return (
@@ -366,9 +387,9 @@ const QuotesSection = () => {
 
 const OrganizersSection = () => {
   const organizers = [
-    { name: "Alex Morgan", role: "Lead Organizer", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80" },
-    { name: "Sam Alt", role: "Curator", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" },
-    { name: "Lisa Su", role: "Design Head", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80" },
+    { name: "Alex Morgan", role: "Lead Organizer", img: "/placeholder.jpeg" },
+    { name: "Sam Alt", role: "Curator", img: "/placeholder.jpeg" },
+    { name: "Lisa Su", role: "Design Head", img: "/placeholder.jpeg" },
   ];
 
   return (
@@ -450,7 +471,13 @@ const RegistrationSection = () => {
   );
 };
 
-const FeatureCard = ({ number, title, desc }) => (
+interface FeatureCardProps {
+  number: string;
+  title: string;
+  desc: string;
+}
+
+const FeatureCard = ({ number, title, desc }: FeatureCardProps) => (
   <div className="group flex gap-6 items-start p-6 border border-white/5 hover:bg-white/5 transition-all duration-300 hover:border-[#e62b1e]/50 rounded-lg">
     <div className="font-bold-display text-4xl text-gray-700 group-hover:text-[#e62b1e] transition-colors">{number}</div>
     <div>
@@ -468,7 +495,7 @@ const LoadingScreen = () => (
           <div className="absolute inset-0 border-4 border-[#e62b1e] border-t-transparent rounded-full animate-spin"></div>
        </div>
        <div className="font-tech text-2xl text-white tracking-[0.2em] animate-pulse">INITIALIZING</div>
-       <div className="mt-2 text-[#e62b1e] text-xs font-tech">VJCET SYSTEM V2.0</div>
+       <div className="mt-2 text-[#e62b1e] text-xs font-tech">TEDxVJCET</div>
     </div>
   </div>
 );
