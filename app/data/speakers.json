@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "JOHN DOE",
+    "role": "CEO",
+    "img": "/placeholder.webp",
+    "description": "John Doe is a visionary leader and the CEO of XYZ Corporation. With a passion for innovation and a commitment to excellence, he has transformed the company into a global leader in his industry. His leadership style is characterized by a deep understanding of his employees' needs and a focus on creating a positive work environment. Under his guidance, the company has achieved remarkable growth and has become a model for other businesses to follow."
+  },
+  {
+    "id": 2,
+    "name": "JOHN DOE",
+    "role": "CEO",
+    "img": "/placeholder.webp",
+    "description": "John Doe is a visionary leader and the CEO of XYZ Corporation. With a passion for innovation and a commitment to excellence, he has transformed the company into a global leader in his industry. His leadership style is characterized by a deep understanding of his employees' needs and a focus on creating a positive work environment. Under his guidance, the company has achieved remarkable growth and has become a model for other businesses to follow."
+  },
+  {
+    "id": 3,
+    "name": "JOHN DOE",
+    "role": "CEO",
+    "img": "/placeholder.webp",
+    "description": "John Doe is a visionary leader and the CEO of XYZ Corporation. With a passion for innovation and a commitment to excellence, he has transformed the company into a global leader in his industry. His leadership style is characterized by a deep understanding of his employees' needs and a focus on creating a positive work environment. Under his guidance, the company has achieved remarkable growth and has become a model for other businesses to follow."
+  }
+]

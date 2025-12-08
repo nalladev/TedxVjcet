@@ -14,7 +14,7 @@ const firaCode = Fira_Code({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.tedxvjcet.in"),
-  title: "TEDx VJCET - Ideas Worth Spreading",
+  title: "TEDx VJCET",
   description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
   keywords: ["TEDx", "VJCET", "TED talks", "Viswajyothi College", "Engineering", "Technology", "Ideas worth spreading", "Innovation", "Kerala"],
   authors: [{ name: "TEDx VJCET Team" }],
