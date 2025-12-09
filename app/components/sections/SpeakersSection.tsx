@@ -125,32 +125,32 @@ export const SpeakersSection = () => {
                   style={getCardStyle(index)}
                 >
                   {!speaker.name.startsWith('SPEAKER') && speaker.role !== 'TO BE REVEALED' ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[700px] md:h-[400px] lg:h-[500px] xl:h-[600px]">
-                      <div className="flex flex-col items-center justify-center space-y-6">
-                        <div className="w-full h-full opacity-100">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[650px] md:h-[450px] lg:h-[450px] xl:h-[550px]">
+                      <div className="flex flex-col items-center justify-center space-y-6 h-full">
+                        <div className="w-full h-full md:h-full max-h-[370px] md:max-h-full flex items-center justify-center overflow-hidden">
                           <Image
                             src={speaker.img}
                             alt={speaker.name}
                             width={400}
                             height={400}
-                            className="w-full h-full object-cover rounded" />
+                            className="h-full max-w-full max-h-full object-cover rounded" />
                         </div>
                         {/*<div className="flex-row hidden md:flex font-anton">
                           <p className="text-2xl md:text-3xl text-red-600 font-medium">TEDx</p>
                           <p className="text-2xl md:text-3xl text-black font-medium">SPEAKER</p>
                         </div>*/}
                       </div>
-                      <div className="flex flex-col justify-center space-y-2">
+                      <div className="flex flex-col justify-center space-y-2 h-full">
                         <div className="space-y-2 font-anton">
-                          <h4 className="text-3xl md:text-4xl lg:text-5xl text-gray-900 font-extralight">{speaker.name}</h4>
+                          <h4 className="text-3xl md:text-6xl lg:text-7xl text-gray-900 font-extralight">{speaker.name}</h4>
                           <h3 className="text-2xl md:text-3xl text-red-500 font-light">{speaker.role}</h3>
                         </div>
                         <p className="text-gray-700 leading-relaxed avantgarde text-xs md:text-base lg:text-lg">{speaker.description}</p>
                       </div>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[700px] md:h-[400px] lg:h-[500px] xl:h-[600px]">
-                      <div className="flex flex-col items-center justify-center space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[650px] md:h-[350px] lg:h-[450px] xl:h-[550px]">
+                      <div className="flex flex-col items-center justify-center space-y-6 h-full">
                         <div className="w-full max-w-md flex items-center justify-center">
                           <div className="w-48 h-48 border-4 border-[#e62b1e] rounded-full flex flex-col items-center justify-center">
                             <svg className="w-16 h-16 text-[#e62b1e] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,7 +164,7 @@ export const SpeakersSection = () => {
                           <p className="text-4xl md:text-5xl text-black font-medium">SPEAKER</p>
                         </div>
                       </div>
-                      <div className="flex flex-col justify-center space-y-4 text-black">
+                      <div className="flex flex-col justify-center space-y-4 text-black h-full">
                         <div className="space-y-4 font-anton">
                           <h4 className="text-3xl md:text-6xl lg:text-7xl font-medium">SPEAKER #{speaker.id}</h4>
                           <h3 className="text-2xl md:text-4xl text-red-500 font-medium">REVEALING SOON</h3>
