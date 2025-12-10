@@ -151,6 +151,7 @@ export const CombinedLoadingHero = ({
           const scale = getScaleFromProgress(easedProgress);
           tedxLogoRef.current.style.transform = `scale(${scale})`;
         } else if (scrollTop < startScroll) {
+          tedxLogoRef.current.style.display = `flex`;
           tedxLogoRef.current.style.transform = `scale(${INITIAL_SCALE})`;
         } else {
           tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
@@ -162,12 +163,12 @@ export const CombinedLoadingHero = ({
 
     const onScroll = () => {
       if (isAnimating) return;
-      
+
       isAnimating = true;
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
-      
+
       animationId = requestAnimationFrame(updateAnimations);
     };
 
@@ -284,7 +285,7 @@ export const CombinedLoadingHero = ({
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
       <div
         ref={tedxLogoRef}
-        className="fixed pointer-events-none inset-0 origin-center w-full h-dvh z-40 flex items-center justify-center"
+        className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-40 hidden items-center justify-center`}
       >
         <Image
           src="/tedx-vjcet.svg"
