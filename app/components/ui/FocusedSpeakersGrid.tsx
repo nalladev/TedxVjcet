@@ -15,17 +15,12 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
     setFocusedIndex(index);
   };
 
-  const isPlaceholder = (speaker: Speaker) => {
-    return speaker.name.startsWith('SPEAKER') || speaker.role === 'TO BE REVEALED';
-  };
-
   return (
     <div className="relative w-full">
       {/* Desktop Layout - Horizontal */}
       <div className="hidden md:flex justify-center items-center space-x-2 lg:space-x-4 p-4 overflow-hidden">
         {speakers.map((speaker, index) => {
           const isFocused = index === focusedIndex;
-          const isPlaceholderCard = isPlaceholder(speaker);
 
           return (
             <div
@@ -42,7 +37,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                   isFocused ? 'shadow-2xl shadow-red-500/20' : 'shadow-lg'
                 }`}
               >
-                {isPlaceholderCard ? (
+                {!speaker.revealed ? (
                   // Placeholder card
                   <div className={`w-full h-full bg-[#161616] flex flex-col items-center justify-center transition-all duration-500 ${
                     !isFocused ? 'grayscale brightness-50' : ''
@@ -65,7 +60,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                   // Real speaker card
                   <>
                     <Image
-                      src={speaker.img}
+                      src={`/cards1/${speaker.id}.png`}
                       alt={speaker.name}
                       width={400}
                       height={600}
@@ -78,7 +73,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                 )}
 
                 {/* Speaker name overlay */}
-                {!isPlaceholderCard && (
+                {speaker.revealed && (
                   <div className="absolute bottom-0 left-0 w-full p-4 text-white">
                     {isFocused && (
                       <>
@@ -103,7 +98,6 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
       <div className="md:hidden flex flex-col space-y-2 p-4">
         {speakers.map((speaker, index) => {
           const isFocused = index === focusedIndex;
-          const isPlaceholderCard = isPlaceholder(speaker);
 
           return (
             <div
@@ -120,7 +114,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                   isFocused ? 'shadow-2xl shadow-red-500/20' : 'shadow-lg'
                 }`}
               >
-                {isPlaceholderCard ? (
+                {!speaker.revealed ? (
                   // Placeholder card
                   <div className={`w-full h-full bg-linear-to-br from-gray-800 to-gray-900 flex items-center justify-between px-4 transition-all duration-500 ${
                     !isFocused ? 'grayscale brightness-50' : ''
@@ -151,7 +145,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                     {/* Image container - maintains size */}
                     <div className="absolute inset-0">
                       <Image
-                        src={speaker.img}
+                        src={`/cards1/${speaker.id}.png`}
                         alt={speaker.name}
                         width={400}
                         height={320}

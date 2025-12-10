@@ -11,7 +11,7 @@ export interface Speaker {
   id: number;
   name: string;
   role: string;
-  img: string;
+  revealed: boolean;
   description: string;
 }
 

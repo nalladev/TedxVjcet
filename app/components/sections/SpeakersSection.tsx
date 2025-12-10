@@ -124,7 +124,7 @@ export const SpeakersSection = () => {
                   className={`absolute w-full flex max-w-5xl mx-auto p-4 md:p-6 rounded-lg transition-all duration-500 ease-in-out border-2 shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-white`}
                   style={getCardStyle(index)}
                 >
-                  {!speaker.name.startsWith('SPEAKER') && speaker.role !== 'TO BE REVEALED' ? (
+                  {speaker.revealed ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[650px] md:h-[450px] lg:h-[450px] xl:h-[550px]">
                       <div className="flex flex-col items-center justify-center space-y-6 h-full">
                         <div className="w-full h-full md:h-full max-h-[370px] md:max-h-full flex items-center justify-center overflow-hidden">

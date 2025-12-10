@@ -15,9 +15,8 @@ import { GlobalStyles } from "@/app/styles/GlobalStyles";
 
 export default function TEDxWebsite() {
   return (
-    <div className="bg-[#050505] relative text-white font-sans overflow-x-hidden selection:bg-[#e62b1e] selection:text-white cursor-default">
+    <div className="relative bg-[#050505] text-white font-sans overflow-x-hidden overflow-y-auto h-screen selection:bg-[#e62b1e] selection:text-white cursor-default">
       <GlobalStyles />
-      <Spotlight />
       <CombinedLoadingHero />
       <CountdownSection />
       <AboutSection />
@@ -25,6 +24,7 @@ export default function TEDxWebsite() {
       <OrganizersSection />
       <RegistrationSection />
       <FooterSection />
+      <Spotlight />
     </div>
   );
 }
