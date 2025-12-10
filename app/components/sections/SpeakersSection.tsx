@@ -30,10 +30,6 @@ export const SpeakersSection = () => {
 
   const getCardStyle = (index: number) => {
     const position = (index - currentIndex + speakers.length) % speakers.length;
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const mobileOffset = 50;
-    const desktopOffset = 125;
-    const offset = isMobile ? mobileOffset : desktopOffset;
 
     if (position === 0) {
       // Current card - center, fully visible
@@ -43,10 +39,10 @@ export const SpeakersSection = () => {
         zIndex: 20
       };
     } else if (position === 1 || position === speakers.length - 1) {
-      // Adjacent cards - stick out more with responsive offsets
+      // Adjacent cards - stick out more with CSS responsive offsets
       const isNext = position === 1;
       return {
-        transform: `translate(-50%, ${isNext ? `${offset}px` : `-${offset}px`}) scale(0.95)`,
+        transform: `translate(-50%, ${isNext ? 'var(--card-offset)' : 'calc(-1 * var(--card-offset))'}) scale(0.95)`,
         opacity: 0.8,
         zIndex: 10
       };
@@ -95,7 +91,7 @@ export const SpeakersSection = () => {
             </button>
 
             {/* Card Stack */}
-            <div className="relative h-[800px] w-full max-w-5xl mx-auto my-6 flex items-center overflow-hidden">
+            <div className="relative h-[800px] w-full max-w-5xl mx-auto my-6 flex items-center overflow-hidden [--card-offset:50px] md:[--card-offset:125px]">
               {speakers.map((speaker, index) => (
                 <div
                   key={speaker.id}
