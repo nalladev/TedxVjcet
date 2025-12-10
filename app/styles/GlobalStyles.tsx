@@ -27,19 +27,10 @@ export const GlobalStyles = () => (
       animation: slide-up 0.8s ease-out forwards;
     }
 
-    /* Hide Scrollbar but allow scroll */
+    /* Hide Scrollbar completely */
     ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #050505;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #333;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #e62b1e;
+      width: 0px;
+      background: transparent;
     }
 
     /* Countdown Card Levitation Effect */
