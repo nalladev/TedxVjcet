@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useRef } from "react";
 import { Spotlight } from "@/app/components/ui";
 import {
   CombinedLoadingHero,
@@ -14,10 +14,15 @@ import {
 import { GlobalStyles } from "@/app/styles/GlobalStyles";
 
 export default function TEDxWebsite() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="relative bg-[#050505] text-white font-sans overflow-x-hidden overflow-y-auto h-screen selection:bg-[#e62b1e] selection:text-white cursor-default">
+    <div 
+      ref={scrollContainerRef}
+      className="relative bg-[#050505] text-white font-sans overflow-x-hidden overflow-y-auto h-screen selection:bg-[#e62b1e] selection:text-white cursor-default"
+    >
       <GlobalStyles />
-      <CombinedLoadingHero />
+      <CombinedLoadingHero scrollContainerRef={scrollContainerRef} />
       <CountdownSection />
       <AboutSection />
       <SpeakersSection />
