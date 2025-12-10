@@ -125,7 +125,6 @@ export const FooterSection = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="grayscale hover:grayscale-0 transition-all duration-300"
                 ></iframe>
               </div>
 
