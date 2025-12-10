@@ -149,12 +149,17 @@ export const CombinedLoadingHero = ({
           const logoProgress = (scrollTop - startScroll) / (endScroll - startScroll);
           const easedProgress = easeOut(logoProgress);
           const scale = getScaleFromProgress(easedProgress);
+          const backgroundOpacity = easedProgress;
+
           tedxLogoRef.current.style.transform = `scale(${scale})`;
+          tedxLogoRef.current.style.backgroundColor = `rgba(5, 5, 5, ${backgroundOpacity})`;
         } else if (scrollTop < startScroll) {
           tedxLogoRef.current.style.display = `flex`;
           tedxLogoRef.current.style.transform = `scale(${INITIAL_SCALE})`;
+          tedxLogoRef.current.style.backgroundColor = `transparent`;
         } else {
           tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
+          tedxLogoRef.current.style.backgroundColor = `#050505`;
         }
       }
 
@@ -201,7 +206,7 @@ export const CombinedLoadingHero = ({
       {/* Loading Screen Layer - Height animated on scroll */}
       <div
         ref={loadingScreenRef}
-        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-30 overflow-hidden bg-[#050505]"
+        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-[#050505]"
       >
         <div className="w-full h-screen flex items-center justify-between flex-col">
           <div className="w-full pt-10">
@@ -270,7 +275,7 @@ export const CombinedLoadingHero = ({
       {/* Hero Section Image Layer - Hidden behind loading screen initially */}
       <div
         ref={heroImageRef}
-        className="fixed top-0 left-0 pointer-events-none w-full h-dvh z-10 bg-[#050505] flex items-center justify-center"
+        className="fixed top-0 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center"
       >
         <Image
           src="/poster.png"
@@ -285,7 +290,7 @@ export const CombinedLoadingHero = ({
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
       <div
         ref={tedxLogoRef}
-        className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-40 hidden items-center justify-center`}
+        className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
       >
         <Image
           src="/tedx-vjcet.svg"

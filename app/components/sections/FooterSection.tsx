@@ -7,7 +7,7 @@ import { CONTACT_INFO } from '@/app/constants';
 
 export const FooterSection = () => {
   return (
-    <footer id="footer" className="relative bg-[#e62b1e] text-white py-16 overflow-hidden">
+    <footer id="footer" className="relative bg-[#e62b1e] text-white py-16 overflow-hidden z-5">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
 
