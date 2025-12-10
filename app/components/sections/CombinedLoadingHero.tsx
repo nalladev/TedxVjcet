@@ -2,14 +2,10 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { TedxLogo } from "../ui/TedxLogo";
 
-// Register ScrollTrigger plugin
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+
 
 // SVG X Component (extracted from TedxLogo)
 const XSvg = ({
@@ -118,86 +114,85 @@ export const CombinedLoadingHero = ({
     if (!isPageLoaded || !containerRef.current || typeof window === "undefined")
       return;
 
-    console.log("Page loaded");
+    const oneHundredVh = window.innerHeight;
+    let animationComplete = false;
+    let animationId: number | null = null;
+    let isAnimating = false;
 
-    // Initialize animations after components are mounted
-    const initializeAnimations = () => {
-      try {
-        // Ensure required refs are available
-        if (
-          !loadingScreenRef.current ||
-          !heroImageRef.current ||
-          !containerRef.current
-        ) {
-          console.warn("Some animation refs are not ready yet");
-          return;
-        }
-
-        // Kill any existing animations to prevent conflicts
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-        // Create scroll-based loading screen height animation
-        // At 0% scroll: loading screen height = 100vh
-        // At 200vh scroll: loading screen height = 0vh (fully revealing image)
-        gsap.to(loadingScreenRef.current, {
-          height: "0vh",
-          scrollTrigger: {
-            scroller: scrollContainerRef?.current || window,
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=200vh",
-            scrub: 1.5,
-            ease: "power2.inOut",
-          },
-        });
-
-        // Pin the hero image section underneath
-        ScrollTrigger.create({
-          scroller: scrollContainerRef?.current || window,
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=200vh",
-          pin: heroImageRef.current,
-          pinSpacing: false,
-        });
-
-        // Refresh ScrollTrigger after setup
-        ScrollTrigger.refresh();
-      } catch (error) {
-        console.error("Error initializing GSAP animations:", error);
+    const updateAnimations = () => {
+      if (!loadingScreenRef.current || !scrollContainerRef?.current) {
+        isAnimating = false;
+        return;
       }
+
+      const scrollTop = scrollContainerRef.current.scrollTop;
+
+      // Loading screen animation
+      const progress = Math.min(scrollTop / oneHundredVh, 1);
+      const height = (1 - progress) * 100;
+      loadingScreenRef.current.style.height = `${height}vh`;
+
+      // Check if animation is complete
+      if (progress >= 1 && !animationComplete) {
+        animationComplete = true;
+        console.log("Loading screen animation completed!");
+      }
+
+      if (progress < 1) {
+        animationComplete = false;
+      }
+
+      // TEDx logo animation
+      if (tedxLogoRef.current) {
+        const startScroll = oneHundredVh;
+        const endScroll = oneHundredVh * 2;
+
+        if (scrollTop >= startScroll && scrollTop <= endScroll) {
+          const logoProgress = (scrollTop - startScroll) / (endScroll - startScroll);
+          const scale = 600 - (599 * logoProgress);
+          tedxLogoRef.current.style.transform = `scale(${scale})`;
+        } else if (scrollTop < startScroll) {
+          tedxLogoRef.current.style.transform = `scale(600)`;
+        } else {
+          tedxLogoRef.current.style.transform = `scale(1)`;
+        }
+      }
+
+      isAnimating = false;
     };
 
-    // Delay initialization to ensure DOM is ready
-    const timer = setTimeout(initializeAnimations, 200);
+    const onScroll = () => {
+      ifhandleScroll();
+      handleTedxLogoScroll();
+    };
+
+    // Add scroll listener to the container
+    if (scrollContainerRef?.current) {
+      scrollContainerRef.current.addEventListener('scroll', onScroll, { passive: true });
+    }
 
     return () => {
-      clearTimeout(timer);
-      try {
-        // Clean up all ScrollTrigger instances
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-        // Kill any remaining tweens
-        gsap.killTweensOf([loadingScreenRef.current, heroImageRef.current]);
-
-        // Clear timeline
-        gsap.globalTimeline.clear();
-      } catch (error) {
-        console.error("Error cleaning up animations:", error);
+      if (scrollContainerRef?.current) {
+        scrollContainerRef.current.removeEventListener('scroll', onScroll);
       }
     };
-  }, [scrollContainerRef,isPageLoaded]);
+  }, [scrollContainerRef, isPageLoaded]);
 
   return (
     <>
-      <div ref={containerRef} className="h-[300dvh] w-1vw"></div>
+      <div ref={containerRef} className="h-[300dvh] w-1vw">
+        {/* Line after first 100vh */}
+        <div className="absolute top-[100vh] left-0 w-full h-px bg-white/20 z-40"></div>
+        {/* Line after second 100vh */}
+        <div className="absolute top-[200vh] left-0 w-full h-px bg-white/20 z-40"></div>
+      </div>
       {/* Loading Screen Layer - Height animated on scroll */}
       <div
         ref={loadingScreenRef}
-        className="absolute top-0 left-0 w-full h-dvh z-30 overflow-hidden bg-[#050505]"
+        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-30 overflow-hidden bg-[#050505]"
       >
-        <div className="w-full h-full flex items-center justify-center flex-col">
-          <div className="w-dvw pt-10">
+        <div className="w-full h-screen flex items-center justify-between flex-col">
+          <div className="w-full pt-10">
             <Image
               src="/dot-grid.png"
               alt="Dot Grid"
@@ -263,7 +258,7 @@ export const CombinedLoadingHero = ({
       {/* Hero Section Image Layer - Hidden behind loading screen initially */}
       <div
         ref={heroImageRef}
-        className="absolute top-0 left-0 w-full h-dvh z-10 bg-[#050505] flex items-center justify-center"
+        className="fixed top-0 left-0 pointer-events-none w-full h-dvh z-10 bg-[#050505] flex items-center justify-center"
       >
         <Image
           src="/poster.png"
@@ -278,14 +273,14 @@ export const CombinedLoadingHero = ({
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
       <div
         ref={tedxLogoRef}
-        className="absolute inset-0 scale-60000 origin-center w-full h-dvh z-10 bg-[#050505] flex items-center justify-center"
+        className="fixed pointer-events-none inset-0 origin-center w-full h-dvh z-40 flex items-center justify-center"
       >
         <Image
           src="/tedx-vjcet.svg"
           alt="TEDx Logo"
           width={400}
           height={100}
-          className="w-[200px] md:w-sm"
+          className="w-[200px] md:w-2xl"
         />
       </div>
 
