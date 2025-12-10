@@ -120,7 +120,7 @@ export const SpeakersSection = () => {
                       </div>
                       <div className="flex flex-col justify-center space-y-2 h-full">
                         <div className="space-y-2 font-anton">
-                          <h4 className="text-3xl md:text-6xl lg:text-7xl font-extralight" style={{ color: 'transparent', WebkitTextStroke: '2px white', textStroke: '2px white' }}>{speaker.name}</h4>
+                          <h4 className="text-3xl md:text-6xl lg:text-7xl font-extralight" style={{ color: 'transparent', WebkitTextStroke: '2px white' }}>{speaker.name}</h4>
                           <h3 className="text-2xl md:text-3xl text-red-500 font-light">{speaker.role}</h3>
                         </div>
                         <p className="text-white leading-relaxed avantgarde text-xs md:text-base lg:text-lg">{speaker.description}</p>
