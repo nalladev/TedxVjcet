@@ -130,6 +130,12 @@ export const CombinedLoadingHero = ({
       const height = (1 - progress) * 100;
       loadingScreenRef.current.style.height = `${height}vh`;
 
+      // Hero image opacity animation
+      if (heroImageRef.current) {
+        const imageOpacity = 0.5 + (progress * 0.5); // From 0.5 to 1.0
+        heroImageRef.current.style.opacity = `${imageOpacity}`;
+      }
+
       // Check if animation is complete
       if (progress >= 1 && !animationComplete) {
         animationComplete = true;
@@ -198,10 +204,7 @@ export const CombinedLoadingHero = ({
   return (
     <>
       <div ref={containerRef} className="h-[300dvh] w-1vw">
-        {/* Line after first 100vh */}
-        <div className="absolute top-[100vh] left-0 w-full h-px bg-white/20 z-40"></div>
-        {/* Line after second 100vh */}
-        <div className="absolute top-[200vh] left-0 w-full h-px bg-white/20 z-40"></div>
+
       </div>
       {/* Loading Screen Layer - Height animated on scroll */}
       <div
@@ -275,7 +278,7 @@ export const CombinedLoadingHero = ({
       {/* Hero Section Image Layer - Hidden behind loading screen initially */}
       <div
         ref={heroImageRef}
-        className="fixed top-0 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center"
+        className="fixed top-0 opacity-50 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center"
       >
         <Image
           src="/poster.png"
