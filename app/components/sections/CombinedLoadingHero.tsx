@@ -3,30 +3,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
-import { TedxLogo } from "../ui/TedxLogo";
+
+
+// Animation constants
+const INITIAL_SCALE = 600;
+const FINAL_SCALE = 1;
 
 
 
-// SVG X Component (extracted from TedxLogo)
-const XSvg = ({
-  className,
-  style,
-}: {
-  className?: string;
-  style?: React.CSSProperties;
-}) => (
-  <svg
-    viewBox="234.1 66.6 34.4 39.8"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    style={style}
-  >
-    <path
-      d="M234.1,106.4L228,96.3l-5.9,10.1h-14.6L221.3,86L208,66.6h14.6l5.4,9.6l5.5-9.6h14.6L234.8,86l13.8,20.3H234.1z"
-      fill="#EE2922"
-    />
-  </svg>
-);
 
 // TEDx Part Component
 const TedxPart = React.forwardRef<SVGGElement, { className?: string }>(
@@ -119,6 +103,20 @@ export const CombinedLoadingHero = ({
     let animationId: number | null = null;
     let isAnimating = false;
 
+    // Easing function for deceleration (ease-out)
+    const easeOut = (t: number): number => {
+      return 1 - Math.pow(1 - t, 3); // Cubic ease-out
+    };
+
+    // Convert linear progress to exponential scale for smoother transitions
+    const getScaleFromProgress = (progress: number): number => {
+      // Use exponential interpolation for smoother scaling at lower values
+      const minScale = Math.log(FINAL_SCALE);
+      const maxScale = Math.log(INITIAL_SCALE);
+      const logScale = maxScale - (progress * (maxScale - minScale));
+      return Math.exp(logScale);
+    };
+
     const updateAnimations = () => {
       if (!loadingScreenRef.current || !scrollContainerRef?.current) {
         isAnimating = false;
@@ -149,12 +147,13 @@ export const CombinedLoadingHero = ({
 
         if (scrollTop >= startScroll && scrollTop <= endScroll) {
           const logoProgress = (scrollTop - startScroll) / (endScroll - startScroll);
-          const scale = 600 - (599 * logoProgress);
+          const easedProgress = easeOut(logoProgress);
+          const scale = getScaleFromProgress(easedProgress);
           tedxLogoRef.current.style.transform = `scale(${scale})`;
         } else if (scrollTop < startScroll) {
-          tedxLogoRef.current.style.transform = `scale(600)`;
+          tedxLogoRef.current.style.transform = `scale(${INITIAL_SCALE})`;
         } else {
-          tedxLogoRef.current.style.transform = `scale(1)`;
+          tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
         }
       }
 
@@ -162,18 +161,30 @@ export const CombinedLoadingHero = ({
     };
 
     const onScroll = () => {
-      ifhandleScroll();
-      handleTedxLogoScroll();
+      if (isAnimating) return;
+      
+      isAnimating = true;
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      
+      animationId = requestAnimationFrame(updateAnimations);
     };
 
+    // Store current ref for cleanup
+    const currentScrollContainer = scrollContainerRef?.current;
+
     // Add scroll listener to the container
-    if (scrollContainerRef?.current) {
-      scrollContainerRef.current.addEventListener('scroll', onScroll, { passive: true });
+    if (currentScrollContainer) {
+      currentScrollContainer.addEventListener('scroll', onScroll, { passive: true });
     }
 
     return () => {
-      if (scrollContainerRef?.current) {
-        scrollContainerRef.current.removeEventListener('scroll', onScroll);
+      if (currentScrollContainer) {
+        currentScrollContainer.removeEventListener('scroll', onScroll);
+      }
+      if (animationId) {
+        cancelAnimationFrame(animationId);
       }
     };
   }, [scrollContainerRef, isPageLoaded]);
