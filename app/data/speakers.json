@@ -1,23 +1,58 @@
 [
   {
     "id": 1,
-    "name": "JOHN DOE",
-    "role": "CEO",
-    "img": "/placeholder.webp",
-    "description": "John Doe is a visionary leader and the CEO of XYZ Corporation. With a passion for innovation and a commitment to excellence, he has transformed the company into a global leader in his industry. His leadership style is characterized by a deep understanding of his employees' needs and a focus on creating a positive work environment. Under his guidance, the company has achieved remarkable growth and has become a model for other businesses to follow."
+    "name": "RISHI RAJ SINGH",
+    "role": "Retd.IPS OFFICER",
+    "revealed": false,
+    "description": "Rishiraj Singh , a retired 1985-batch IPS officer of the  Kerala cadre,he is known for his strict,no -nonsense law-enforcement style and has served in major roles including Kochi City Police Commissioner, Excise Commissioner, and Director General of Prisons. "
   },
   {
     "id": 2,
-    "name": "JOHN DOE",
-    "role": "CEO",
-    "img": "/placeholder.webp",
-    "description": "John Doe is a visionary leader and the CEO of XYZ Corporation. With a passion for innovation and a commitment to excellence, he has transformed the company into a global leader in his industry. His leadership style is characterized by a deep understanding of his employees' needs and a focus on creating a positive work environment. Under his guidance, the company has achieved remarkable growth and has become a model for other businesses to follow."
+    "name": "CHEF PILLAI",
+    "role": "WELL KNOWN CHEF",
+    "revealed": false,
+    "description": "Chef Pillai is a Kerala-born chef who started  as a waiter , worked for 14 years in top restaurants in London, like Veeraswamy, gained fame on MasterChef: The Professionals (UK), and founded restaurant Chef Pillai (RCP) chain."
   },
   {
     "id": 3,
-    "name": "JOHN DOE",
-    "role": "CEO",
-    "img": "/placeholder.webp",
-    "description": "John Doe is a visionary leader and the CEO of XYZ Corporation. With a passion for innovation and a commitment to excellence, he has transformed the company into a global leader in his industry. His leadership style is characterized by a deep understanding of his employees' needs and a focus on creating a positive work environment. Under his guidance, the company has achieved remarkable growth and has become a model for other businesses to follow."
+    "name": "VINITHA KOSHY",
+    "role": "ACTRESS",
+    "revealed": false,
+    "description": "Vinitha Koshy,an actress from Kollam who previously worked as a paediatric counsellor in Singapore, made her  debut in Aanandam (2016),rose to fame with her State Award-winning role in Ottamuri Velicham (2017), and has since acted in films like Aby, Luca, Operation Java."
+  },
+  {
+    "id": 4,
+    "name": "RAHUL RAMACHADRAN",
+    "role": "FILM DIRECTOR AND SCRIPTWRITER",
+    "revealed": false,
+    "description": "Rahul Ramachandran is an Indian film director and scriptwriter in the Malayalam film industry who started with short films in 2017, deputed with Jeem Boom Bhaa (2019), scripted Njan  Kanda Superman (2019), and later directed the Suresh Gopi project SG 251."
+  },
+  {
+    "id": 5,
+    "name": "RAHUL P BALACHADRAN",
+    "role": "FOUNDER OF INKER ROBOTICS",
+    "revealed": false,
+    "description": "Rahul P Balachandran , founder of INKER Robotics and leader India’s first RoboPark in Thrissur, works to advance robotics, AI and emerging technologies with the goal of making them accessible to everyone."
+  },
+  {
+    "id": 6,
+    "name": "RAUL JOHN AJU",
+    "role": "AI-PRODIGY",
+    "revealed": false,
+    "description": "Raul John Aju is a teen AI-prodigy from Kerala who founded an AI startup, built over 10 AI tools and the humanoid robot called Me‐bot by age 16, and has taught AI to more than 140,000 students and businesses online."
+  },
+  {
+    "id": 7,
+    "name": "GOWRI N",
+    "role": "TRAVEL INFLUENCER",
+    "revealed": false,
+    "description": "Gowri N is a dynamic travel influencer known for her energetic storytelling, stunning visual content, and culturally rich travel insights that inspire and engage her audience."
+  },
+  {
+    "id": 8,
+    "name": "ANDREWS JOSE",
+    "role": "FOUNDER AND CEO ACCREDIT360",
+    "revealed": false,
+    "description": "Andrews Jose , Founder and CEO of Accredit360, is a Ph.D. scholar in Computer Science who contributes to institutional  quality frameworks like NAAC, NBA, and IQAC, and serves as the Assistant Head of the Computer Science and Engineering Department (CSED)."
   }
 ]

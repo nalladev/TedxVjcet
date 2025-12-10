@@ -7,9 +7,9 @@ import { Organizer } from '@/app/types';
 
 export const OrganizersSection = () => {
   const organizers: Organizer[] = [
-    { name: "Alex Morgan", role: "Lead Organizer", img: "/placeholder.webp" },
-    { name: "Sam Alt", role: "Curator", img: "/placeholder.webp" },
-    { name: "Lisa Su", role: "Design Head", img: "/placeholder.webp" },
+    { name: "Nivin K Sunil", role: "Organizer", img: "/organizers/1.png" },
+    { name: "Ms.Jesline Joseph", role: "Staff Incharge", img: "/organizers/2.png" },
+    { name: "Abhijith Shaji", role: "Co-organizer", img: "/organizers/3.png" },
   ];
 
   return (

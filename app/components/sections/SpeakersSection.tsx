@@ -129,7 +129,7 @@ export const SpeakersSection = () => {
                       <div className="flex flex-col items-center justify-center space-y-6 h-full">
                         <div className="w-full h-full md:h-full max-h-[370px] md:max-h-full flex items-center justify-center overflow-hidden">
                           <Image
-                            src={speaker.img}
+                            src={`/cards2/speaker${speaker.id}.png`}
                             alt={speaker.name}
                             width={400}
                             height={400}

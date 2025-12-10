@@ -22,7 +22,7 @@ export const SpeakerCard = ({ speaker, index }: SpeakerCardProps) => {
 
   // Check if this is a placeholder speaker (no real data)
   const isPlaceholder = speaker.name.startsWith('SPEAKER') || speaker.role === 'TO BE REVEALED';
-  
+
   if (isPlaceholder) {
     return (
       <div
@@ -57,7 +57,7 @@ export const SpeakerCard = ({ speaker, index }: SpeakerCardProps) => {
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <Image
-        src={speaker.img}
+        src={`/cards1/speaker${speaker.id}.png`}
         alt={speaker.name}
         width={300}
         height={400}

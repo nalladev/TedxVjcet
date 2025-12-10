@@ -1,4 +1,5 @@
 export { HeroSection } from './HeroSection';
+export { CombinedLoadingHero } from './CombinedLoadingHero';
 export { CountdownSection } from './CountdownSection';
 export { AboutSection } from './AboutSection';
 export { SpeakersSection } from './SpeakersSection';
