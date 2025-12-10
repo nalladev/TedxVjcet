@@ -1,3 +1,6 @@
+import { Speaker } from "../types";
+import speakersData from '@/app/data/speakers.json';
+
 // Event Configuration
 export const EVENT_DATE = new Date('2026-01-03T00:00:00.000Z');
 
@@ -38,3 +41,5 @@ export const CONTACT_INFO = {
   },
   mapUrl: 'https://maps.app.goo.gl/S52rk41bxgKPRPP5A'
 } as const;
+
+export const speakers = speakersData as Speaker[];

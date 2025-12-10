@@ -4,43 +4,21 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 import { FocusedSpeakersGrid } from '@/app/components/ui/FocusedSpeakersGrid';
-import { Speaker } from '@/app/types';
-import speakersData from '@/app/data/speakers.json';
+import { speakers } from '@/app/constants';
+
+// {
+//   id: i + 1,
+//   name: `SPEAKER ${i + 1}`,
+//   role: "TO BE REVEALED",
+//   revealed: false,
+//   description: "This speaker will be revealed soon. Stay tuned for more exciting announcements!"
+// }
 
 export const SpeakersSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSpeakers = 8;
 
-  // Generate complete speakers array with placeholders
-  const generateSpeakersWithPlaceholders = (): Speaker[] => {
-    const revealedSpeakers = speakersData as Speaker[];
-    const speakers: Speaker[] = [];
-
-    // Add revealed speakers
-    for (let i = 0; i < totalSpeakers; i++) {
-      const revealedSpeaker = revealedSpeakers.find(speaker => speaker.id === i + 1);
-
-      if (revealedSpeaker) {
-        speakers.push(revealedSpeaker);
-      } else {
-        // Add placeholder for unrevealed speaker
-        speakers.push({
-          id: i + 1,
-          name: `SPEAKER ${i + 1}`,
-          role: "TO BE REVEALED",
-          revealed: false,
-          description: "This speaker will be revealed soon. Stay tuned for more exciting announcements!"
-        });
-      }
-    }
-
-    return speakers;
-  };
-
-  const speakers = generateSpeakersWithPlaceholders();
-  const revealedSpeakersCount = speakersData.length;
-
-
+  const revealedSpeakersCount = speakers.filter(speaker => speaker.revealed).length;
 
   const nextSpeaker = () => {
     setCurrentIndex((prev) => (prev + 1) % speakers.length);
