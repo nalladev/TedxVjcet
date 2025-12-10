@@ -9,7 +9,7 @@ export const AboutSection = () => {
     <div id="about" className="relative z-10 bg-[#050505] py-20 shadow-[0_-50px_100px_rgba(0,0,0,1)] overflow-hidden border-t border-white/5">
       {/* Background Video */}
       <video
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
+        className="absolute inset-0 w-full h-full object-cover opacity-20"
         autoPlay
         muted
         loop
@@ -19,7 +19,7 @@ export const AboutSection = () => {
       </video>
 
       {/* Dark overlay to ensure text readability */}
-      <div className="absolute inset-0 bg-black/60 z-5"></div>
+      <div className="absolute inset-0 bg-black/20 z-5"></div>
 
       <ParallaxBackground text="IDEAS" direction={-1} speed={0.3} opacity="opacity-[0.08]" />
 

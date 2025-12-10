@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
+import { SVGGrid } from '@/app/components/ui/SVGGrid';
 import { Organizer } from '@/app/types';
 
 export const OrganizersSection = () => {
@@ -14,6 +15,8 @@ export const OrganizersSection = () => {
 
   return (
     <div className="bg-[#111] py-24 border-t border-white/10 relative z-30 overflow-hidden">
+      <SVGGrid opacity={0.2} gridSize={60} strokeWidth={0.8} dotSize={1.5} />
+
       <ParallaxBackground text="ORGANIZERS" direction={1} speed={0.35} opacity="opacity-[0.08]" className='-top-400 md:-top-120'/>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
