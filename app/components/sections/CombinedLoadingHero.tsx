@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { SVGGrid } from '@/app/components/ui/SVGGrid';
 
 
 
@@ -71,17 +72,48 @@ export const CombinedLoadingHero = ({
   onContainerRefReady,
 }: CombinedLoadingHeroProps) => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [parallaxTransform, setParallaxTransform] = useState({ x: 0, y: 0 });
 
   // Refs for animation targets
   const containerRef = useRef<HTMLDivElement>(null);
   const loadingScreenRef = useRef<HTMLDivElement>(null);
   const heroImageRef = useRef<HTMLDivElement>(null);
+  const heroImageInnerRef = useRef<HTMLImageElement>(null);
   const tedxLogoRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
     onContainerRefReady?.(containerRef);
   }, [onContainerRefReady]);
+
+  // Mouse parallax effect
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (typeof window === "undefined") return;
+    
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    
+    // Calculate normalized mouse position (-1 to 1)
+    const x = (clientX / innerWidth) * 2 - 1;
+    const y = (clientY / innerHeight) * 2 - 1;
+    
+    // Apply parallax movement (adjust multiplier for intensity)
+    const parallaxIntensity = 20;
+    setParallaxTransform({
+      x: x * parallaxIntensity,
+      y: y * parallaxIntensity
+    });
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [handleMouseMove]);
 
   useEffect(() => {
     const handleLoad = () => {
@@ -236,6 +268,8 @@ export const CombinedLoadingHero = ({
         ref={loadingScreenRef}
         className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-[#050505]"
       >
+        <SVGGrid opacity={0.3} gridSize={40} strokeWidth={0.4} dotSize={0.8} />
+
         <div className="w-full h-screen flex items-center justify-around flex-col">
           {/*<div className="w-full pt-10">
             <Image
@@ -260,8 +294,6 @@ export const CombinedLoadingHero = ({
             }}
           />
 
-
-
           {/*<div className="w-dvw pb-10">
             <Image
               src="/dot-grid.png"
@@ -277,16 +309,22 @@ export const CombinedLoadingHero = ({
       {/* Hero Section Image Layer - Hidden behind loading screen initially */}
       <div
         ref={heroImageRef}
-        className="fixed top-0 opacity-50 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center"
+        className="fixed top-0 opacity-50 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center overflow-hidden"
       >
         <Image
+          ref={heroImageInnerRef}
           src="/college-x.png"
           alt="Hero Background"
           width={1920}
           height={1080}
-          className="w-dvw h-dvh object-center md:object-[0%_23%] object-cover"
+          className="w-dvw h-dvh object-center md:object-[0%_23%] object-cover transition-transform duration-100 ease-out"
+          style={{
+            transform: `translate(${parallaxTransform.x}px, ${parallaxTransform.y}px) scale(1.1)`
+          }}
           priority
         />
+        {/* Mobile gradient overlay - top-left to bottom-right */}
+        <div className="absolute inset-0 md:hidden bg-gradient-to-br from-black/70 via-black/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
@@ -352,6 +390,8 @@ export const CombinedLoadingHero = ({
             transform: translateY(0);
           }
         }
+
+
       `}</style>
     </>
   );

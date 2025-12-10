@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 import { FocusedSpeakersGrid } from '@/app/components/ui/FocusedSpeakersGrid';
+import { SVGGrid } from '@/app/components/ui/SVGGrid';
 import { speakers } from '@/app/constants';
 
 // {
@@ -76,7 +77,8 @@ export const SpeakersSection = () => {
 
       {/* Card Rotation Section - Only show if there's at least 1 speaker */}
       {revealedSpeakersCount > 0 && (
-        <div id="speakers" className="min-h-screen w-full flex items-center justify-center px-4 py-16 bg-[#050505]">
+        <div id="speakers" className="relative min-h-screen w-full flex items-center justify-center px-4 py-16 bg-[#050505]">
+          <SVGGrid opacity={0.4} gridSize={80} strokeWidth={0.5} dotSize={1} />
           <div className="flex w-full max-w-7xl mx-auto justify-center items-center flex-col">
             {/* Previous Button */}
             <button
@@ -91,24 +93,25 @@ export const SpeakersSection = () => {
             </button>
 
             {/* Card Stack */}
-            <div className="relative h-[800px] w-full max-w-5xl mx-auto my-6 flex items-center overflow-hidden [--card-offset:50px] md:[--card-offset:125px]">
+            <div className="relative h-[800px] md:h-[880px] w-full max-w-5xl mx-auto my-6 flex items-center overflow-hidden [--card-offset:50px] md:[--card-offset:125px]">
               {speakers.map((speaker, index) => (
                 <div
                   key={speaker.id}
-                  className={`absolute w-full flex max-w-5xl mx-auto p-4 md:p-6 rounded-lg transition-all duration-500 ease-in-out border-2 shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-white`}
+                  className={`absolute w-full flex max-w-5xl mx-auto p-4  md:px-6 md:pb-0  rounded-xl transition-all duration-500 ease-in-out border border-white shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-gradient-to-b md:bg-gradient-to-r from-black to-[#e62b1e]`}
                   style={getCardStyle(index)}
                 >
                   {speaker.revealed ? (
-                    <div className="grid grid-cols-1 md:overflow-y-hidden md:grid-cols-2 gap-6 h-[650px] md:h-[450px] lg:h-[450px] xl:h-[550px]">
-                      <div className="flex flex-col items-center justify-center space-y-6 h-full">
-                        <div className="w-full h-full md:h-full max-h-[370px] md:max-h-full flex items-center justify-center overflow-hidden">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[650px] md:h-[450px] lg:h-[450px] xl:h-[550px] md:items-start">
+                      <div className="flex flex-col h-full overflow-hidden">
+                        <div className="w-full flex-1 flex items-end justify-center overflow-hidden">
                           <Image
                             src={`/cards2/speaker${speaker.id}.png`}
                             alt={speaker.name}
                             width={400}
                             height={400}
                             style={{ width: "auto", height: "100%" }}
-                            className="h-full max-w-full max-h-full object-cover rounded" />
+                            className="h-full max-w-full object-cover rounded object-bottom" />
+
                         </div>
                         {/*<div className="flex-row hidden md:flex font-anton">
                           <p className="text-2xl md:text-3xl text-red-600 font-medium">TEDx</p>
@@ -117,10 +120,10 @@ export const SpeakersSection = () => {
                       </div>
                       <div className="flex flex-col justify-center space-y-2 h-full">
                         <div className="space-y-2 font-anton">
-                          <h4 className="text-3xl md:text-6xl lg:text-7xl text-gray-900 font-extralight">{speaker.name}</h4>
+                          <h4 className="text-3xl md:text-6xl lg:text-7xl font-extralight" style={{ color: 'transparent', WebkitTextStroke: '2px white', textStroke: '2px white' }}>{speaker.name}</h4>
                           <h3 className="text-2xl md:text-3xl text-red-500 font-light">{speaker.role}</h3>
                         </div>
-                        <p className="text-gray-700 leading-relaxed avantgarde text-xs md:text-base lg:text-lg">{speaker.description}</p>
+                        <p className="text-white leading-relaxed avantgarde text-xs md:text-base lg:text-lg">{speaker.description}</p>
                       </div>
                     </div>
                   ) : (
@@ -136,15 +139,15 @@ export const SpeakersSection = () => {
                         </div>
                         <div className="flex-row hidden md:flex font-anton">
                           <p className="text-4xl md:text-5xl text-red-600 font-medium">TEDx</p>
-                          <p className="text-4xl md:text-5xl text-black font-medium">SPEAKER</p>
+                          <p className="text-4xl md:text-5xl text-white font-medium">SPEAKER</p>
                         </div>
                       </div>
-                      <div className="flex flex-col justify-center space-y-4 text-black h-full">
+                      <div className="flex flex-col justify-center space-y-4 text-white h-full">
                         <div className="space-y-4 font-anton">
-                          <h4 className="text-3xl md:text-6xl lg:text-7xl font-medium">SPEAKER #{speaker.id}</h4>
+                          <h4 className="text-3xl md:text-6xl lg:text-7xl font-medium" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8), -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8)' }}>SPEAKER #{speaker.id}</h4>
                           <h3 className="text-2xl md:text-4xl text-red-500 font-medium">REVEALING SOON</h3>
                         </div>
-                        <p className="text-black leading-relaxed avantgarde text-xs md:text-base lg:text-lg">
+                        <p className="text-white leading-relaxed avantgarde text-xs md:text-base lg:text-lg">
                           This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup.
                         </p>
                         <div className="mt-6">

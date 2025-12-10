@@ -17,7 +17,7 @@ export const OrganizersSection = () => {
     <div className="bg-[#111] py-24 border-t border-white/10 relative z-30 overflow-hidden">
       <SVGGrid opacity={0.2} gridSize={60} strokeWidth={0.8} dotSize={1.5} />
 
-      <ParallaxBackground text="ORGANIZERS" direction={1} speed={0.35} opacity="opacity-[0.08]" className='-top-400 md:-top-120'/>
+      <ParallaxBackground text="ORGANIZERS" direction={1} speed={0.35} opacity="opacity-[0.08]" className='-top-400 md:-top-90'/>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
