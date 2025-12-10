@@ -93,12 +93,13 @@ export const CountdownSection = () => {
           <>
             {/* Countdown Display */}
             <div className="grid grid-cols-4 gap-3 md:gap-8 mb-12 max-w-4xl mx-auto">
-              {timeUnits.map((unit) => (
+              {timeUnits.map((unit, index) => (
                 <div
                   key={unit.label}
-                  className="countdown-card group bg-white/5 border border-white/10 rounded-lg p-3 md:p-5 backdrop-blur-md hover:border-[#e62b1e]/50 transition-all duration-300 hover:bg-white/10"
+                  className="countdown-card group bg-white/5 border border-white/10 rounded-lg p-3 md:p-5 backdrop-blur-md hover:border-[#e62b1e]/50 transition-all duration-300 hover:bg-white/10 md:animate-none animate-jump-mobile"
                   style={{
-                    transition: 'transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6), box-shadow 0.3s ease'
+                    transition: 'transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6), box-shadow 0.3s ease',
+                    animationDelay: `${index * 0.5}s`
                   }}
                 >
                   <div className="text-center">
@@ -132,7 +133,7 @@ export const CountdownSection = () => {
                 href="https://www.ted.com/tedx/events/64560"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 bg-linear-to-r from-[#e62b1e] to-red-600 hover:from-red-600 hover:to-[#e62b1e] text-white font-tech px-8 py-4 rounded-xl border border-[#e62b1e]/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e62b1e]/20 text-sm tracking-wider uppercase"
+                className="group inline-flex items-center gap-4 bg-linear-to-r from-[#e62b1e] to-red-600 hover:from-red-600 hover:to-[#e62b1e] text-white font-tech px-8 py-4 rounded-xl border border-[#e62b1e]/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e62b1e]/20 text-sm tracking-wider uppercase animate-blip"
               >
                 <Ticket size={20} className="group-hover:rotate-12 transition-transform duration-300" />
                 <span>Book Your Ticket</span>
@@ -151,6 +152,52 @@ export const CountdownSection = () => {
           </div>
         )}
       </div>
+
+      <style jsx>{`
+        @keyframes jump-mobile {
+          0%, 70%, 100% {
+            transform: translateY(0) scale(1);
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+          }
+          15%, 35% {
+            transform: translateY(-8px) scale(1.05);
+            border-color: rgba(230, 43, 30, 0.5);
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+        }
+
+        @keyframes blip {
+          0%, 60%, 100% {
+            transform: scale(1);
+            box-shadow: 0 4px 15px rgba(230, 43, 30, 0.2);
+          }
+          10%, 20% {
+            transform: scale(1.02);
+            box-shadow: 0 6px 25px rgba(230, 43, 30, 0.4);
+          }
+          30%, 40% {
+            transform: scale(1.02);
+            box-shadow: 0 6px 25px rgba(230, 43, 30, 0.4);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .animate-jump-mobile {
+            animation: jump-mobile 4s infinite ease-in-out;
+          }
+        }
+
+        @media (min-width: 769px) {
+          .animate-jump-mobile {
+            animation: none;
+          }
+        }
+
+        .animate-blip {
+          animation: blip 3s infinite ease-in-out;
+        }
+      `}</style>
     </section>
   );
 };

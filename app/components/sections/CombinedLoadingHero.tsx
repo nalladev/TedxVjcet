@@ -61,10 +61,14 @@ VjcetPart.displayName = "VjcetPart";
 
 interface CombinedLoadingHeroProps {
   scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
+  onLoadStateChange?: (isLoaded: boolean) => void;
+  onContainerRefReady?: (ref: React.RefObject<HTMLDivElement | null>) => void;
 }
 
 export const CombinedLoadingHero = ({
   scrollContainerRef,
+  onLoadStateChange,
+  onContainerRefReady,
 }: CombinedLoadingHeroProps) => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
 
@@ -76,8 +80,13 @@ export const CombinedLoadingHero = ({
 
 
   useEffect(() => {
+    onContainerRefReady?.(containerRef);
+  }, [onContainerRefReady]);
+
+  useEffect(() => {
     const handleLoad = () => {
       setIsPageLoaded(true);
+      onLoadStateChange?.(true);
     };
 
     // Check if page is already loaded
@@ -92,13 +101,14 @@ export const CombinedLoadingHero = ({
         window.removeEventListener("load", handleLoad);
       }
     };
-  }, []);
+  }, [onLoadStateChange]);
 
   useEffect(() => {
     if (!isPageLoaded || !containerRef.current || typeof window === "undefined")
       return;
 
     const oneHundredVh = window.innerHeight;
+    const maxAnimationRange = oneHundredVh * 2; // End of all animations
     let animationComplete = false;
     let animationId: number | null = null;
     let isAnimating = false;
@@ -125,29 +135,37 @@ export const CombinedLoadingHero = ({
 
       const scrollTop = scrollContainerRef.current.scrollTop;
 
-      // Loading screen animation
-      const progress = Math.min(scrollTop / oneHundredVh, 1);
-      const height = (1 - progress) * 100;
-      loadingScreenRef.current.style.height = `${height}vh`;
-
-      // Hero image opacity animation
-      if (heroImageRef.current) {
-        const imageOpacity = 0.5 + (progress * 0.5); // From 0.5 to 1.0
-        heroImageRef.current.style.opacity = `${imageOpacity}`;
+      // Early exit if we're way past all animations (efficiency optimization)
+      if (scrollTop > maxAnimationRange + oneHundredVh) {
+        isAnimating = false;
+        return;
       }
 
-      // Check if animation is complete
-      if (progress >= 1 && !animationComplete) {
-        animationComplete = true;
-        console.log("Loading screen animation completed!");
+      // Loading screen animation (0 to 1vh)
+      if (scrollTop <= oneHundredVh) {
+        const progress = Math.min(scrollTop / oneHundredVh, 1);
+        const height = (1 - progress) * 100;
+        loadingScreenRef.current.style.height = `${height}vh`;
+
+        // Hero image opacity animation
+        if (heroImageRef.current) {
+          const imageOpacity = 0.5 + (progress * 0.5); // From 0.5 to 1.0
+          heroImageRef.current.style.opacity = `${imageOpacity}`;
+        }
+
+        // Check if animation is complete
+        if (progress >= 1 && !animationComplete) {
+          animationComplete = true;
+          console.log("Loading screen animation completed!");
+        }
+
+        if (progress < 1) {
+          animationComplete = false;
+        }
       }
 
-      if (progress < 1) {
-        animationComplete = false;
-      }
-
-      // TEDx logo animation
-      if (tedxLogoRef.current) {
+      // TEDx logo animation (1vh to 2vh)
+      if (tedxLogoRef.current && scrollTop >= 0 && scrollTop <= maxAnimationRange) {
         const startScroll = oneHundredVh;
         const endScroll = oneHundredVh * 2;
 
@@ -163,7 +181,7 @@ export const CombinedLoadingHero = ({
           tedxLogoRef.current.style.display = `flex`;
           tedxLogoRef.current.style.transform = `scale(${INITIAL_SCALE})`;
           tedxLogoRef.current.style.backgroundColor = `transparent`;
-        } else {
+        } else if (scrollTop > endScroll) {
           tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
           tedxLogoRef.current.style.backgroundColor = `#050505`;
         }
@@ -174,6 +192,13 @@ export const CombinedLoadingHero = ({
 
     const onScroll = () => {
       if (isAnimating) return;
+
+      const scrollTop = scrollContainerRef?.current?.scrollTop || 0;
+      
+      // Early exit if we're way past the animation range - but keep listener active
+      if (scrollTop > maxAnimationRange + oneHundredVh) {
+        return;
+      }
 
       isAnimating = true;
       if (animationId) {
@@ -186,7 +211,7 @@ export const CombinedLoadingHero = ({
     // Store current ref for cleanup
     const currentScrollContainer = scrollContainerRef?.current;
 
-    // Add scroll listener to the container
+    // Add scroll listener to the container - keep it active for scroll-up detection
     if (currentScrollContainer) {
       currentScrollContainer.addEventListener('scroll', onScroll, { passive: true });
     }
@@ -211,8 +236,8 @@ export const CombinedLoadingHero = ({
         ref={loadingScreenRef}
         className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-[#050505]"
       >
-        <div className="w-full h-screen flex items-center justify-between flex-col">
-          <div className="w-full pt-10">
+        <div className="w-full h-screen flex items-center justify-around flex-col">
+          {/*<div className="w-full pt-10">
             <Image
               src="/dot-grid.png"
               alt="Dot Grid"
@@ -220,7 +245,7 @@ export const CombinedLoadingHero = ({
               height={100}
               className="w-[200px] md:w-sm rotate-180 grayscale-30 md:-translate-x-10"
             />
-          </div>
+          </div>*/}
 
           <Image
             src="/weird_x.png"
@@ -234,36 +259,9 @@ export const CombinedLoadingHero = ({
             }}
           />
 
-          {isPageLoaded && (
-            <div
-              className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white flex flex-col items-center cursor-pointer"
-              style={{ animation: "fadeIn 1s ease-out" }}
-            >
-              <div className="mb-2 text-sm text-gray-300 font-light tracking-wide">
-                Scroll to explore
-              </div>
-              <div
-                className="w-8 h-8 flex items-center justify-center"
-                style={{ animation: "bounce 2s infinite" }}
-              >
-                <svg
-                  className="w-6 h-6 text-red-500"
-                  fill="none"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
-                </svg>
-              </div>
-            </div>
-          )}
 
-          <div className="w-dvw pb-10">
+
+          {/*<div className="w-dvw pb-10">
             <Image
               src="/dot-grid.png"
               alt="Dot Grid"
@@ -271,7 +269,7 @@ export const CombinedLoadingHero = ({
               height={100}
               className="w-[200px] md:w-sm ml-auto grayscale-30 md:translate-x-10"
             />
-          </div>
+          </div>*/}
         </div>
       </div>
 
@@ -281,7 +279,7 @@ export const CombinedLoadingHero = ({
         className="fixed top-0 opacity-50 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center"
       >
         <Image
-          src="/poster.png"
+          src="/college-x.png"
           alt="Hero Background"
           width={1920}
           height={1080}
@@ -300,7 +298,7 @@ export const CombinedLoadingHero = ({
           alt="TEDx Logo"
           width={400}
           height={100}
-          className="w-[200px] md:w-2xl"
+          className="w-[350px] md:w-2xl"
         />
       </div>
 
@@ -340,22 +338,6 @@ export const CombinedLoadingHero = ({
           }
           70% {
             filter: drop-shadow(0 0 15px rgba(238, 41, 34, 0.6));
-          }
-        }
-
-        @keyframes bounce {
-          0%,
-          20%,
-          50%,
-          80%,
-          100% {
-            transform: translateY(0);
-          }
-          40% {
-            transform: translateY(-10px);
-          }
-          60% {
-            transform: translateY(5px);
           }
         }
 
