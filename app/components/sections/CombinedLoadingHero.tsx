@@ -60,7 +60,7 @@ const VjcetPart = React.forwardRef<SVGGElement, { className?: string }>(
 VjcetPart.displayName = "VjcetPart";
 
 interface CombinedLoadingHeroProps {
-  scrollContainerRef?: React.RefObject<HTMLDivElement>;
+  scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export const CombinedLoadingHero = ({
