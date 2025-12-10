@@ -69,10 +69,10 @@ export const TedxLogo = () => {
         className="w-full h-auto max-w-screen-lg mx-auto" // Ensure SVG is responsive and centered
       >
         {/* Original paths */}
-        <path ref={(el) => (pathRefs.current[0] = el)} d="M45.1,83.3H27V66.7h56v16.5H64.9v48H45.1V83.3z" />
-        <path ref={(el) => (pathRefs.current[1] = el)} d="M86.1,66.7h54.4v16.5H106v8h34.5v15.4H106v8h34.5v16.5H86.1V66.7z" />
+        <path ref={(el) => { pathRefs.current[0] = el; }} d="M45.1,83.3H27V66.7h56v16.5H64.9v48H45.1V83.3z" />
+        <path ref={(el) => { pathRefs.current[1] = el; }} d="M86.1,66.7h54.4v16.5H106v8h34.5v15.4H106v8h34.5v16.5H86.1V66.7z" />
         <path
-          ref={(el) => (pathRefs.current[2] = el)}
+          ref={(el) => { pathRefs.current[2] = el; }}
           d="M163.7,114.7h7.8c12.4,0,14.2-10,14.2-16.1c0-4.1-1.3-15.3-15.6-15.3h-6.3V114.7z M143.8,66.7h32.6
           c21.5,0,29.1,15.9,29.1,32.2c0,19.8-10.5,32.3-33,32.3h-28.7V66.7z"
         />
