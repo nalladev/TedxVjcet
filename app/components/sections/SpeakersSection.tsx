@@ -99,7 +99,7 @@ export const SpeakersSection = () => {
                   style={getCardStyle(index)}
                 >
                   {speaker.revealed ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[650px] md:h-[450px] lg:h-[450px] xl:h-[550px]">
+                    <div className="grid grid-cols-1 md:overflow-y-hidden md:grid-cols-2 gap-6 h-[650px] md:h-[450px] lg:h-[450px] xl:h-[550px]">
                       <div className="flex flex-col items-center justify-center space-y-6 h-full">
                         <div className="w-full h-full md:h-full max-h-[370px] md:max-h-full flex items-center justify-center overflow-hidden">
                           <Image
