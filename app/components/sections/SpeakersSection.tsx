@@ -111,6 +111,7 @@ export const SpeakersSection = () => {
                             alt={speaker.name}
                             width={400}
                             height={400}
+                            style={{ width: "auto", height: "100%" }}
                             className="h-full max-w-full max-h-full object-cover rounded" />
                         </div>
                         {/*<div className="flex-row hidden md:flex font-anton">

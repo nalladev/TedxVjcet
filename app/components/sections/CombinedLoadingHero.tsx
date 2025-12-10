@@ -194,7 +194,7 @@ export const CombinedLoadingHero = ({
       if (isAnimating) return;
 
       const scrollTop = scrollContainerRef?.current?.scrollTop || 0;
-      
+
       // Early exit if we're way past the animation range - but keep listener active
       if (scrollTop > maxAnimationRange + oneHundredVh) {
         return;
@@ -250,9 +250,10 @@ export const CombinedLoadingHero = ({
           <Image
             src="/weird_x.png"
             alt="Tedx Logo"
-            width={400}
-            height={100}
+            width={200}
+            height={200}
             className="w-[150px] md:w-[270px]"
+            loading="eager"
             style={{
               animation:
                 "heartbeat 1.5s ease-in-out infinite, heartbeatGlow 1.5s ease-in-out infinite",

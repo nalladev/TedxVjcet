@@ -7,6 +7,20 @@ import { FeatureCard } from '@/app/components/ui/FeatureCard';
 export const AboutSection = () => {
   return (
     <div id="about" className="relative z-10 bg-[#050505] py-20 shadow-[0_-50px_100px_rgba(0,0,0,1)] overflow-hidden border-t border-white/5">
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/bg-video.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-black/60 z-5"></div>
+
       <ParallaxBackground text="IDEAS" direction={-1} speed={0.3} opacity="opacity-[0.08]" />
 
       <div className="sticky top-0 flex flex-col items-center justify-center p-6">
