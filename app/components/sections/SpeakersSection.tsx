@@ -28,7 +28,7 @@ export const SpeakersSection = () => {
           id: i + 1,
           name: `SPEAKER ${i + 1}`,
           role: "TO BE REVEALED",
-          img: "/placeholder.webp",
+          revealed: false,
           description: "This speaker will be revealed soon. Stay tuned for more exciting announcements!"
         });
       }
