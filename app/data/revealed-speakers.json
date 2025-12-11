@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "ANDREWS JOSE",
+    "role": "FOUNDER AND CEO ACCREDIT360",
+    "gender": "male",
+    "description": "Andrews Jose , Founder and CEO of Accredit360, is a Ph.D. scholar in Computer Science who contributes to institutional  quality frameworks like NAAC, NBA, and IQAC, and serves as the Assistant Head of the Computer Science and Engineering Department (CSED)."
+  },
+  {
+    "id": 2,
+    "name": "SPEAKER 2",
+    "role": "TO BE REVEALED",
+    "gender": "female",
+    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+  },
+  {
+    "id": 3,
+    "name": "SPEAKER 3", 
+    "role": "TO BE REVEALED",
+    "gender": "female",
+    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+  },
+  {
+    "id": 4,
+    "name": "SPEAKER 4",
+    "role": "TO BE REVEALED", 
+    "gender": "male",
+    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+  },
+  {
+    "id": 5,
+    "name": "SPEAKER 5",
+    "role": "TO BE REVEALED",
+    "gender": "male", 
+    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+  },
+  {
+    "id": 6,
+    "name": "SPEAKER 6",
+    "role": "TO BE REVEALED",
+    "gender": "male",
+    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+  },
+  {
+    "id": 7,
+    "name": "SPEAKER 7",
+    "role": "TO BE REVEALED",
+    "gender": "female",
+    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+  },
+  {
+    "id": 8,
+    "name": "SPEAKER 8",
+    "role": "TO BE REVEALED",
+    "gender": "male",
+    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+  }
+]

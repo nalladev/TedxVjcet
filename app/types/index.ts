@@ -12,7 +12,6 @@ export interface Speaker {
   name: string;
   role: string;
   show_fullname?: boolean;
-  revealed: boolean;
   gender: 'male' | 'female';
   description: string;
 }

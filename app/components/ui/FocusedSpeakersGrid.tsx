@@ -37,7 +37,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                   isFocused ? 'shadow-2xl shadow-red-500/20' : 'shadow-lg'
                 }`}
               >
-                {!speaker.revealed ? (
+                {speaker.name === `SPEAKER ${speaker.id}` && speaker.role === 'TO BE REVEALED' ? (
                   // Placeholder card
                   <div className="relative w-full h-full bg-[#161616] flex flex-col items-center justify-center">
                     <Image
@@ -80,7 +80,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                 )}
 
                 {/* Speaker name overlay */}
-                {speaker.revealed && (
+                {speaker.name !== `SPEAKER ${speaker.id}` && speaker.role !== 'TO BE REVEALED' && (
                   <div className="absolute bottom-0 left-0 w-full p-4 text-white">
                     {isFocused && (
                       <>
@@ -121,7 +121,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                   isFocused ? 'shadow-2xl shadow-red-500/20' : 'shadow-lg'
                 }`}
               >
-                {!speaker.revealed ? (
+                {speaker.name === `SPEAKER ${speaker.id}` && speaker.role === 'TO BE REVEALED' ? (
                   // Placeholder card
                   <div className="relative w-full h-full bg-linear-to-br from-gray-800 to-gray-900 flex items-center justify-between px-4">
                     <Image
