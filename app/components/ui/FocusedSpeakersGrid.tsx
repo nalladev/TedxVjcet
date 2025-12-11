@@ -134,7 +134,7 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                       sizes="(max-width: 768px) 100vw, 320px"
                     />
                     <div className="absolute inset-0 flex items-center justify-between px-4 z-10">
-                      <div className="flex items-center bg-black/40 rounded-lg p-2 w-full">
+                      <div className={`flex items-center bg-black/40 rounded-lg p-2 w-full ${isFocused ? 'flex-col justify-center h-full' : ''}`}>
                         <div className={`border-4 border-[#e62b1e] rounded-full flex items-center justify-center shadow-lg shadow-red-500/50 ${
                           isFocused ? 'w-16 h-16' : 'w-12 h-12'
                         }`}>
@@ -144,11 +144,11 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                           </svg>
                         </div>
-                        <div className="ml-4">
+                        <div className={`${isFocused ? 'ml-0 mt-4 flex flex-col items-center' : 'ml-4'}`}>
                           <p className={`text-white font-bold mb-1 ${
                             isFocused ? 'text-lg' : 'text-sm'
                           }`}>SPEAKER #{speaker.id}</p>
-                          <p className={`text-[#e62b1e] uppercase tracking-wider ${
+                          <p className={`text-white uppercase tracking-wider ${
                             isFocused ? 'text-sm' : 'text-xs'
                           }`}>Revealing Soon</p>
                         </div>
