@@ -132,7 +132,7 @@ export const CountdownSection = () => {
             {/* Book Ticket Button */}
             <div className="text-center">
               <a
-                href="https://www.ted.com/tedx/events/64560"
+                href="https://makemypass.com/event/tedx-vjcet"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-4 bg-linear-to-r from-[#e62b1e] to-red-600 hover:from-red-600 hover:to-[#e62b1e] text-white font-tech px-8 py-4 rounded-xl border border-[#e62b1e]/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e62b1e]/20 text-sm tracking-wider uppercase animate-blip"
