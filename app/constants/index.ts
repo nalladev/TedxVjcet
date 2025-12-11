@@ -1,5 +1,5 @@
 import { Speaker } from "../types";
-import speakersData from '@/app/data/speakers.json';
+import speakersData from '@/app/data/revealed-speakers.json';
 
 // Event Configuration
 export const EVENT_DATE = new Date('2026-01-03T00:00:00.000Z');
@@ -43,4 +43,16 @@ export const CONTACT_INFO = {
   mapUrl: 'https://maps.app.goo.gl/S52rk41bxgKPRPP5A'
 } as const;
 
+// Export speakers data (safe for client)
 export const speakers = speakersData as Speaker[];
+
+// Calculate speaker counts
+const revealedCount = speakers.filter(speaker => 
+  speaker.name !== `SPEAKER ${speaker.id}` && speaker.role !== 'TO BE REVEALED'
+).length;
+
+export const speakerCounts = {
+  total: speakers.length,
+  revealed: revealedCount,
+  unrevealed: speakers.length - revealedCount
+};

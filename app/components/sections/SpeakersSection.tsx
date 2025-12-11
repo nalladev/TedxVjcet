@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 import { FocusedSpeakersGrid } from '@/app/components/ui/FocusedSpeakersGrid';
 import { SVGGrid } from '@/app/components/ui/SVGGrid';
-import { speakers } from '@/app/constants';
+import { speakers, speakerCounts } from '@/app/constants';
 
 // {
 //   id: i + 1,
@@ -19,7 +19,7 @@ export const SpeakersSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSpeakers = 8;
 
-  const revealedSpeakersCount = speakers.filter(speaker => speaker.revealed).length;
+  const revealedSpeakersCount = speakerCounts.revealed;
 
   const nextSpeaker = () => {
     setCurrentIndex((prev) => (prev + 1) % speakers.length);
@@ -67,7 +67,7 @@ export const SpeakersSection = () => {
             <h2 className="text-5xl md:text-8xl font-bold-display tracking-tighter uppercase">Speakers</h2>
          </div>
          <div className="text-right hidden md:block mt-auto">
-            <p className="font-tech text-sm text-gray-500">{revealedSpeakersCount}/{totalSpeakers} SPEAKERS REVEALED</p>
+            <p className="font-tech text-sm text-gray-500">{revealedSpeakersCount}/{speakerCounts.total} SPEAKERS REVEALED</p>
          </div>
       </div>
 
@@ -103,7 +103,7 @@ export const SpeakersSection = () => {
                     className={`absolute w-full flex max-w-5xl mx-auto p-4  md:px-6 md:pb-0  rounded-xl transition-all duration-500 ease-in-out border border-white shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-black`}
                     style={getCardStyle(index)}
                   >
-                    {speaker.revealed ? (
+                    {speaker.name !== `SPEAKER ${speaker.id}` && speaker.role !== 'TO BE REVEALED' ? (
                       <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 h-[650px] md:h-[450px] lg:h-[450px] xl:h-[550px] md:items-start">
                         <div className='absolute z-1 font-libre-franklin'>
                           <div className='absolute inset-0 pointer-events-none' style={{ background: 'radial-gradient(ellipse at left center, transparent 0%, transparent 50%, rgba(0,0,0,0.5) 55%, transparent 100%)' }}></div>
