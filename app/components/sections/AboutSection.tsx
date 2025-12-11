@@ -31,7 +31,7 @@ export const AboutSection = () => {
                   What is <br/><span className="text-[#e62b1e]">TEDx?</span>
                 </h2>
              </div>
-             <p className="md:ml-10 font-tech text-gray-400 text-sm md:text-base border-l-2 border-[#e62b1e] pl-6 max-w-md">
+             <p className="md:ml-10 font-tech text-white text-sm md:text-base border-l-2 border-[#e62b1e] pl-6 max-w-md">
                TEDxVJCET 2025 is an independently organized TED event
                licensed by TED and hosted by Viswajyothi College of
                Engineering and Technology (VJCET), Vazhakulam.
