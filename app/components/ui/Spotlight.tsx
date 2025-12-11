@@ -9,7 +9,7 @@ export const Spotlight = () => {
     <div
       className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300"
       style={{
-        background: `radial-gradient(600px circle at ${x}px ${y}px, rgba(230, 43, 30, 0.08), transparent 40%)`
+        background: `radial-gradient(600px circle at ${x}px ${y}px, rgba(230, 43, 30, 0.2), transparent 40%)`
       }}
     />
   );

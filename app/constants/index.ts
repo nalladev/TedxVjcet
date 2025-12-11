@@ -31,8 +31,9 @@ export const THEME_COLORS = {
 
 // Contact Information
 export const CONTACT_INFO = {
-  email: 'contact@tedxvjcet.example.com',
-  phone: '+91 98765 43210',
+  email: 'tedx@vjcet.org',
+  phone: '+91 87149 30113',
+  phone2: '+91 95264 94491',
   website: 'https://tedxvjcet.com',
   address: {
     venue: 'Viswajyothi College of Engineering & Technology',

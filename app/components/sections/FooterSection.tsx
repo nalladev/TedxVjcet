@@ -7,7 +7,7 @@ import { CONTACT_INFO } from '@/app/constants';
 
 export const FooterSection = () => {
   return (
-    <footer id="footer" className="relative bg-[#e62b1e] text-white py-16 overflow-hidden z-5">
+    <footer id="footer" className="relative bg-black text-red-500 py-16 overflow-hidden z-5">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
 
@@ -20,8 +20,8 @@ export const FooterSection = () => {
 
             <div className="space-y-4">
               <div className="flex items-start gap-4">
-                <MapPin size={20} className="text-white mt-1 shrink-0" />
-                <div>
+                <MapPin size={20} className="mt-1 shrink-0" />
+                <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">VENUE</p>
                   <p className="text-sm leading-relaxed">
                     {CONTACT_INFO.address.venue}<br />
@@ -32,30 +32,33 @@ export const FooterSection = () => {
               </div>
 
               <div className="flex items-start gap-4">
-                <Mail size={20} className="text-white mt-1 shrink-0" />
-                <div>
+                <Mail size={20} className=" mt-1 shrink-0" />
+                <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">EMAIL</p>
-                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-sm hover:text-black transition-colors">
+                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-sm hover:text-red-500 transition-colors">
                     {CONTACT_INFO.email}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <Phone size={20} className="text-white mt-1 shrink-0" />
-                <div>
+                <Phone size={20} className=" mt-1 shrink-0" />
+                <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">CONTACT</p>
-                  <a href={`tel:${CONTACT_INFO.phone}`} className="text-sm hover:text-black transition-colors">
+                  <a href={`tel:${CONTACT_INFO.phone}`} className="text-sm hover:text-red-500 transition-colors">
                     {CONTACT_INFO.phone}
+                  </a>,
+                  <a href={`tel:${CONTACT_INFO.phone2}`} className="text-sm hover:text-red-500 transition-colors">
+                    {CONTACT_INFO.phone2}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <Globe size={20} className="text-white mt-1 shrink-0" />
-                <div>
+                <Globe size={20} className=" mt-1 shrink-0" />
+                <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">WEBSITE</p>
-                  <a href={CONTACT_INFO.website} className="text-sm hover:text-black transition-colors">
+                  <a href={CONTACT_INFO.website} className="text-sm hover:text-red-500 transition-colors">
                     {CONTACT_INFO.website.replace('https://', '')}
                   </a>
                 </div>
@@ -67,7 +70,7 @@ export const FooterSection = () => {
           <div className="space-y-6">
             <h3 className="text-2xl md:text-3xl font-anton tracking-tight mb-6">CONNECT</h3>
 
-            <div className="space-y-4">
+            <div className="space-y-4 text-white">
               <div>
                 <p className="font-tech text-sm font-bold mb-3">FOLLOW US</p>
                 <div className="flex gap-4">
@@ -75,7 +78,7 @@ export const FooterSection = () => {
                     href="https://www.instagram.com/tedxvjcet/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-black hover:scale-110 transition-all duration-300 group"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-red-500 hover:scale-110 transition-all duration-300 group"
                   >
                     <SiInstagram size={24} className="group-hover:text-white" />
                   </a>
@@ -83,7 +86,7 @@ export const FooterSection = () => {
                     href="https://www.linkedin.com/company/tedxvjcet"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-black hover:scale-110 transition-all duration-300 group"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-red-500 hover:scale-110 transition-all duration-300 group"
                   >
                     <SiLinkedin size={24} className="group-hover:text-white" />
                   </a>
@@ -91,7 +94,7 @@ export const FooterSection = () => {
                     href="https://www.ted.com/tedx/events/64560"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-black hover:scale-110 transition-all duration-300 group"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-red-500 hover:scale-110 transition-all duration-300 group"
                   >
                     <SiTed size={24} className="group-hover:text-white" />
                   </a>
@@ -101,11 +104,11 @@ export const FooterSection = () => {
               <div>
                 <p className="font-tech text-sm font-bold mb-3">QUICK LINKS</p>
                 <div className="space-y-2">
-                  <a href="#about" className="block text-sm hover:text-black transition-colors">About TEDxVJCET</a>
-                  <a href="#countdown" className="block text-sm hover:text-black transition-colors">Countdown</a>
-                  <a href="#speakers" className="block text-sm hover:text-black transition-colors">Our Speakers</a>
-                  <a href="#registration" className="block text-sm hover:text-black transition-colors">Registration</a>
-                  <a href="#footer" className="block text-sm hover:text-black transition-colors">Contact Us</a>
+                  <a href="#about" className="block text-sm hover:text-red-500 transition-colors">About TEDxVJCET</a>
+                  <a href="#countdown" className="block text-sm hover:text-red-500 transition-colors">Countdown</a>
+                  <a href="#speakers" className="block text-sm hover:text-red-500 transition-colors">Our Speakers</a>
+                  <a href="#registration" className="block text-sm hover:text-red-500 transition-colors">Registration</a>
+                  <a href="#footer" className="block text-sm hover:text-red-500 transition-colors">Contact Us</a>
                 </div>
               </div>
             </div>
@@ -138,7 +141,7 @@ export const FooterSection = () => {
                   href={CONTACT_INFO.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block mt-2 text-xs text-white hover:text-black transition-colors font-tech"
+                  className="inline-block mt-2 text-xs text-white hover:text-red-500 transition-colors font-tech"
                 >
                   View on Google Maps →
                 </a>
@@ -152,14 +155,14 @@ export const FooterSection = () => {
         <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <p className="font-anton text-lg mb-2">TEDxVJCET © {new Date().getFullYear()}</p>
+            <p className="text-sm text-white/80 max-w-md pb-2"><span className='text-red-500'>X</span> = independently organized TED event</p>
             <p className="text-sm text-white/80 max-w-md">
-              This independent TEDx event is operated under license from TED.
               All content and ideas shared are those of the speakers.
             </p>
           </div>
 
           <div className="text-center md:text-right">
-            <div className="inline-flex items-center gap-2 mb-2 border border-white/20 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 mb-4 border border-white/20 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md">
               <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
               <span className="font-tech tracking-widest text-xs uppercase">Ideas Worth Spreading</span>
             </div>

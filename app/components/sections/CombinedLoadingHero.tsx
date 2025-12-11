@@ -7,7 +7,7 @@ import { SVGGrid } from '@/app/components/ui/SVGGrid';
 
 
 // Animation constants
-const INITIAL_SCALE = 600;
+const INITIAL_SCALE = 17;
 const FINAL_SCALE = 1;
 
 
@@ -221,17 +221,56 @@ export const CombinedLoadingHero = ({
           const logoProgress = (scrollTop - startScroll) / (endScroll - startScroll);
           const easedProgress = easeOut(logoProgress);
           const scale = getScaleFromProgress(easedProgress);
-          const backgroundOpacity = easedProgress;
 
-          tedxLogoRef.current.style.transform = `scale(${scale})`;
+          // Three-phase animation
+          let logoOpacity = 0;
+          let leftPosition = 900;
+          let topPosition = 20;
+          let currentScale = INITIAL_SCALE;
+          let backgroundOpacity = 0;
+
+          if (logoProgress <= 1/3) {
+            // Phase 1: Opacity 0 to 1 in first 1/3
+            const opacityProgress = logoProgress / (1/3);
+            logoOpacity = opacityProgress;
+            backgroundOpacity = opacityProgress;
+            currentScale = INITIAL_SCALE; // Keep initial scale
+          } else if (logoProgress <= 2/3) {
+            // Phase 2: Position animation in second 1/3
+            logoOpacity = 1; // Keep full opacity
+            backgroundOpacity = 1; // Keep full background opacity
+            const positionProgress = (logoProgress - 1/3) / (1/3);
+            leftPosition = 900 - (positionProgress * 900);
+            topPosition = 20 - (positionProgress * 20);
+            currentScale = INITIAL_SCALE; // Keep initial scale
+          } else {
+            // Phase 3: Scale animation in final 1/3
+            logoOpacity = 1; // Keep full opacity
+            backgroundOpacity = 1; // Keep full background opacity
+            leftPosition = 0; // Keep final position
+            topPosition = 0; // Keep final position
+            const scaleProgress = (logoProgress - 2/3) / (1/3);
+            currentScale = getScaleFromProgress(scaleProgress);
+          }
+
+          tedxLogoRef.current.style.transform = `scale(${currentScale})`;
           tedxLogoRef.current.style.backgroundColor = `rgba(5, 5, 5, ${backgroundOpacity})`;
+          tedxLogoRef.current.style.left = `${leftPosition}px`;
+          tedxLogoRef.current.style.top = `${topPosition}px`;
+          tedxLogoRef.current.style.opacity = `${logoOpacity}`;
         } else if (scrollTop < startScroll) {
           tedxLogoRef.current.style.display = `flex`;
           tedxLogoRef.current.style.transform = `scale(${INITIAL_SCALE})`;
           tedxLogoRef.current.style.backgroundColor = `transparent`;
+          tedxLogoRef.current.style.left = `900px`;
+          tedxLogoRef.current.style.top = `20px`;
+          tedxLogoRef.current.style.opacity = `0`;
         } else if (scrollTop > endScroll) {
           tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
           tedxLogoRef.current.style.backgroundColor = `#050505`;
+          tedxLogoRef.current.style.left = `0px`;
+          tedxLogoRef.current.style.top = `0px`;
+          tedxLogoRef.current.style.opacity = `1`;
         }
       }
 
@@ -332,7 +371,7 @@ export const CombinedLoadingHero = ({
           alt="Hero Background"
           width={1920}
           height={1080}
-          className="w-dvw h-dvh object-center md:object-[0%_23%] object-cover transition-transform duration-100 ease-out"
+          className="w-dvw h-dvh object-center md:object-[0%_23%] object-cover pointer-events-none transition-transform duration-100 ease-out"
           style={{
             transform: `translate(${parallaxTransform.x}px, ${parallaxTransform.y}px) scale(1.1)`
           }}
@@ -346,13 +385,14 @@ export const CombinedLoadingHero = ({
       <div
         ref={tedxLogoRef}
         className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
+        style={{ left: '900px', top: '20px', opacity: 0 }}
       >
         <Image
           src="/tedx-vjcet.svg"
           alt="TEDx Logo"
           width={400}
           height={100}
-          className="w-[350px] md:w-2xl"
+          className="w-[350px] md:w-2xl pointer-events-none"
         />
       </div>
 
