@@ -93,7 +93,7 @@ export const SpeakersSection = () => {
             </button>
 
             {/* Card Stack */}
-            <div className="relative h-[800px] md:h-[880px] w-full max-w-5xl mx-auto my-0 flex items-center overflow-hidden [--card-offset:50px] md:[--card-offset:125px]">
+            <div className="relative h-[800px] md:h-[700px] lg:h-[880px] w-full max-w-5xl mx-auto my-0 flex items-center overflow-hidden [--card-offset:50px] md:[--card-offset:125px]">
               {speakers.map((speaker, index) => {
                 const firstName = speaker.show_fullname  ? speaker.name : speaker.name.split(' ')[0];
                 const restName = speaker.name.split(' ').slice(1).join(' ');

@@ -428,6 +428,9 @@ export const CombinedLoadingHero = ({
       </div>
 
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
+      {/* Hidden h1 for accessibility */}
+      <h1 className="sr-only">TEDx VJCET - Ideas Worth Spreading</h1>
+      
       <div
         ref={tedxLogoRef}
         className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
