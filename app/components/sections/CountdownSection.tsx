@@ -59,7 +59,7 @@ export const CountdownSection = () => {
   return (
     <section id="countdown" className="relative z-10 bg-linear-to-b from-[#050505] via-[#0a0a0a] to-[#050505] py-20 overflow-hidden">
       {/* Background Elements */}
-      <SVGGrid opacity={0.15} gridSize={50} strokeWidth={0.6} dotSize={1.2} />
+      <SVGGrid opacity={0.4} gridSize={50} strokeWidth={0.6} dotSize={1.2} />
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
       <div className="absolute inset-0 grid-bg opacity-20"></div>
 

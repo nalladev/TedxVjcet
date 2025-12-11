@@ -73,7 +73,6 @@ export const CombinedLoadingHero = ({
 }: CombinedLoadingHeroProps) => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
   const [parallaxTransform, setParallaxTransform] = useState({ x: 0, y: 0 });
-  const [isMounted, setIsMounted] = useState(false);
   const [responsiveValues, setResponsiveValues] = useState({
     initialLeft: 900,
     initialTop: 20,
@@ -96,7 +95,6 @@ export const CombinedLoadingHero = ({
 
   // Set responsive values after mounting to avoid hydration mismatch
   useEffect(() => {
-    setIsMounted(true);
     const updateResponsiveValues = () => {
       const isMobile = window.innerWidth < 768;
       setResponsiveValues({
@@ -113,6 +111,8 @@ export const CombinedLoadingHero = ({
       window.removeEventListener('resize', updateResponsiveValues);
     };
   }, []);
+
+
 
   // Mouse parallax effect
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -173,10 +173,7 @@ export const CombinedLoadingHero = ({
     let animationId: number | null = null;
     let isAnimating = false;
 
-    // Easing function for deceleration (ease-out)
-    const easeOut = (t: number): number => {
-      return 1 - Math.pow(1 - t, 3); // Cubic ease-out
-    };
+
 
     // Convert linear progress to exponential scale for smoother transitions
     const getScaleFromProgress = (progress: number): number => {
@@ -245,8 +242,6 @@ export const CombinedLoadingHero = ({
 
         if (scrollTop >= startScroll && scrollTop <= endScroll) {
           const logoProgress = (scrollTop - startScroll) / (endScroll - startScroll);
-          const easedProgress = easeOut(logoProgress);
-          const scale = getScaleFromProgress(easedProgress);
 
           // Use responsive values from state
           const { initialLeft, initialTop, initialScale } = responsiveValues;
@@ -342,7 +337,7 @@ export const CombinedLoadingHero = ({
         cancelAnimationFrame(animationId);
       }
     };
-  }, [scrollContainerRef, isPageLoaded]);
+  }, [scrollContainerRef, isPageLoaded, responsiveValues]);
 
   return (
     <>
@@ -350,7 +345,7 @@ export const CombinedLoadingHero = ({
       {/* Loading Screen Layer - Height animated on scroll */}
       <div
         ref={loadingScreenRef}
-        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-gradient-to-b from-[#050505] from-0% via-[#050505] via-75% to-transparent to-100%"
+        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-linear-to-b from-[#050505] from-0% via-[#050505] via-75% to-transparent to-100%"
       >
         <SVGGrid opacity={0.3} gridSize={40} strokeWidth={0.4} dotSize={0.8} />
 
@@ -409,17 +404,17 @@ export const CombinedLoadingHero = ({
           priority
         />
         {/* Mobile gradient overlay - top-left to bottom-right */}
-        <div className="absolute inset-0 md:hidden bg-gradient-to-br from-black/70 via-black/20 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 md:hidden bg-linear-to-br from-black/70 via-black/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
       <div
         ref={tedxLogoRef}
         className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
-        style={{
-          left: isMounted ? `${responsiveValues.initialLeft}px` : '900px',
-          top: isMounted ? `${responsiveValues.initialTop}px` : '20px',
-          opacity: 0
+        style={{ 
+          left: `${responsiveValues.initialLeft}px`,
+          top: `${responsiveValues.initialTop}px`,
+          opacity: 0 
         }}
       >
         <Image
