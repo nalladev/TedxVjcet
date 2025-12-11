@@ -63,6 +63,9 @@ export const CountdownSection = () => {
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
       <div className="absolute inset-0 grid-bg opacity-20"></div>
 
+      {/* Top fade-out gradient */}
+      <div className="absolute top-0 left-0 right-0 h-30 bg-gradient-to-b from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none"></div>
+
       {/* Animated Background Blobs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#e62b1e] rounded-full mix-blend-multiply filter blur-[200px] opacity-10 animate-pulse"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[200px] opacity-10 animate-pulse" style={{ animationDelay: '2s' }}></div>
