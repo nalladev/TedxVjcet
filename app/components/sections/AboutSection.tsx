@@ -24,14 +24,14 @@ export const AboutSection = () => {
       <ParallaxBackground text="IDEAS" direction={-1} speed={0.3} opacity="opacity-[0.08]" />
 
       <div className="sticky top-0 flex flex-col items-center justify-center p-6">
-        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-20">
-          <div className="space-y-8">
+        <div className="max-w-6xl w-full gap-16 items-center relative z-20">
+          <div className="space-y-8 flex flex-col md:flex-row justify-center items-center w-full">
              <div className="overflow-hidden">
                 <h2 className="text-4xl md:text-7xl font-bold-display uppercase leading-[0.9] animate-slide-up">
                   What is <br/><span className="text-[#e62b1e]">TEDx?</span>
                 </h2>
              </div>
-             <p className="font-tech text-gray-400 text-sm md:text-base border-l-2 border-[#e62b1e] pl-6 max-w-md">
+             <p className="md:ml-10 font-tech text-gray-400 text-sm md:text-base border-l-2 border-[#e62b1e] pl-6 max-w-md">
                TEDxVJCET 2025 is an independently organized TED event
                licensed by TED and hosted by Viswajyothi College of
                Engineering and Technology (VJCET), Vazhakulam.
