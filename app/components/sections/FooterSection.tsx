@@ -9,7 +9,7 @@ export const FooterSection = () => {
   return (
     <footer id="footer" className="relative bg-black text-red-500 py-16 overflow-hidden z-5">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-10 pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-12">
@@ -78,6 +78,7 @@ export const FooterSection = () => {
                     href="https://www.instagram.com/tedxvjcet/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Follow TEDxVJCET on Instagram"
                     className="p-3 bg-white/10 rounded-lg hover:bg-red-500 hover:scale-110 transition-all duration-300 group"
                   >
                     <SiInstagram size={24} className="group-hover:text-white" />
@@ -86,6 +87,7 @@ export const FooterSection = () => {
                     href="https://www.linkedin.com/company/tedxvjcet"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Follow TEDxVJCET on LinkedIn"
                     className="p-3 bg-white/10 rounded-lg hover:bg-red-500 hover:scale-110 transition-all duration-300 group"
                   >
                     <SiLinkedin size={24} className="group-hover:text-white" />
@@ -94,6 +96,7 @@ export const FooterSection = () => {
                     href="https://www.ted.com/tedx/events/64560"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Visit official TED website"
                     className="p-3 bg-white/10 rounded-lg hover:bg-red-500 hover:scale-110 transition-all duration-300 group"
                   >
                     <SiTed size={24} className="group-hover:text-white" />
@@ -126,6 +129,7 @@ export const FooterSection = () => {
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
+                  title="Google Maps location of Viswajyothi College of Engineering & Technology"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>

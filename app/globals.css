@@ -24,3 +24,89 @@ body {
   color: var(--foreground);
   font-family: var(--font-fira-code), system-ui, sans-serif;
 }
+
+/* Performance Optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Composited Animation Optimizations */
+.animate-pulse,
+.animate-spin,
+.transition-transform,
+.transition-all,
+.group:hover *[class*="translate"],
+.group:hover *[class*="scale"],
+*[class*="animate-"] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth scrolling optimization */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Image loading optimization */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}
+
+/* GPU acceleration for common transforms */
+.hover\:scale-110:hover,
+.hover\:scale-105:hover,
+.group:hover .group-hover\:translate-x-2,
+.group:hover .group-hover\:scale-110 {
+  transform: translateZ(0) scale(var(--tw-scale-x), var(--tw-scale-y));
+}
+
+/* Reduce layout shifts */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Improve text rendering */
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus management for accessibility */
+:focus-visible {
+  outline: 2px solid #e62b1e;
+  outline-offset: 2px;
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+  .text-gray-500 {
+    color: #000000;
+  }
+  .text-white {
+    color: #ffffff;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

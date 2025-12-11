@@ -16,6 +16,7 @@ export const AboutSection = () => {
         playsInline
       >
         <source src="/bg-video-2.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
 
       {/* Dark overlay to ensure text readability */}
