@@ -89,14 +89,14 @@ export const CombinedLoadingHero = ({
   // Mouse parallax effect
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (typeof window === "undefined") return;
-    
+
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
-    
+
     // Calculate normalized mouse position (-1 to 1)
     const x = (clientX / innerWidth) * 2 - 1;
     const y = (clientY / innerHeight) * 2 - 1;
-    
+
     // Apply parallax movement (adjust multiplier for intensity)
     const parallaxIntensity = 20;
     setParallaxTransform({
@@ -109,7 +109,7 @@ export const CombinedLoadingHero = ({
     if (typeof window === "undefined") return;
 
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
@@ -260,13 +260,11 @@ export const CombinedLoadingHero = ({
 
   return (
     <>
-      <div ref={containerRef} className="h-[300dvh] w-1vw">
-
-      </div>
+      <div ref={containerRef} className="h-[300dvh] w-1vw"></div>
       {/* Loading Screen Layer - Height animated on scroll */}
       <div
         ref={loadingScreenRef}
-        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-[#050505]"
+        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-gradient-to-b from-[#050505] from-0% via-[#050505] via-75% to-transparent to-100%"
       >
         <SVGGrid opacity={0.3} gridSize={40} strokeWidth={0.4} dotSize={0.8} />
 

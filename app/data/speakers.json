@@ -17,12 +17,12 @@
     "id": 3,
     "name": "GOWRI N",
     "role": "TRAVEL INFLUENCER",
-    "revealed": false,
+    "revealed": true,
     "description": "Gowri N is a dynamic travel influencer known for her energetic storytelling, stunning visual content, and culturally rich travel insights that inspire and engage her audience."
   },
   {
     "id": 4,
-    "name": "RISHI RAJ SINGH",
+    "name": "RISHIRAJ SINGH",
     "role": "Retd.IPS OFFICER",
     "revealed": true,
     "description": "Rishiraj Singh , a retired 1985-batch IPS officer of the  Kerala cadre,he is known for his strict,no -nonsense law-enforcement style and has served in major roles including Kochi City Police Commissioner, Excise Commissioner, and Director General of Prisons. "
@@ -51,8 +51,9 @@
   {
     "id": 8,
     "name": "CHEF PILLAI",
+    "show_fullname": true,
     "role": "WELL KNOWN CHEF",
     "revealed": true,
-    "description": "Chef Pillai is a Kerala-born chef who started  as a waiter , worked for 14 years in top restaurants in London, like Veeraswamy, gained fame on MasterChef: The Professionals (UK), and founded restaurant Chef Pillai (RCP) chain."
+    "description": "Chef Pillai is a Kerala-born chef who started  as a waiter, worked for 14 years in top restaurants in London, like Veeraswamy, gained fame on MasterChef: The Professionals (UK), and founded restaurant Chef Pillai (RCP) chain."
   }
 ]
