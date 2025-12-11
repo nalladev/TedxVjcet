@@ -80,6 +80,8 @@ export const CombinedLoadingHero = ({
   const heroImageRef = useRef<HTMLDivElement>(null);
   const heroImageInnerRef = useRef<HTMLImageElement>(null);
   const tedxLogoRef = useRef<HTMLDivElement>(null);
+  const xLogoRef = useRef<HTMLImageElement>(null);
+  const loadingScreenInnerRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
@@ -177,7 +179,21 @@ export const CombinedLoadingHero = ({
       if (scrollTop <= oneHundredVh) {
         const progress = Math.min(scrollTop / oneHundredVh, 1);
         const height = (1 - progress) * 100;
+
         loadingScreenRef.current.style.height = `${height}vh`;
+
+        // Apply scale reduction to first child div
+        if (loadingScreenInnerRef.current) {
+          const scale = 1 - (progress * 0.15); // Reduce scale by 15% as we scroll
+          loadingScreenInnerRef.current.style.transform = `scale(${scale})`;
+          loadingScreenInnerRef.current.style.transformOrigin = 'center center';
+        }
+
+        // X logo fade animation - faster fade
+        if (xLogoRef.current) {
+          const xOpacity = 1 - (progress * 2.5); // Much faster fade out
+          xLogoRef.current.style.opacity = `${Math.max(0, xOpacity)}`;
+        }
 
         // Hero image opacity animation
         if (heroImageRef.current) {
@@ -268,7 +284,7 @@ export const CombinedLoadingHero = ({
       >
         <SVGGrid opacity={0.3} gridSize={40} strokeWidth={0.4} dotSize={0.8} />
 
-        <div className="w-full h-screen flex items-center justify-around flex-col">
+        <div ref={loadingScreenInnerRef} className="w-full h-screen flex items-center justify-around flex-col">
           {/*<div className="w-full pt-10">
             <Image
               src="/dot-grid.png"
@@ -280,6 +296,7 @@ export const CombinedLoadingHero = ({
           </div>*/}
 
           <Image
+            ref={xLogoRef}
             src="/weird_x.png"
             alt="Tedx Logo"
             width={200}
