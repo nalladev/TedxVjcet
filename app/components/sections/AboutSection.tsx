@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
-import { FeatureCard } from '@/app/components/ui/FeatureCard';
+// import { FeatureCard } from '@/app/components/ui/FeatureCard';
 
 export const AboutSection = () => {
   return (
@@ -15,7 +15,7 @@ export const AboutSection = () => {
         loop
         playsInline
       >
-        <source src="/bg-video.mp4" type="video/mp4" />
+        <source src="/bg-video-2.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay to ensure text readability */}
@@ -36,11 +36,11 @@ export const AboutSection = () => {
              </p>
           </div>
 
-          <div className="grid gap-6">
+          {/*<div className="grid gap-6">
             <FeatureCard number="01" title="EVOLVE THINKING" desc="Engage with keynotes from industry experts that challenge the status quo." />
             <FeatureCard number="02" title="EXPAND TOOLBOX" desc="Hands-on workshops designed to give you practical, actionable skills." />
             <FeatureCard number="03" title="ELEVATE CAREER" desc="Network with visionaries and find your next big breakthrough." />
-          </div>
+          </div>*/}
         </div>
       </div>
     </div>

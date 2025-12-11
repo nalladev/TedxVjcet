@@ -73,6 +73,12 @@ export const CombinedLoadingHero = ({
 }: CombinedLoadingHeroProps) => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
   const [parallaxTransform, setParallaxTransform] = useState({ x: 0, y: 0 });
+  const [isMounted, setIsMounted] = useState(false);
+  const [responsiveValues, setResponsiveValues] = useState({
+    initialLeft: 900,
+    initialTop: 20,
+    initialScale: INITIAL_SCALE
+  });
 
   // Refs for animation targets
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,6 +93,26 @@ export const CombinedLoadingHero = ({
   useEffect(() => {
     onContainerRefReady?.(containerRef);
   }, [onContainerRefReady]);
+
+  // Set responsive values after mounting to avoid hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+    const updateResponsiveValues = () => {
+      const isMobile = window.innerWidth < 768;
+      setResponsiveValues({
+        initialLeft: isMobile ? 470 : 900,
+        initialTop: isMobile ? -110 : 20,
+        initialScale: isMobile ? 17 : INITIAL_SCALE
+      });
+    };
+
+    updateResponsiveValues();
+    window.addEventListener('resize', updateResponsiveValues);
+
+    return () => {
+      window.removeEventListener('resize', updateResponsiveValues);
+    };
+  }, []);
 
   // Mouse parallax effect
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -222,11 +248,14 @@ export const CombinedLoadingHero = ({
           const easedProgress = easeOut(logoProgress);
           const scale = getScaleFromProgress(easedProgress);
 
+          // Use responsive values from state
+          const { initialLeft, initialTop, initialScale } = responsiveValues;
+
           // Three-phase animation
           let logoOpacity = 0;
-          let leftPosition = 900;
-          let topPosition = 20;
-          let currentScale = INITIAL_SCALE;
+          let leftPosition = initialLeft;
+          let topPosition = initialTop;
+          let currentScale = initialScale;
           let backgroundOpacity = 0;
 
           if (logoProgress <= 1/3) {
@@ -234,15 +263,15 @@ export const CombinedLoadingHero = ({
             const opacityProgress = logoProgress / (1/3);
             logoOpacity = opacityProgress;
             backgroundOpacity = opacityProgress;
-            currentScale = INITIAL_SCALE; // Keep initial scale
+            currentScale = initialScale; // Keep initial scale
           } else if (logoProgress <= 2/3) {
             // Phase 2: Position animation in second 1/3
             logoOpacity = 1; // Keep full opacity
             backgroundOpacity = 1; // Keep full background opacity
             const positionProgress = (logoProgress - 1/3) / (1/3);
-            leftPosition = 900 - (positionProgress * 900);
-            topPosition = 20 - (positionProgress * 20);
-            currentScale = INITIAL_SCALE; // Keep initial scale
+            leftPosition = initialLeft - (positionProgress * initialLeft);
+            topPosition = initialTop - (positionProgress * initialTop);
+            currentScale = initialScale; // Keep initial scale
           } else {
             // Phase 3: Scale animation in final 1/3
             logoOpacity = 1; // Keep full opacity
@@ -259,11 +288,13 @@ export const CombinedLoadingHero = ({
           tedxLogoRef.current.style.top = `${topPosition}px`;
           tedxLogoRef.current.style.opacity = `${logoOpacity}`;
         } else if (scrollTop < startScroll) {
+          const { initialLeft, initialTop, initialScale } = responsiveValues;
+
           tedxLogoRef.current.style.display = `flex`;
-          tedxLogoRef.current.style.transform = `scale(${INITIAL_SCALE})`;
+          tedxLogoRef.current.style.transform = `scale(${initialScale})`;
           tedxLogoRef.current.style.backgroundColor = `transparent`;
-          tedxLogoRef.current.style.left = `900px`;
-          tedxLogoRef.current.style.top = `20px`;
+          tedxLogoRef.current.style.left = `${initialLeft}px`;
+          tedxLogoRef.current.style.top = `${initialTop}px`;
           tedxLogoRef.current.style.opacity = `0`;
         } else if (scrollTop > endScroll) {
           tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
@@ -385,7 +416,11 @@ export const CombinedLoadingHero = ({
       <div
         ref={tedxLogoRef}
         className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
-        style={{ left: '900px', top: '20px', opacity: 0 }}
+        style={{
+          left: isMounted ? `${responsiveValues.initialLeft}px` : '900px',
+          top: isMounted ? `${responsiveValues.initialTop}px` : '20px',
+          opacity: 0
+        }}
       >
         <Image
           src="/tedx-vjcet.svg"
