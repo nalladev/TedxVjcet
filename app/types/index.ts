@@ -11,6 +11,7 @@ export interface Speaker {
   id: number;
   name: string;
   role: string;
+  show_fullname?: boolean;
   revealed: boolean;
   description: string;
 }
