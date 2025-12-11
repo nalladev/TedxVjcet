@@ -28,9 +28,9 @@ export const OrganizersSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
            {organizers.map((org, i) => (
               <div key={i} className="group relative bg-gradient-to-b from-transparent via-[#050505]/50 to-[#050505] p-1 border border-[#e62b1e] md:border-white/10 md:hover:border-[#e62b1e] transition-colors duration-300">
-                 <div className="absolute top-2 left-2 z-10 font-tech text-[10px] bg-black/50 backdrop-blur px-2 text-white border border-white/20">
+                 {/*<div className="absolute top-2 left-2 z-10 font-tech text-[10px] bg-black/50 backdrop-blur px-2 text-white border border-white/20">
                     PLAYER_0{i+1}
-                 </div>
+                 </div>*/}
                  <div className="aspect-square overflow-hidden mb-4 relative">
                     <Image
                       src={org.img}
