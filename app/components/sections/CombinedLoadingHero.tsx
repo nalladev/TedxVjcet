@@ -85,6 +85,7 @@ export const CombinedLoadingHero = ({
   const heroImageRef = useRef<HTMLDivElement>(null);
   const heroImageInnerRef = useRef<HTMLImageElement>(null);
   const tedxLogoRef = useRef<HTMLDivElement>(null);
+  const tedxLogoImageRef = useRef<HTMLImageElement>(null);
   const xLogoRef = useRef<HTMLImageElement>(null);
   const loadingScreenInnerRef = useRef<HTMLDivElement>(null);
 
@@ -168,7 +169,7 @@ export const CombinedLoadingHero = ({
       return;
 
     const oneHundredVh = window.innerHeight;
-    const maxAnimationRange = oneHundredVh * 2; // End of all animations
+    const maxAnimationRange = oneHundredVh * 3; // End of all animations
     let animationComplete = false;
     let animationId: number | null = null;
     let isAnimating = false;
@@ -300,6 +301,25 @@ export const CombinedLoadingHero = ({
         }
       }
 
+      // TEDx logo fade animation (2vh to 3vh)
+      if (tedxLogoImageRef.current && scrollTop >= oneHundredVh * 2 && scrollTop <= maxAnimationRange) {
+        const fadeStartScroll = oneHundredVh * 2;
+        const fadeEndScroll = oneHundredVh * 2.5;
+
+        const fadeProgress = (scrollTop - fadeStartScroll) / (fadeEndScroll - fadeStartScroll);
+        const logoFadeOpacity = 1 - fadeProgress;
+
+        tedxLogoImageRef.current.style.opacity = `${Math.max(0, logoFadeOpacity)}`;
+
+        // Keep container properties at final state
+        if (tedxLogoRef.current) {
+          tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
+          tedxLogoRef.current.style.backgroundColor = `#050505`;
+          tedxLogoRef.current.style.left = `0px`;
+          tedxLogoRef.current.style.top = `0px`;
+        }
+      }
+
       isAnimating = false;
     };
 
@@ -411,13 +431,14 @@ export const CombinedLoadingHero = ({
       <div
         ref={tedxLogoRef}
         className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
-        style={{ 
+        style={{
           left: `${responsiveValues.initialLeft}px`,
           top: `${responsiveValues.initialTop}px`,
-          opacity: 0 
+          opacity: 0
         }}
       >
         <Image
+          ref={tedxLogoImageRef}
           src="/tedx-vjcet.svg"
           alt="TEDx Logo"
           width={400}
