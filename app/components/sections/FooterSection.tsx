@@ -93,7 +93,7 @@ export const FooterSection = () => {
                     <SiLinkedin size={24} className="group-hover:text-white" />
                   </a>
                   <a
-                    href="https://www.ted.com/"
+                    href="https://www.ted.com/tedx/events/64560"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Visit official TED website"
