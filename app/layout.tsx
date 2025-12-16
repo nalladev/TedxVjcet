@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     images: ["/poster.png"],
   },
   icons: {
-    icon: "/poster.png",
-    apple: "/poster.png",
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
   robots: {
     index: true,
