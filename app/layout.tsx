@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/tedx-vjcet-logo-white-bg.png",
-        width: 1200,
-        height: 630,
+        width: 352,
+        height: 88,
         alt: "TEDx VJCET Logo",
       },
     ],
