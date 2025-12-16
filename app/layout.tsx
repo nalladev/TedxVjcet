@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
   keywords: ["TEDx", "VJCET", "TED talks", "Viswajyothi College", "Engineering", "Technology", "Ideas worth spreading", "Innovation", "Kerala"],
   authors: [{ name: "TEDx VJCET Team" }],
+  themeColor: "#000000",
   openGraph: {
     title: "TEDx VJCET - Ideas Worth Spreading",
     description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
@@ -51,10 +52,6 @@ export const metadata: Metadata = {
     description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology.",
     images: ["/tedx-vjcet-logo-white-bg.png"],
   },
-  icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
-  },
   robots: {
     index: true,
     follow: true,
@@ -69,6 +66,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "TEDx VJCET",
+              "url": "https://www.tedxvjcet.in",
+              "logo": "https://www.tedxvjcet.in/icon.png",
+              "sameAs": [
+                "https://www.instagram.com/tedxvjcet/",
+                "https://www.linkedin.com/company/tedxvjcet/"
+              ]
+            })
+          }}
+        />
         {/* Preconnect to external origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
