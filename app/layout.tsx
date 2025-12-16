@@ -36,10 +36,10 @@ export const metadata: Metadata = {
     siteName: "TEDx VJCET",
     images: [
       {
-        url: "/poster.png",
+        url: "/tedx-vjcet-logo-white-bg.png",
         width: 1200,
         height: 630,
-        alt: "TEDx VJCET Poster",
+        alt: "TEDx VJCET Logo",
       },
     ],
     locale: "en_US",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TEDx VJCET - Ideas Worth Spreading",
     description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology.",
-    images: ["/poster.png"],
+    images: ["/tedx-vjcet-logo-white-bg.png"],
   },
   icons: {
     icon: "/icon.png",
