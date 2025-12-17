@@ -82,6 +82,7 @@ export default function RootLayout({
             })
           }}
         />
+        <meta name="google-site-verification" content="8fOJu7BjZP_ujxAy-HJl1ATfcZb3b-3dQ-ZUWkJI7xs" />
         {/* Preconnect to external origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
