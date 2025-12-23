@@ -365,7 +365,7 @@ export const CombinedLoadingHero = ({
       {/* Loading Screen Layer - Height animated on scroll */}
       <div
         ref={loadingScreenRef}
-        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-linear-to-b from-[#050505] from-0% via-[#050505] via-75% to-transparent to-100%"
+        className="fixed top-0 left-0 pointer-events-none w-full h-screen z-3 overflow-hidden bg-[linear-gradient(to_bottom,#050505_0%,#050505_75%,#050505a3_90%,transparent_100%)]"
       >
         <SVGGrid opacity={0.3} gridSize={40} strokeWidth={0.4} dotSize={0.8} />
 
@@ -430,7 +430,7 @@ export const CombinedLoadingHero = ({
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
       {/* Hidden h1 for accessibility */}
       <h1 className="sr-only">TEDx VJCET - Ideas Worth Spreading</h1>
-      
+
       <div
         ref={tedxLogoRef}
         className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
