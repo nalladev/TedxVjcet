@@ -106,12 +106,12 @@ export const FooterSection = () => {
 
               <div>
                 <p className="font-tech text-sm font-bold mb-3">QUICK LINKS</p>
-                <div className="space-y-2">
-                  <a href="#about" className="block text-sm hover:text-red-500 transition-colors">About TEDxVJCET</a>
-                  <a href="#countdown" className="block text-sm hover:text-red-500 transition-colors">Countdown</a>
-                  <a href="#speakers" className="block text-sm hover:text-red-500 transition-colors">Our Speakers</a>
-                  <a href="#registration" className="block text-sm hover:text-red-500 transition-colors">Registration</a>
-                  <a href="#footer" className="block text-sm hover:text-red-500 transition-colors">Contact Us</a>
+                <div className="space-y-2 flex flex-col">
+                  <a href="#about" className="w-fit text-sm hover:text-red-500 transition-colors">About TEDxVJCET</a>
+                  <a href="#countdown" className="w-fit text-sm hover:text-red-500 transition-colors">Countdown</a>
+                  <a href="#speakers" className="w-fit text-sm hover:text-red-500 transition-colors">Our Speakers</a>
+                  <a href="#registration" className="w-fit text-sm hover:text-red-500 transition-colors">Registration</a>
+                  <a href="#footer" className="w-fit text-sm hover:text-red-500 transition-colors">Contact Us</a>
                 </div>
               </div>
             </div>
