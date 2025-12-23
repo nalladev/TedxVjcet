@@ -8,14 +8,14 @@
   },
   {
     "id": 2,
-    "name": "SPEAKER 2",
-    "role": "TO BE REVEALED",
+    "name": "ANNU ANTONY",
+    "role": "ACTRESS",
     "gender": "female",
-    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+    "description": "Annu Antony is an Indian actress who made her film debut as Devika in Aanandam (2016). A graduate of Christ University, Bengaluru, she has since appeared in notable Malayalam films such as Hridayam, Pookkaalam, and Swakaryam Sambhavabahulam. She is widely recognized for her natural charm and expressive performances in contemporary Malayalam cinema."
   },
   {
     "id": 3,
-    "name": "SPEAKER 3", 
+    "name": "SPEAKER 3",
     "role": "TO BE REVEALED",
     "gender": "female",
     "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
@@ -23,7 +23,7 @@
   {
     "id": 4,
     "name": "SPEAKER 4",
-    "role": "TO BE REVEALED", 
+    "role": "TO BE REVEALED",
     "gender": "male",
     "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
   },
@@ -31,7 +31,7 @@
     "id": 5,
     "name": "SPEAKER 5",
     "role": "TO BE REVEALED",
-    "gender": "male", 
+    "gender": "male",
     "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
   },
   {
