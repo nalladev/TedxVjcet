@@ -3,37 +3,43 @@ import React from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 
-const sponsors = [
-  {
-    name: 'Santa Monica Study Abroad Pvt. Ltd.',
-    website: 'https://santamonicaedu.in/',
-    sponsorship: 'Title Sponsor',
-    image: '/sponsors/curated/santamonica.png',
-  },
-  {
-    name: 'OHCO Chocolate',
-    sponsorship: 'In-Kind Sponsor (15k)',
-    image: '/sponsors/curated/ohco-a.png',
-  },
-  {
-    name: 'Kottaram Sweet House',
-    website: 'https://www.kottaramsweets.com/',
-    sponsorship: 'In-Kind Sponsor',
-    image: '/sponsors/curated/kottaram-a.png',
-  },
-  {
-    name: 'Joance Regency',
-    website: 'https://joanceregency.com/',
-    sponsorship: 'Bronze Sponsor (10k)',
-    image: '/sponsors/curated/joance.png',
-  },
-  {
-    name: 'Digiora',
-    website: 'https://www.digiora.com/',
-    sponsorship: 'Bronze Sponsor (10k)',
-    image: '/sponsors/curated/digiora.png',
-  },
-];
+// In-file component for the sponsor card
+interface SponsorCardProps {
+  name: string;
+  website: string;
+  image: string;
+  isTitle?: boolean;
+}
+
+const SponsorCard: React.FC<SponsorCardProps> = ({ name, website, image, isTitle = false }) => {
+  const cardSize = isTitle ? "md:w-96" : "w-80";
+  const imageContainerSize = isTitle ? "w-48 h-48" : "w-40 h-40";
+  const imageSize = isTitle ? 180 : 150;
+
+  return (
+    <div
+      className={`${cardSize} flex flex-col items-center text-center p-6 bg-white/5 rounded-lg border border-white/10 transform transition-all duration-300 hover:scale-105 hover:border-red-600/50 hover:bg-white/10`}
+    >
+      <a
+        href={website}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${imageContainerSize} rounded-full bg-white flex items-center justify-center mb-6 transition-transform duration-300 transform hover:scale-110`}
+      >
+        <Image
+          src={image}
+          alt={`${name} logo`}
+          width={imageSize}
+          height={imageSize}
+          className="object-contain rounded-full p-2"
+        />
+      </a>
+      <div className="font-tech">
+        <p className="text-xl text-white">{name}</p>
+      </div>
+    </div>
+  );
+};
 
 const SponsorsSection = () => {
   return (
@@ -47,32 +53,52 @@ const SponsorsSection = () => {
         <h2 className="text-4xl md:text-7xl font-bold-display text-center mb-16 uppercase">
           Our <span className="text-[#e62b1e]">Sponsors</span>
         </h2>
-        <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
-          {sponsors.map((sponsor, index) => (
-            <div
-              key={index}
-              className="w-80 flex flex-col items-center text-center p-6 bg-white/5 rounded-lg border border-white/10 transform transition-all duration-300 hover:scale-105 hover:border-red-600/50 hover:bg-white/10"
-            >
-              <a
-                href={sponsor.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-40 h-40 rounded-full bg-white flex items-center justify-center mb-6 transition-transform duration-300 transform hover:scale-110"
-              >
-                <Image
-                  src={sponsor.image}
-                  alt={`${sponsor.name} logo`}
-                  width={150}
-                  height={150}
-                  className="object-contain rounded-full p-2"
-                />
-              </a>
-              <div className="font-tech">
-                <p className="text-xl text-white">{sponsor.name}</p>
-                <p className="text-red-500 mt-1">{sponsor.sponsorship}</p>
-              </div>
-            </div>
-          ))}
+
+        {/* Title Sponsor Tier */}
+        <div className="mb-20">
+          <h3 className="text-3xl md:text-4xl font-bold-display text-center text-red-500 mb-10">TITLE SPONSOR</h3>
+          <div className="flex justify-center">
+            <SponsorCard
+              name="Santa Monica Study Abroad"
+              website="https://santamonicaedu.in/"
+              image="/sponsors/curated/santamonica.png"
+              isTitle={true}
+            />
+          </div>
+        </div>
+
+        {/* Bronze Sponsors Tier */}
+        <div className="mb-20">
+          <h3 className="text-3xl md:text-4xl font-bold-display text-center text-red-500 mb-10">BRONZE SPONSORS</h3>
+          <div className="flex flex-wrap justify-center gap-8">
+            <SponsorCard
+              name="Joance Regency"
+              website="https://joanceregency.com/"
+              image="/sponsors/curated/joance.png"
+            />
+            <SponsorCard
+              name="Digiora"
+              website="https://www.digiora.com/"
+              image="/sponsors/curated/digiora.png"
+            />
+          </div>
+        </div>
+
+        {/* In-Kind Sponsors Tier */}
+        <div>
+          <h3 className="text-3xl md:text-4xl font-bold-display text-center text-red-500 mb-10">IN-KIND SPONSORS</h3>
+          <div className="flex flex-wrap justify-center gap-8">
+            <SponsorCard
+              name="OHCO Chocolate"
+              website="#"
+              image="/sponsors/curated/ohco-a.png"
+            />
+            <SponsorCard
+              name="Kottaram Sweet House"
+              website="https://www.kottaramsweets.com/"
+              image="/sponsors/curated/kottaram-a.png"
+            />
+          </div>
         </div>
       </div>
     </div>
