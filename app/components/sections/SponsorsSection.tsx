@@ -87,7 +87,7 @@ const SponsorsSection = () => {
           Our <span className="text-[#e62b1e]">Sponsors</span>
         </h2>
         
-        <div className="relative scroller-container w-full overflow-hidden whitespace-nowrap">
+        <div className="relative scroller-container w-full overflow-hidden whitespace-nowrap scroller-fade-mask">
           <div className="inline-block animate-scroll">
             <SponsorStripContent />
           </div>

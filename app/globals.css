@@ -127,4 +127,8 @@ body {
   .scroller-container:hover .animate-scroll {
     animation-play-state: paused;
   }
+  .scroller-fade-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
 }
