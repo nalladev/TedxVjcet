@@ -11,21 +11,21 @@ interface SponsorGridCardProps {
   isTitle?: boolean;
 }
 const SponsorGridCard: React.FC<SponsorGridCardProps> = ({ name, website, image, isTitle = false }) => {
-  const cardSize = isTitle ? 'w-80' : 'w-72';
-  const imageContainerSize = isTitle ? 'w-40 h-40' : 'w-36 h-36';
-  const imageSize = isTitle ? 150 : 130;
+  const cardSize = isTitle ? 'w-72 md:w-80' : 'w-60 md:w-72';
+  const imageContainerSize = isTitle ? 'w-32 h-32 md:w-40 md:h-40' : 'w-28 h-28 md:w-36 md:h-36';
+  const imageSize = isTitle ? 120 : 90;
 
   return (
     <a
       href={website}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${cardSize} flex flex-col items-center text-center p-4 bg-white/5 rounded-lg border border-white/10 transform transition-all duration-300 hover:scale-105 hover:border-red-600/50`}
+      className={`${cardSize} flex flex-col items-center text-center p-2 md:p-4 bg-white/5 rounded-lg border border-white/10 transform transition-all duration-300 hover:scale-105 hover:border-red-600/50`}
     >
-      <div className={`${imageContainerSize} rounded-full bg-white flex items-center justify-center mb-4`}>
+      <div className={`${imageContainerSize} rounded-full bg-white flex items-center justify-center mb-2 md:mb-4`}>
         <Image src={image} alt={name} width={imageSize} height={imageSize} className="object-contain rounded-full p-2" />
       </div>
-      <p className="text-lg text-white font-tech">{name}</p>
+      <p className="text-base md:text-lg text-white font-tech">{name}</p>
     </a>
   );
 };
@@ -37,9 +37,9 @@ interface TierSectionProps {
   sponsors: SponsorGridCardProps[];
 }
 const TierSection: React.FC<TierSectionProps> = ({ title, sponsors }) => (
-  <div className="h-full flex-shrink-0 flex flex-col items-center justify-start p-8 space-y-8 border-r-2 border-white/10" style={{ width: 'max-content', minWidth: '45vw' }}>
-    <h3 className="text-3xl font-bold-display text-red-500 uppercase">{title}</h3>
-    <div className="flex flex-wrap justify-center gap-8">
+  <div className="h-full flex-shrink-0 flex flex-col items-center justify-start p-4 md:p-8 space-y-4 md:space-y-8 border-r-2 border-white/10" style={{ width: 'max-content', minWidth: '45vw' }}>
+    <h3 className="text-2xl md:text-3xl font-bold-display text-red-500 uppercase">{title}</h3>
+    <div className="flex flex-wrap justify-center gap-4 md:gap-8">
       {sponsors.map((sponsor, index) => (
         <SponsorGridCard key={index} {...sponsor} />
       ))}
