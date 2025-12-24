@@ -9,7 +9,7 @@ export const RegistrationSection = () => {
   return (
     <div id="registration" className="relative z-30 bg-[#e62b1e] text-white min-h-[90vh] flex flex-col items-center justify-center text-center p-6 overflow-hidden">
        {/* Restored customized background text settings from user */}
-       <ParallaxBackground text="TICKETS" direction={-1} speed={0.3} opacity="opacity-[0.1]" className="z-0 -top-50" />
+       <ParallaxBackground text="TICKETS" direction={1} speed={0.3} opacity="opacity-[0.1]" className="z-0 -top-50" />
 
        <div className="max-w-4xl space-y-10 relative z-10">
          <div className="inline-block bg-white text-[#e62b1e] px-6 py-2 font-tech text-sm uppercase tracking-[0.2em] mb-10 border border-white/20 shadow-lg animate-pulse">
