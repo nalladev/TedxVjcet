@@ -122,6 +122,9 @@ body {
     }
   }
   .animate-scroll {
-    animation: scroll 20s linear infinite;
+    animation: scroll 30s linear infinite;
+  }
+  .scroller-container:hover .animate-scroll {
+    animation-play-state: paused;
   }
 }
