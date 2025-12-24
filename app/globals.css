@@ -110,3 +110,25 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Added for sponsor marquee */
+@layer utilities {
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+  .scroller-container:hover .animate-scroll {
+    animation-play-state: paused;
+  }
+  .scroller-fade-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
+}

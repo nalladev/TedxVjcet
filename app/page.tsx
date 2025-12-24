@@ -15,6 +15,7 @@ import { GlobalStyles } from "@/app/styles/GlobalStyles";
 const SpeakersSection = lazy(() => import("@/app/components/sections").then(module => ({ default: module.SpeakersSection })));
 const OrganizersSection = lazy(() => import("@/app/components/sections").then(module => ({ default: module.OrganizersSection })));
 const RegistrationSection = lazy(() => import("@/app/components/sections").then(module => ({ default: module.RegistrationSection })));
+const SponsorsSection = lazy(() => import("@/app/components/sections").then(module => ({ default: module.SponsorsSection })));
 
 export default function TEDxWebsite() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -43,6 +44,11 @@ export default function TEDxWebsite() {
         <div className="animate-pulse text-white text-xl">Loading organizers...</div>
       </div>}>
         <OrganizersSection />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-screen bg-gray-800 flex items-center justify-center">
+        <div className="animate-pulse text-white text-xl">Loading sponsors...</div>
+      </div>}>
+        <SponsorsSection />
       </Suspense>
       <Suspense fallback={<div className="min-h-screen bg-red-600 flex items-center justify-center">
         <div className="animate-pulse text-white text-xl">Loading registration...</div>
