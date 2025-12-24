@@ -34,7 +34,7 @@ export const CONTACT_INFO = {
   email: 'tedx@vjcet.org',
   phone: '+91 87149 30113',
   phone2: '+91 95264 94491',
-  website: 'https://tedxvjcet.com',
+  website: 'https://tedxvjcet.in',
   address: {
     venue: 'Viswajyothi College of Engineering & Technology',
     street: 'Vazhakulam, Muvattupuzha',
@@ -47,7 +47,7 @@ export const CONTACT_INFO = {
 export const speakers = speakersData as Speaker[];
 
 // Calculate speaker counts
-const revealedCount = speakers.filter(speaker => 
+const revealedCount = speakers.filter(speaker =>
   speaker.name !== `SPEAKER ${speaker.id}` && speaker.role !== 'TO BE REVEALED'
 ).length;
 
