@@ -30,14 +30,8 @@ export const metadata: Metadata = {
   keywords: ["TEDx", "VJCET", "TED talks", "Viswajyothi College", "Engineering", "Technology", "Ideas worth spreading", "Innovation", "Kerala"],
   authors: [{ name: "TEDx VJCET Team" }],
   icons: {
-    icon: [
-      { url: "/icon.png" },
-      { url: "/icon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/icon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
-    ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
+    icon: '/favicon.ico',
+    apple: '/apple-icon.png',
   },
   openGraph: {
     title: "TEDx VJCET - Ideas Worth Spreading",
