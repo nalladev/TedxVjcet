@@ -3,76 +3,151 @@ import React from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 
-// Card for an individual sponsor in the grid
-interface SponsorGridCardProps {
+// Card for an individual sponsor, designed to be used within the carousel
+interface SponsorCardProps {
   name: string;
   website: string;
   image: string;
-  isTitle?: boolean;
 }
-const SponsorGridCard: React.FC<SponsorGridCardProps> = ({ name, website, image, isTitle = false }) => {
-  const cardSize = isTitle ? 'w-72 md:w-80' : 'w-60 md:w-72';
-  const imageContainerSize = isTitle ? 'w-32 h-32 md:w-40 md:h-40' : 'w-28 h-28 md:w-36 md:h-36';
-  const imageSize = isTitle ? 120 : 90;
-
+const SponsorCard: React.FC<SponsorCardProps> = ({ name, website, image }) => {
   return (
     <a
       href={website}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${cardSize} flex flex-col items-center text-center p-2 md:p-4 bg-white/5 rounded-lg border border-white/10 transform transition-all duration-300 hover:scale-105 hover:border-red-600/50`}
+      className="flex flex-col items-center justify-center text-center p-4 bg-white/5 rounded-lg border border-white/10 w-full h-full transform transition-transform duration-300 hover:scale-105"
     >
-      <div className={`${imageContainerSize} rounded-full bg-white flex items-center justify-center mb-2 md:mb-4`}>
-        <Image src={image} alt={name} width={imageSize} height={imageSize} className="object-contain rounded-full p-2" />
+      <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center mb-4">
+        <Image src={image} alt={name} width={240} height={240} className="object-contain rounded-full p-2" priority />
       </div>
-      <p className="text-base md:text-lg text-white font-tech">{name}</p>
+      <p className="md:text-lg text-white font-tech">{name}</p>
     </a>
   );
 };
 
-
-// A full section for a tier, containing a title and a grid of sponsors
-interface TierSectionProps {
-  title: string;
-  sponsors: SponsorGridCardProps[];
-}
-const TierSection: React.FC<TierSectionProps> = ({ title, sponsors }) => (
-  <div className="h-full flex-shrink-0 flex flex-col items-center justify-start p-4 md:p-8 space-y-4 md:space-y-8 border-r-2 border-white/10" style={{ width: 'max-content', minWidth: '45vw' }}>
-    <h3 className="text-2xl md:text-3xl font-bold-display text-red-500 uppercase">{title}</h3>
-    <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-      {sponsors.map((sponsor, index) => (
-        <SponsorGridCard key={index} {...sponsor} />
-      ))}
-    </div>
-  </div>
-);
-
-
-// The content of the entire scrolling strip, composed of multiple TierSections
-const SponsorStripContent = () => {
-  const sponsorsData = {
-    title: [
-      { name: 'Santa Monica Study Abroad', website: 'https://santamonicaedu.in/', image: '/sponsors/curated/santamonica.png', isTitle: true },
-    ],
-    bronze: [
-      { name: 'Joance Regency', website: 'https://joanceregency.com/', image: '/sponsors/curated/joance.png' },
-      { name: 'Digiora', website: 'https://www.digiora.com/', image: '/sponsors/curated/digiora.png' },
-    ],
-    inKind: [
-      { name: 'OHCO Chocolate', website: '#', image: '/sponsors/curated/ohco-a.png' },
-      { name: 'Kottaram Sweet House', website: 'https://www.kottaramsweets.com/', image: '/sponsors/curated/kottaram-a.png' },
-    ],
-  };
+// The 3D carousel component
+const SponsorsCarousel = () => {
+  const sponsorsData = [
+    { name: 'Santa Monica Study Abroad', website: 'https://santamonicaedu.in/', image: '/sponsors/curated/santamonica.png' },
+    { name: 'Joance Regency', website: 'https://joanceregency.com/', image: '/sponsors/curated/joance.png' },
+    { name: 'Digiora', website: 'https://www.digiora.com/', image: '/sponsors/curated/digiora.png' },
+    { name: 'OHCO Chocolate', website: '#', image: '/sponsors/curated/ohco-a.png' },
+    { name: 'Kottaram Sweet House', website: 'https://www.kottaramsweets.com/', image: '/sponsors/curated/kottaram-a.png' },
+  ];
+  const numElements = sponsorsData.length;
 
   return (
-    <div className="flex items-stretch">
-      <TierSection title="Title Sponsor" sponsors={sponsorsData.title} />
-      <TierSection title="Bronze Sponsors" sponsors={sponsorsData.bronze} />
-      <TierSection title="In-Kind Sponsors" sponsors={sponsorsData.inKind} />
+    <div className="carousel-container">
+      <div
+        className="carousel"
+        style={
+          {
+            '--_num-elements': numElements,
+          } as React.CSSProperties
+        }
+      >
+        <ul className="item-wrapper">
+          {sponsorsData.map((sponsor, index) => (
+            <li
+              key={index}
+              className="item"
+              style={
+                {
+                  '--_index': index + 1,
+                } as React.CSSProperties
+              }
+            >
+              <SponsorCard {...sponsor} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <style jsx>{`
+        .carousel-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 70vh;
+          width: 100%;
+        }
+
+        .carousel {
+          --carousel-transition-duration: 250ms;
+          --carousel-transition-ease: ease-out;
+          --carousel-item-width: 18rem;
+          --carousel-item-height: 22rem;
+          --carousel-diameter: 40rem;
+          --carousel-3d-perspective: 1000px;
+          --carousel-3d-perspective-origin: 50% 20%;
+          --carousel-animation-duration: 40s;
+          --carousel-animation-play-state: running;
+
+          --_diameter: var(--carousel-diameter);
+          --_radius: calc(var(--_diameter) / 2);
+          --_item-width: var(--carousel-item-width);
+          --_item-height: var(--carousel-item-height);
+          perspective: var(--carousel-3d-perspective);
+          perspective-origin: var(--carousel-3d-perspective-origin);
+          width: var(--_diameter);
+          height: var(--_diameter);
+          position: relative;
+        }
+
+        @media only screen and (max-width: 48rem) {
+          .carousel-container {
+            height: 40vh;
+          }
+          .carousel {
+            --_diameter: calc(var(--carousel-diameter) * 0.6);
+            --_item-width: calc(var(--carousel-item-width) * 0.6);
+            --_item-height: calc(var(--carousel-item-height) * 0.6);
+          }
+        }
+
+        .item-wrapper {
+          --_z: calc(var(--_radius) * -1);
+          transform: translateZ(var(--_z));
+          transform-style: preserve-3d;
+          width: inherit;
+          height: inherit;
+          list-style-type: none;
+          position: relative;
+          animation: carousel-rotation-normal var(--carousel-animation-duration) normal linear infinite
+            var(--carousel-animation-play-state);
+          transition: all var(--carousel-transition-duration) var(--carousel-transition-ease);
+        }
+
+        .item-wrapper:hover {
+          --carousel-animation-play-state: paused;
+        }
+
+        .item {
+          --_width: var(--_item-width);
+          --_height: var(--_item-height);
+          --_rotation: calc(360 / var(--_num-elements) * var(--_index) * 1deg);
+          left: calc(var(--_radius) - var(--_item-width) / 2);
+          top: calc(var(--_radius) - var(--_item-height) / 2);
+          transform: rotateY(var(--_rotation)) translateZ(var(--_radius));
+          transform-style: inherit;
+          width: var(--_width);
+          height: var(--_height);
+          transition: all var(--carousel-transition-duration) var(--carousel-transition-ease);
+          position: absolute;
+        }
+      `}</style>
+      <style jsx global>{`
+        @keyframes carousel-rotation-normal {
+          from {
+            transform: rotateY(0deg);
+          }
+          to {
+            transform: rotateY(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 };
-
 
 const SponsorsSection = () => {
   return (
@@ -86,15 +161,8 @@ const SponsorsSection = () => {
         <h2 className="text-4xl md:text-7xl font-bold-display text-center uppercase">
           Our <span className="text-[#e62b1e]">Sponsors</span>
         </h2>
-        
-        <div className="relative scroller-container w-full overflow-hidden whitespace-nowrap scroller-fade-mask">
-          <div className="inline-block animate-scroll">
-            <SponsorStripContent />
-          </div>
-          <div className="inline-block animate-scroll" aria-hidden="true">
-            <SponsorStripContent />
-          </div>
-        </div>
+
+        <SponsorsCarousel />
       </div>
     </div>
   );
