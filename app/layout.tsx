@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Fira_Code, Libre_Franklin } from "next/font/google";
 import "./globals.css";
+import { METADATA } from "./constants";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,9 +23,8 @@ const libreFranklin = Libre_Franklin({
   display: "swap",
   preload: true,
 });
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.tedxvjcet.in"),
+  metadataBase: new URL(METADATA.website),
   title: "TEDx VJCET",
   description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
   keywords: ["TEDx", "VJCET", "TED talks", "Viswajyothi College", "Engineering", "Technology", "Ideas worth spreading", "Innovation", "Kerala"],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TEDx VJCET - Ideas Worth Spreading",
     description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
-    url: "https://www.tedxvjcet.in",
+    url: METADATA.website,
     siteName: "TEDx VJCET",
     locale: "en_IN",
     type: "website",
@@ -65,14 +65,35 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "Event",
               "name": "TEDx VJCET",
-              "url": "https://www.tedxvjcet.in",
-              "logo": "https://www.tedxvjcet.in/icon.png",
-              "sameAs": [
-                "https://www.instagram.com/tedxvjcet/",
-                "https://www.linkedin.com/company/tedxvjcet/"
-              ]
+              "startDate": METADATA.date.toISOString(),
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": {
+                "@type": "Place",
+                "name": METADATA.venue,
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": METADATA.street,
+                  "addressLocality": "Ernakulam",
+                  "postalCode": "686670",
+                  "addressRegion": "Kerala",
+                  "addressCountry": "IN"
+                }
+              },
+              "description": "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
+              "organizer": {
+                "@type": "Organization",
+                "name": "TEDx VJCET",
+                "url": METADATA.website,
+                "logo": `${METADATA.website}/icon.svg`,
+                "sameAs": [
+                  METADATA.instagram,
+                  METADATA.linkedin,
+                ]
+              },
+              "url": METADATA.website,
             })
           }}
         />

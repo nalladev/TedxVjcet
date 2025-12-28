@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Zap, Ticket, ArrowRight } from 'lucide-react';
-import { EVENT_DATE, COUNTDOWN_LABELS } from '@/app/constants';
+import { CONTACT } from '@/app/constants';
 import { SVGGrid } from '@/app/components/ui/SVGGrid';
 
 interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
+  days: number,
+  hours: number,
+  minutes: number,
+  seconds: number,
 }
 
 export const CountdownSection = () => {
@@ -23,7 +23,7 @@ export const CountdownSection = () => {
 
   useEffect(() => {
     const calculateTimeLeft = (): TimeLeft => {
-      const difference = EVENT_DATE.getTime() - new Date().getTime();
+      const difference = CONTACT.date.getTime() - new Date().getTime();
 
       if (difference > 0) {
         return {
@@ -50,10 +50,10 @@ export const CountdownSection = () => {
   }, []);
 
   const timeUnits = [
-    { value: timeLeft.days, label: COUNTDOWN_LABELS.days },
-    { value: timeLeft.hours, label: COUNTDOWN_LABELS.hours },
-    { value: timeLeft.minutes, label: COUNTDOWN_LABELS.minutes },
-    { value: timeLeft.seconds, label: COUNTDOWN_LABELS.seconds }
+    { value: timeLeft.days, label: 'Days' },
+    { value: timeLeft.hours, label: 'Hours' },
+    { value: timeLeft.minutes, label: 'Minutes' },
+    { value: timeLeft.seconds, label: 'Seconds' }
   ];
 
   return (
@@ -64,7 +64,7 @@ export const CountdownSection = () => {
       <div className="absolute inset-0 grid-bg opacity-20"></div>
 
       {/* Top fade-out gradient */}
-      <div className="absolute top-0 left-0 right-0 h-30 bg-gradient-to-b from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute top-0 left-0 right-0 h-30 bg-linear-to-b from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none"></div>
 
       {/* Animated Background Blobs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#e62b1e] rounded-full mix-blend-multiply filter blur-[200px] opacity-10 animate-pulse"></div>
@@ -123,7 +123,7 @@ export const CountdownSection = () => {
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 text-gray-400 mb-12">
               <div className="flex items-center gap-3">
                 <Calendar size={20} className="text-[#e62b1e]" />
-                <span className="font-tech text-sm">January 3, 2026</span>
+                <span className="font-tech text-sm">{CONTACT.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
               </div>
               <div className="hidden md:block w-px h-6 bg-gray-600"></div>
               <div className="flex items-center gap-3">
@@ -135,7 +135,7 @@ export const CountdownSection = () => {
             {/* Book Ticket Button */}
             <div className="text-center">
               <a
-                href="https://makemypass.com/event/tedx-vjcet"
+                href={CONTACT.makeMyPass}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-4 bg-linear-to-r from-[#e62b1e] to-red-600 hover:from-red-600 hover:to-[#e62b1e] text-white font-tech px-8 py-4 rounded-xl border border-[#e62b1e]/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e62b1e]/20 text-sm tracking-wider uppercase animate-blip"

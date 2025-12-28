@@ -3,7 +3,7 @@
 import React from 'react';
 import { ArrowRight, Ticket } from 'lucide-react';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
-import { EVENT_DATE } from '@/app/constants';
+import { CONTACT } from '@/app/constants';
 
 export const RegistrationSection = () => {
   return (
@@ -19,10 +19,10 @@ export const RegistrationSection = () => {
            SECURE YOUR<br/>SEAT
          </h2>
          <p className="font-sans text-xl md:text-3xl opacity-90 max-w-2xl mx-auto font-light">
-           Event Date: <span className="font-bold underline decoration-4 decoration-black underline-offset-4">{EVENT_DATE.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}</span>. <br/>Don&apos;t miss the future.
+           Event Date: <span className="font-bold underline decoration-4 decoration-black underline-offset-4">{CONTACT.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}</span>. <br/>Don&apos;t miss the future.
          </p>
          <div className="pt-8">
-            <a href="https://makemypass.com/event/tedx-vjcet" target="_blank" rel="noopener noreferrer" className="relative overflow-hidden bg-black text-white px-20 py-8 text-2xl font-bold hover:bg-white hover:text-[#e62b1e] transition-all duration-300 items-center gap-4 mx-auto group shadow-2xl inline-flex rounded-sm ring-4 ring-transparent hover:ring-black/20">
+            <a href={CONTACT.makeMyPass} target="_blank" rel="noopener noreferrer" className="relative overflow-hidden bg-black text-white px-20 py-8 text-2xl font-bold hover:bg-white hover:text-[#e62b1e] transition-all duration-300 items-center gap-4 mx-auto group shadow-2xl inline-flex rounded-sm ring-4 ring-transparent hover:ring-black/20">
                <span className="relative z-10 flex items-center gap-3">
                  <Ticket size={32} />
                  BOOK TICKETS

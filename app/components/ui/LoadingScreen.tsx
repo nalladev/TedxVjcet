@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export const LoadingScreen = () => {
-  const [isVisible, setIsVisible] = useState(true);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export const LoadingScreen = () => {
 
   return (
     <div className="fixed top-0 left-0 bg-[#050505] flex items-center justify-between flex-col h-screen w-full overflow-hidden">
-      <div className='w-[100dvw] pt-10'>
+      <div className='w-dvw pt-10'>
         <Image
           src="/dot-grid.png"
           alt="Dot Grid"
@@ -137,7 +136,7 @@ export const LoadingScreen = () => {
         </div>
       )}
 
-      <div className='w-[100dvw] pb-10'>
+      <div className='w-dvw pb-10'>
         <Image
           src="/dot-grid.png"
           alt="Dot Grid"

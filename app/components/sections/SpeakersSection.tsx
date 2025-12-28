@@ -17,7 +17,6 @@ import { speakers, speakerCounts } from '@/app/constants';
 
 export const SpeakersSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSpeakers = 8;
 
   const revealedSpeakersCount = speakerCounts.revealed;
 
@@ -96,7 +95,6 @@ export const SpeakersSection = () => {
             <div className="relative h-[800px] md:h-[700px] lg:h-[880px] w-full max-w-5xl mx-auto my-0 flex items-center overflow-hidden [--card-offset:50px] md:[--card-offset:125px]">
               {speakers.map((speaker, index) => {
                 const firstName = speaker.show_fullname  ? speaker.name : speaker.name.split(' ')[0];
-                const restName = speaker.name.split(' ').slice(1).join(' ');
                 return (
                   <div
                     key={speaker.id}
@@ -136,7 +134,7 @@ export const SpeakersSection = () => {
                             <h4 className="text-3xl md:text-4xl text-right lg:text-5xl font-extralight" style={{ color: 'transparent', WebkitTextStroke: '2px white' }}>{speaker.name}</h4>
                             <h3 className="text-2xl md:text-3xl text-red-500 font-light" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{speaker.role}</h3>
                           </div>
-                          <p className="text-white leading-relaxed text-center avantgarde text-xs md:text-base lg:text-lg text-justify " style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>{speaker.description}</p>
+                          <p className="text-white leading-relaxed avantgarde text-xs md:text-base lg:text-lg text-justify " style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}>{speaker.description}</p>
                         </div>
                       </div>
                     ) : (
