@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Calendar, MapPin, ChevronDown } from 'lucide-react';
 import { useMousePosition } from '@/app/hooks/useMousePosition';
-import { EVENT_DATE } from '@/app/constants';
+import { CONTACT } from '@/app/constants';
 
 export const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -82,7 +82,7 @@ export const HeroSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm font-tech text-gray-400 mt-8">
           <div className="flex items-center gap-2">
             <Calendar size={16} />
-            <span>{EVENT_DATE.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}</span>
+            <span>{CONTACT.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}</span>
           </div>
           <div className="hidden md:block w-px h-4 bg-gray-600"></div>
           <div className="flex items-center gap-2">

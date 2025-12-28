@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
+import { SPONSORS_DATA } from '@/app/constants';
 
 // Card for an individual sponsor in the grid
 interface SponsorGridCardProps {
@@ -13,7 +14,7 @@ interface SponsorGridCardProps {
 const SponsorGridCard: React.FC<SponsorGridCardProps> = ({ name, website, image, isTitle = false }) => {
   const cardSize = isTitle ? 'w-80' : 'w-72';
   const imageContainerSize = isTitle ? 'w-40 h-40' : 'w-36 h-36';
-  const imageSize = isTitle ? 150 : 130;
+  const imageSize = isTitle ? 250 : 200;
 
   return (
     <a
@@ -37,7 +38,7 @@ interface TierSectionProps {
   sponsors: SponsorGridCardProps[];
 }
 const TierSection: React.FC<TierSectionProps> = ({ title, sponsors }) => (
-  <div className="h-full flex-shrink-0 flex flex-col items-center justify-start p-8 space-y-8 border-r-2 border-white/10" style={{ width: 'max-content', minWidth: '45vw' }}>
+  <div className="h-full shrink-0 flex flex-col items-center justify-start p-8 space-y-8 border-r-2 border-white/10" style={{ width: 'max-content', minWidth: '45vw' }}>
     <h3 className="text-3xl font-bold-display text-red-500 uppercase">{title}</h3>
     <div className="flex flex-wrap justify-center gap-8">
       {sponsors.map((sponsor, index) => (
@@ -50,25 +51,11 @@ const TierSection: React.FC<TierSectionProps> = ({ title, sponsors }) => (
 
 // The content of the entire scrolling strip, composed of multiple TierSections
 const SponsorStripContent = () => {
-  const sponsorsData = {
-    title: [
-      { name: 'Santa Monica Study Abroad', website: 'https://santamonicaedu.in/', image: '/sponsors/curated/santamonica.png', isTitle: true },
-    ],
-    bronze: [
-      { name: 'Joance Regency', website: 'https://joanceregency.com/', image: '/sponsors/curated/joance.png' },
-      { name: 'Digiora', website: 'https://www.digiora.com/', image: '/sponsors/curated/digiora.png' },
-    ],
-    inKind: [
-      { name: 'OHCO Chocolate', website: 'https://ohco.in/', image: '/sponsors/curated/ohco-a.png' },
-      { name: 'Kottaram Sweet House', website: 'https://www.kottaramsweets.com/', image: '/sponsors/curated/kottaram-a.png' },
-    ],
-  };
-
   return (
     <div className="flex items-stretch">
-      <TierSection title="Title Sponsor" sponsors={sponsorsData.title} />
-      <TierSection title="Bronze Sponsors" sponsors={sponsorsData.bronze} />
-      <TierSection title="In-Kind Sponsors" sponsors={sponsorsData.inKind} />
+      <TierSection title="Title Sponsor" sponsors={SPONSORS_DATA.title} />
+      <TierSection title="Bronze Sponsors" sponsors={SPONSORS_DATA.bronze} />
+      <TierSection title="In-Kind Sponsors" sponsors={SPONSORS_DATA.inKind} />
     </div>
   );
 };

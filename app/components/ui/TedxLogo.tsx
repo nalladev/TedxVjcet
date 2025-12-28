@@ -66,7 +66,7 @@ export const TedxLogo = () => {
         viewBox="0 0 276 198" // Original viewBox
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid meet"
-        className="w-full h-auto max-w-screen-lg mx-auto" // Ensure SVG is responsive and centered
+        className="w-full h-auto max-w-5xl mx-auto" // Ensure SVG is responsive and centered
       >
         {/* Original paths */}
         <path ref={(el) => { pathRefs.current[0] = el; }} d="M45.1,83.3H27V66.7h56v16.5H64.9v48H45.1V83.3z" />

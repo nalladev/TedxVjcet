@@ -3,7 +3,7 @@
 import React from 'react';
 import { MapPin, Mail, Phone, Globe } from 'lucide-react';
 import { SiInstagram, SiLinkedin, SiTed } from 'react-icons/si';
-import { CONTACT_INFO } from '@/app/constants';
+import { CONTACT, LOCATION } from '@/app/constants';
 
 export const FooterSection = () => {
   return (
@@ -24,9 +24,7 @@ export const FooterSection = () => {
                 <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">VENUE</p>
                   <p className="text-sm leading-relaxed">
-                    {CONTACT_INFO.address.venue}<br />
-                    {CONTACT_INFO.address.street}<br />
-                    {CONTACT_INFO.address.city}
+                    {CONTACT.address}
                   </p>
                 </div>
               </div>
@@ -35,8 +33,8 @@ export const FooterSection = () => {
                 <Mail size={20} className=" mt-1 shrink-0" />
                 <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">EMAIL</p>
-                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-sm hover:text-red-500 transition-colors">
-                    {CONTACT_INFO.email}
+                  <a href={`mailto:${CONTACT.email}`} className="text-sm hover:text-red-500 transition-colors">
+                    {CONTACT.email}
                   </a>
                 </div>
               </div>
@@ -45,11 +43,11 @@ export const FooterSection = () => {
                 <Phone size={20} className=" mt-1 shrink-0" />
                 <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">CONTACT</p>
-                  <a href={`tel:${CONTACT_INFO.phone}`} className="text-sm hover:text-red-500 transition-colors">
-                    {CONTACT_INFO.phone}
+                  <a href={`tel:${CONTACT.phone}`} className="text-sm hover:text-red-500 transition-colors">
+                    {CONTACT.phone}
                   </a>,
-                  <a href={`tel:${CONTACT_INFO.phone2}`} className="text-sm hover:text-red-500 transition-colors">
-                    {CONTACT_INFO.phone2}
+                  <a href={`tel:${CONTACT.phone2}`} className="text-sm hover:text-red-500 transition-colors">
+                    {CONTACT.phone2}
                   </a>
                 </div>
               </div>
@@ -58,8 +56,8 @@ export const FooterSection = () => {
                 <Globe size={20} className=" mt-1 shrink-0" />
                 <div className='text-white'>
                   <p className="font-tech text-sm font-bold mb-1">WEBSITE</p>
-                  <a href={CONTACT_INFO.website} className="text-sm hover:text-red-500 transition-colors">
-                    {CONTACT_INFO.website.replace('https://', '')}
+                  <a href={CONTACT.website} className="text-sm hover:text-red-500 transition-colors">
+                    {CONTACT.website.replace('https://', '')}
                   </a>
                 </div>
               </div>
@@ -75,7 +73,7 @@ export const FooterSection = () => {
                 <p className="font-tech text-sm font-bold mb-3">FOLLOW US</p>
                 <div className="flex gap-4">
                   <a
-                    href="https://www.instagram.com/tedxvjcet/"
+                    href={CONTACT.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow TEDxVJCET on Instagram"
@@ -84,7 +82,7 @@ export const FooterSection = () => {
                     <SiInstagram size={24} className="group-hover:text-white" />
                   </a>
                   <a
-                    href="https://www.linkedin.com/company/tedxvjcet"
+                    href={CONTACT.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow TEDxVJCET on LinkedIn"
@@ -93,7 +91,7 @@ export const FooterSection = () => {
                     <SiLinkedin size={24} className="group-hover:text-white" />
                   </a>
                   <a
-                    href="https://www.ted.com/tedx/events/64560"
+                    href={CONTACT.ted}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Visit official TED website"
@@ -138,11 +136,10 @@ export const FooterSection = () => {
               <div className="mt-4 p-4 bg-black/20 rounded-lg backdrop-blur-sm border border-white/10">
                 <p className="font-tech text-xs font-bold mb-2">DIRECTIONS</p>
                 <p className="text-xs leading-relaxed">
-                  Located 25km from Ernakulam, easily accessible by road.
-                  Free parking available on campus.
+                  {LOCATION.directions}
                 </p>
                 <a
-                  href={CONTACT_INFO.mapUrl}
+                  href={CONTACT.map}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block mt-2 text-xs text-white hover:text-red-500 transition-colors font-tech"
