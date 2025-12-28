@@ -29,31 +29,18 @@ export const metadata: Metadata = {
   description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
   keywords: ["TEDx", "VJCET", "TED talks", "Viswajyothi College", "Engineering", "Technology", "Ideas worth spreading", "Innovation", "Kerala"],
   authors: [{ name: "TEDx VJCET Team" }],
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-icon.png',
-  },
   openGraph: {
     title: "TEDx VJCET - Ideas Worth Spreading",
     description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology. Join us for inspiring talks and ideas worth spreading.",
     url: "https://www.tedxvjcet.in",
     siteName: "TEDx VJCET",
-    images: [
-      {
-        url: "/tedx-vjcet-logo-white-bg.png",
-        width: 352,
-        height: 88,
-        alt: "TEDx VJCET Logo",
-      },
-    ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "TEDx VJCET - Ideas Worth Spreading",
     description: "TEDx VJCET is an independently organized TED event at Viswajyothi College of Engineering and Technology.",
-    images: ["/tedx-vjcet-logo-white-bg.png"],
   },
   robots: {
     index: true,

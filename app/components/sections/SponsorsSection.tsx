@@ -59,7 +59,7 @@ const SponsorStripContent = () => {
       { name: 'Digiora', website: 'https://www.digiora.com/', image: '/sponsors/curated/digiora.png' },
     ],
     inKind: [
-      { name: 'OHCO Chocolate', website: '#', image: '/sponsors/curated/ohco-a.png' },
+      { name: 'OHCO Chocolate', website: 'https://ohco.in/', image: '/sponsors/curated/ohco-a.png' },
       { name: 'Kottaram Sweet House', website: 'https://www.kottaramsweets.com/', image: '/sponsors/curated/kottaram-a.png' },
     ],
   };
@@ -86,7 +86,7 @@ const SponsorsSection = () => {
         <h2 className="text-4xl md:text-7xl font-bold-display text-center uppercase">
           Our <span className="text-[#e62b1e]">Sponsors</span>
         </h2>
-        
+
         <div className="relative scroller-container w-full overflow-hidden whitespace-nowrap scroller-fade-mask">
           <div className="inline-block animate-scroll">
             <SponsorStripContent />
