@@ -54,6 +54,7 @@ const SponsorStripContent = () => {
   return (
     <div className="flex items-stretch">
       <TierSection title="Title Sponsor" sponsors={SPONSORS_DATA.title} />
+      <TierSection title="Platinum Sponsor" sponsors={SPONSORS_DATA.platinum} />
       <TierSection title="Bronze Sponsors" sponsors={SPONSORS_DATA.bronze} />
       <TierSection title="In-Kind Sponsors" sponsors={SPONSORS_DATA.inKind} />
     </div>
