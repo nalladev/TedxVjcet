@@ -59,6 +59,9 @@ export const SPONSORS_DATA = {
   title: [
     { name: 'Santa Monica Study Abroad', website: 'https://santamonicaedu.in/', image: '/sponsors/curated/santamonica.png', isTitle: true },
   ],
+  platinum: [
+    { name: 'Sowthzide Games', website: '#', image: '/sponsors/curated/sowthzide.png' },
+  ],
   bronze: [
     { name: 'Joance Regency', website: 'https://joanceregency.com/', image: '/sponsors/curated/joance.png' },
     { name: 'Digiora', website: 'https://www.digiora.com/', image: '/sponsors/curated/digiora.png' },

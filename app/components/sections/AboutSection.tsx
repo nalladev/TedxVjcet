@@ -22,7 +22,7 @@ export const AboutSection = () => {
       {/* Dark overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 z-5"></div>
 
-      <ParallaxBackground text="IDEAS" direction={-1} speed={0.3} opacity="opacity-[0.08]" />
+      <ParallaxBackground text="IDEAS" direction={-1} speed={0.3} opacity="opacity-[0.08]" className="-top-80 md:top-0" />
 
       <div className="sticky top-0 flex flex-col items-center justify-center p-6">
         <div className="max-w-6xl w-full gap-16 items-center relative z-20">

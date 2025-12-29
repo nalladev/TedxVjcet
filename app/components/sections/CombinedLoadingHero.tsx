@@ -6,9 +6,26 @@ import { SVGGrid } from '@/app/components/ui/SVGGrid';
 
 
 
-// Animation constants
-const INITIAL_SCALE = 17;
-const FINAL_SCALE = 1;
+const animationConfig = {
+  desktop: {
+    initialLeft: 1056,
+    initialTop: 100,
+    initialScale: 20,
+    finalScale: 2,
+  },
+  tablet: {
+    initialLeft: 760,
+    initialTop: -35,
+    initialScale: 14,
+    finalScale: 1.5,
+  },
+  mobile: {
+    initialLeft: 470,
+    initialTop: -110,
+    initialScale: 17,
+    finalScale: 1,
+  },
+};
 
 
 
@@ -73,11 +90,9 @@ export const CombinedLoadingHero = ({
 }: CombinedLoadingHeroProps) => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
   const [parallaxTransform, setParallaxTransform] = useState({ x: 0, y: 0 });
-  const [responsiveValues, setResponsiveValues] = useState({
-    initialLeft: 900,
-    initialTop: 20,
-    initialScale: INITIAL_SCALE
-  });
+  const [responsiveValues, setResponsiveValues] = useState(
+    animationConfig.desktop,
+  );
 
   // Refs for animation targets
   const containerRef = useRef<HTMLDivElement>(null);
@@ -97,12 +112,14 @@ export const CombinedLoadingHero = ({
   // Set responsive values after mounting to avoid hydration mismatch
   useEffect(() => {
     const updateResponsiveValues = () => {
-      const isMobile = window.innerWidth < 768;
-      setResponsiveValues({
-        initialLeft: isMobile ? 470 : 900,
-        initialTop: isMobile ? -110 : 20,
-        initialScale: isMobile ? 17 : INITIAL_SCALE
-      });
+      const width = window.innerWidth;
+      if (width < 768) {
+        setResponsiveValues(animationConfig.mobile);
+      } else if (width < 1024) {
+        setResponsiveValues(animationConfig.tablet);
+      } else {
+        setResponsiveValues(animationConfig.desktop);
+      }
     };
 
     updateResponsiveValues();
@@ -117,7 +134,8 @@ export const CombinedLoadingHero = ({
 
   // Mouse parallax effect
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (typeof window === "undefined") return;
+    return;
+    if (typeof window === "undefined") return
 
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
@@ -179,8 +197,8 @@ export const CombinedLoadingHero = ({
     // Convert linear progress to exponential scale for smoother transitions
     const getScaleFromProgress = (progress: number): number => {
       // Use exponential interpolation for smoother scaling at lower values
-      const minScale = Math.log(FINAL_SCALE);
-      const maxScale = Math.log(INITIAL_SCALE);
+      const minScale = Math.log(responsiveValues.finalScale);
+      const maxScale = Math.log(responsiveValues.initialScale);
       const logScale = maxScale - (progress * (maxScale - minScale));
       return Math.exp(logScale);
     };
@@ -293,7 +311,7 @@ export const CombinedLoadingHero = ({
           tedxLogoRef.current.style.top = `${initialTop}px`;
           tedxLogoRef.current.style.opacity = `0`;
         } else if (scrollTop > endScroll) {
-          tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
+          tedxLogoRef.current.style.transform = `scale(${responsiveValues.finalScale})`;
           tedxLogoRef.current.style.backgroundColor = `#050505`;
           tedxLogoRef.current.style.left = `0px`;
           tedxLogoRef.current.style.top = `0px`;
@@ -313,7 +331,7 @@ export const CombinedLoadingHero = ({
 
         // Keep container properties at final state
         if (tedxLogoRef.current) {
-          tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
+          tedxLogoRef.current.style.transform = `scale(${responsiveValues.finalScale})`;
           tedxLogoRef.current.style.backgroundColor = `#050505`;
           tedxLogoRef.current.style.left = `0px`;
           tedxLogoRef.current.style.top = `0px`;
@@ -433,7 +451,7 @@ export const CombinedLoadingHero = ({
 
       <div
         ref={tedxLogoRef}
-        className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
+        className={`fixed pointer-events-none inset-0 scale-${responsiveValues.initialScale} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
         style={{
           left: `${responsiveValues.initialLeft}px`,
           top: `${responsiveValues.initialTop}px`,

@@ -54,6 +54,7 @@ const SponsorStripContent = () => {
   return (
     <div className="flex items-stretch">
       <TierSection title="Title Sponsor" sponsors={SPONSORS_DATA.title} />
+      <TierSection title="Platinum Sponsor" sponsors={SPONSORS_DATA.platinum} />
       <TierSection title="Bronze Sponsors" sponsors={SPONSORS_DATA.bronze} />
       <TierSection title="In-Kind Sponsors" sponsors={SPONSORS_DATA.inKind} />
     </div>
@@ -68,7 +69,7 @@ const SponsorsSection = () => {
       className="relative z-30 bg-black text-white py-20 shadow-[0_-50px_100px_rgba(0,0,0,1)] border-t border-white/5 overflow-hidden"
       style={{ background: 'radial-gradient(ellipse at center, #1b1b1b 0%, #050505 100%)' }}
     >
-      <ParallaxBackground text="SPONSORS" direction={-1} speed={0.3} opacity="opacity-[0.08]" />
+      <ParallaxBackground text="SPONSORS" direction={-1} speed={0.3} opacity="opacity-[0.08]" className="-top-60" />
       <div className="container mx-auto relative z-10 space-y-16">
         <h2 className="text-4xl md:text-7xl font-bold-display text-center uppercase">
           Our <span className="text-[#e62b1e]">Sponsors</span>
