@@ -86,7 +86,7 @@ export const CountdownSection = () => {
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg font-tech text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-lg font-tech text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {isEventPassed
               ? 'Thank you for being part of our incredible journey of ideas worth spreading.'
               : 'The stage is set, the speakers are ready. Join us as we countdown to a transformative experience.'

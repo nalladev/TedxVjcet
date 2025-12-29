@@ -12,8 +12,21 @@ export const ParallaxBackground = ({
   textColor = "text-white" 
 }: ParallaxBackgroundProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentSpeed, setCurrentSpeed] = useState(speed);
   const ref = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768;
+      setCurrentSpeed(isMobile ? speed * 2 : speed);
+    };
+
+    handleResize(); // Set initial speed
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [speed]);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -53,7 +66,7 @@ export const ParallaxBackground = ({
       );
 
       // Map progress to horizontal movement
-      const maxOffset = window.innerWidth * 0.8 * speed;
+      const maxOffset = window.innerWidth * 0.8 * currentSpeed;
       const offset = progress * maxOffset * direction;
 
       // Use transform for GPU acceleration
@@ -65,7 +78,7 @@ export const ParallaxBackground = ({
     rafId = requestAnimationFrame(updateParallax);
 
     return () => cancelAnimationFrame(rafId);
-  }, [isVisible, direction, speed]);
+  }, [isVisible, direction, currentSpeed]);
 
   return (
     <div ref={ref} className={`absolute inset-0 flex items-center pointer-events-none overflow-hidden z-0 ${className} ${direction > 0 ? 'justify-start' : 'justify-end'}`}>
