@@ -21,12 +21,12 @@ const SponsorGridCard: React.FC<SponsorGridCardProps> = ({ name, website, image,
       href={website}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${cardSize} flex flex-col items-center text-center p-4 bg-white/5 rounded-lg border border-white/10 transform transition-all duration-300 hover:scale-105 hover:border-red-600/50`}
+      className={`${cardSize} flex flex-col items-center text-center p-2 md:p-4 bg-white/5 rounded-lg border border-white/10 transform transition-all duration-300 hover:scale-105 hover:border-red-600/50`}
     >
-      <div className={`${imageContainerSize} rounded-full bg-white flex items-center justify-center mb-4`}>
+      <div className={`${imageContainerSize} rounded-full bg-white flex items-center justify-center mb-2 md:mb-4`}>
         <Image src={image} alt={name} width={imageSize} height={imageSize} className="object-contain rounded-full p-2" />
       </div>
-      <p className="text-lg text-white font-tech">{name}</p>
+      <p className="text-base md:text-lg text-white font-tech">{name}</p>
     </a>
   );
 };
