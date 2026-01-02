@@ -36,23 +36,23 @@
   },
   {
     "id": 6,
-    "name": "SPEAKER 6",
-    "role": "TO BE REVEALED",
+    "name": "Suresh Pillai",
+    "role": "WELL KNOWN CHEF",
     "gender": "male",
-    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+    "description": "Chef Pillai is a Kerala-born chef who started  as a waiter, worked for 14 years in top restaurants in London, like Veeraswamy, gained fame on MasterChef: The Professionals (UK), and founded restaurant Chef Pillai (RCP) chain."
   },
   {
     "id": 7,
     "name": "SPEAKER 7",
     "role": "TO BE REVEALED",
-    "gender": "female",
+    "gender": "male",
     "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
   },
   {
     "id": 8,
     "name": "SPEAKER 8",
     "role": "TO BE REVEALED",
-    "gender": "male",
+    "gender": "female",
     "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
   }
 ]
