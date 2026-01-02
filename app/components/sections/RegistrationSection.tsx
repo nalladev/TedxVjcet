@@ -29,7 +29,6 @@ export const RegistrationSection = () => {
                  <ArrowRight className="group-hover:translate-x-2 transition-transform" />
                </span>
             </a> */}
-          <div className="pt-8">
             <button
               disabled
               className="relative overflow-hidden bg-black/60 text-white/60
@@ -40,7 +39,6 @@ export const RegistrationSection = () => {
               <Ticket size={32} />
               SOLD OUT
             </button>
-          </div>
         </div>
       </div>
     </div>
