@@ -29,30 +29,30 @@
   },
   {
     "id": 5,
-    "name": "SPEAKER 5",
-    "role": "TO BE REVEALED",
-    "gender": "male",
-    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+    "name": "VINITHA KOSHY",
+    "role": "ACTRESS",
+    "gender": "female",
+    "description": "Vinitha Koshy, an actress from Kollam who previously worked as a paediatric counsellor in Singapore, made her debut in Aanandam (2016), rose to fame with her State Award-winning role in Ottamuri Velicham (2017), and has since acted in films like Aby, Luca, Operation Java."
   },
   {
     "id": 6,
-    "name": "SPEAKER 6",
-    "role": "TO BE REVEALED",
+    "name": "Suresh Pillai",
+    "role": "WELL KNOWN CHEF",
     "gender": "male",
-    "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
+    "description": "Chef Pillai is a Kerala-born chef who started  as a waiter, worked for 14 years in top restaurants in London, like Veeraswamy, gained fame on MasterChef: The Professionals (UK), and founded restaurant Chef Pillai (RCP) chain."
   },
   {
     "id": 7,
     "name": "SPEAKER 7",
     "role": "TO BE REVEALED",
-    "gender": "female",
+    "gender": "male",
     "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
   },
   {
     "id": 8,
     "name": "SPEAKER 8",
     "role": "TO BE REVEALED",
-    "gender": "male",
+    "gender": "female",
     "description": "This incredible speaker will be revealed soon! Stay tuned for more exciting announcements about our amazing lineup."
   }
 ]

@@ -28,25 +28,33 @@
     "description": "Raul John Aju is a teen AI-prodigy from Kerala who founded an AI startup, built over 10 AI tools and the humanoid robot called Me‐bot by age 16, and has taught AI to more than 140,000 students and businesses online."
   },
   {
-    "id": 6,
-    "name": "RAHUL RAMACHADRAN",
-    "role": "FILM DIRECTOR AND SCRIPTWRITER",
-    "gender": "male",
-    "description": "Rahul Ramachandran is an Indian film director and scriptwriter in the Malayalam film industry who started with short films in 2017, deputed with Jeem Boom Bhaa (2019), scripted Njan  Kanda Superman (2019), and later directed the Suresh Gopi project SG 251."
-  },
-  {
-    "id": 7,
+    "id": 5,
     "name": "VINITHA KOSHY",
     "role": "ACTRESS",
     "gender": "female",
     "description": "Vinitha Koshy,an actress from Kollam who previously worked as a paediatric counsellor in Singapore, made her  debut in Aanandam (2016),rose to fame with her State Award-winning role in Ottamuri Velicham (2017), and has since acted in films like Aby, Luca, Operation Java."
   },
   {
-    "id": 8,
+    "id": 6,
     "name": "CHEF PILLAI",
     "show_fullname": false,
     "role": "WELL KNOWN CHEF",
     "gender": "male",
     "description": "Chef Pillai is a Kerala-born chef who started  as a waiter, worked for 14 years in top restaurants in London, like Veeraswamy, gained fame on MasterChef: The Professionals (UK), and founded restaurant Chef Pillai (RCP) chain."
+  },
+  {
+    "id": 7,
+    "name": "Rena Fathima",
+    "show_fullname": false,
+    "role": "CONTENT CREATOR AND ENTREPRENEUR",
+    "gender": "female",
+    "description": "Rena Fathima, hailing from Kerala and pursuing her BBA in Aviation is a content creator and entrepreneur. From beauty and skincare to motivation, travel, and finance, she has built a strong digital presence rooted in relatability and purpose. Balancing studies, brand collaborations, and her own clothing store, she stands as a symbol of financial independence and self-belief—encouraging young women to be resilient, self-reliant, and resolute in shaping their own futures."
+  },
+  {
+    "id": 8,
+    "name": "RAHUL RAMACHADRAN",
+    "role": "FILM DIRECTOR AND SCRIPTWRITER",
+    "gender": "male",
+    "description": "Rahul Ramachandran is an Indian film director and scriptwriter in the Malayalam film industry who started with short films in 2017, deputed with Jeem Boom Bhaa (2019), scripted Njan  Kanda Superman (2019), and later directed the Suresh Gopi project SG 251."
   }
 ]
