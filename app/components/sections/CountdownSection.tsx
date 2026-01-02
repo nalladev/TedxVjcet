@@ -134,16 +134,13 @@ export const CountdownSection = () => {
 
             {/* Book Ticket Button */}
             <div className="text-center">
-              <a
-                href={CONTACT.makeMyPass}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 bg-linear-to-r from-[#e62b1e] to-red-600 hover:from-red-600 hover:to-[#e62b1e] text-white font-tech px-8 py-4 rounded-xl border border-[#e62b1e]/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e62b1e]/20 text-sm tracking-wider uppercase animate-blip"
+              <button
+                disabled
+                className="group inline-flex items-center gap-4 bg-gradient-to-r from-gray-600 to-gray-700 text-gray-300 font-tech px-8 py-4 rounded-xl border border-gray-600/50 backdrop-blur-md cursor-not-allowed text-sm tracking-wider uppercase pointer-events-none"
               >
-                <Ticket size={20} className="group-hover:rotate-12 transition-transform duration-300" />
-                <span>Book Your Ticket</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-              </a>
+                <Ticket size={20} className="opacity-70" />
+                <span>SOLD OUT</span>
+              </button>
             </div>
           </>
         )}
