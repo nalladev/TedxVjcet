@@ -42,19 +42,19 @@
     "gender": "male",
     "description": "Chef Pillai is a Kerala-born chef who started  as a waiter, worked for 14 years in top restaurants in London, like Veeraswamy, gained fame on MasterChef: The Professionals (UK), and founded restaurant Chef Pillai (RCP) chain."
   },
-  {
+    {
     "id": 7,
+    "name": "RAHUL RAMACHADRAN",
+    "role": "FILM DIRECTOR AND SCRIPTWRITER",
+    "gender": "male",
+    "description": "Rahul Ramachandran is an Indian film director and scriptwriter in the Malayalam film industry who started with short films in 2017, deputed with Jeem Boom Bhaa (2019), scripted Njan  Kanda Superman (2019), and later directed the Suresh Gopi project SG 251."
+  },
+  {
+    "id": 8,
     "name": "Rena Fathima",
     "show_fullname": false,
     "role": "CONTENT CREATOR AND ENTREPRENEUR",
     "gender": "female",
     "description": "Rena Fathima, hailing from Kerala and pursuing her BBA in Aviation is a content creator and entrepreneur. From beauty and skincare to motivation, travel, and finance, she has built a strong digital presence rooted in relatability and purpose. Balancing studies, brand collaborations, and her own clothing store, she stands as a symbol of financial independence and self-belief—encouraging young women to be resilient, self-reliant, and resolute in shaping their own futures."
-  },
-  {
-    "id": 8,
-    "name": "RAHUL RAMACHADRAN",
-    "role": "FILM DIRECTOR AND SCRIPTWRITER",
-    "gender": "male",
-    "description": "Rahul Ramachandran is an Indian film director and scriptwriter in the Malayalam film industry who started with short films in 2017, deputed with Jeem Boom Bhaa (2019), scripted Njan  Kanda Superman (2019), and later directed the Suresh Gopi project SG 251."
   }
 ]
