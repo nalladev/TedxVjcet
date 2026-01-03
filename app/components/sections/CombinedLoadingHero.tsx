@@ -2,69 +2,26 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import { SVGGrid } from '@/app/components/ui/SVGGrid';
-
-
-
-// Animation constants
-const INITIAL_SCALE = 17;
-const FINAL_SCALE = 1;
-
-
-
-
-// TEDx Part Component
-const TedxPart = React.forwardRef<SVGGElement, { className?: string }>(
-  (props, ref) => (
-    <svg
-      viewBox="0 0 803 319"
-      xmlns="http://www.w3.org/2000/svg"
-      className={props.className}
-    >
-      <g ref={ref}>
-        <path
-          d="M679 243L721.264 180.622L680.597 121H723.462L740.748 151.92L758.532 121H801.39L760.736 180.62L803 242.998L760.108 243L740.748 210.775L721.867 243H679Z"
-          fill="#EB0028"
-        />
-        <path
-          d="M481 319L481.002 121H581.472C612.087 121 635.489 131.282 651.025 151.566C667.535 173.109 671 200.513 671 219.707C671 250.863 662.667 275.243 646.235 292.166C628.943 309.972 603.096 319 569.406 319H481ZM540.905 269.659H566.022C605.241 269.659 611.097 237.821 611.097 218.851C611.097 173.845 573.152 170.343 561.522 170.343H540.905V269.659Z"
-          fill="#EB0028"
-        />
-        <path
-          d="M303 319V121H470V171H363V197H470V243H363V269H470V319H303Z"
-          fill="#EB0028"
-        />
-        <path d="M176 319V171H121V121H293V171H237V319H176Z" fill="#EB0028" />
-      </g>
-    </svg>
-  ),
-);
-TedxPart.displayName = "TedxPart";
-
-// VJCET Part Component
-const VjcetPart = React.forwardRef<SVGGElement, { className?: string }>(
-  (props, ref) => (
-    <svg
-      viewBox="854.434 124.638 825.766 205.997"
-      xmlns="http://www.w3.org/2000/svg"
-      className={props.className}
-    >
-      <g ref={ref}>
-        <path
-          d="M872.879 127.273L933.106 297.132H934.8L995.027 127.273H1013.47L943.364 320H924.543L854.434 127.273H872.879ZM1101.86 127.273H1119.46V266.266C1119.39 278.813 1117.13 289.29 1112.68 297.697C1108.23 306.041 1102.08 312.283 1094.24 316.424C1086.39 320.565 1077.39 322.635 1067.23 322.635C1057.25 322.635 1048.34 320.784 1040.5 317.083C1032.66 313.381 1026.48 308.174 1021.96 301.461C1017.51 294.748 1015.28 286.875 1015.28 277.841H1032.6C1032.6 283.55 1034.1 288.6 1037.11 292.992C1040.13 297.321 1044.23 300.708 1049.44 303.155C1054.71 305.602 1060.64 306.825 1067.23 306.825C1074.07 306.825 1080.06 305.382 1085.2 302.496C1090.41 299.611 1094.49 295.188 1097.44 289.228C1100.38 283.205 1101.86 275.551 1101.86 266.266V127.273ZM1329.54 187.5H1311.85C1310.53 180.913 1308.15 174.827 1304.7 169.244C1301.31 163.597 1297.05 158.672 1291.9 154.469C1286.76 150.266 1280.92 147.003 1274.4 144.682C1267.87 142.361 1260.82 141.2 1253.22 141.2C1241.05 141.2 1229.95 144.368 1219.91 150.705C1209.94 157.041 1201.94 166.358 1195.91 178.654C1189.95 190.888 1186.97 205.882 1186.97 223.636C1186.97 241.516 1189.95 256.573 1195.91 268.807C1201.94 281.04 1209.94 290.326 1219.91 296.662C1229.95 302.936 1241.05 306.072 1253.22 306.072C1260.82 306.072 1267.87 304.912 1274.4 302.591C1280.92 300.269 1286.76 297.038 1291.9 292.898C1297.05 288.694 1301.31 283.77 1304.7 278.123C1308.15 272.477 1310.53 266.36 1311.85 259.773H1329.54C1327.98 268.619 1325.03 276.868 1320.7 284.522C1316.43 292.114 1310.97 298.764 1304.32 304.473C1297.74 310.182 1290.15 314.636 1281.55 317.836C1272.96 321.035 1263.51 322.635 1253.22 322.635C1237.04 322.635 1222.67 318.588 1210.12 310.495C1197.58 302.34 1187.73 290.859 1180.58 276.053C1173.49 261.247 1169.94 243.775 1169.94 223.636C1169.94 203.498 1173.49 186.026 1180.58 171.22C1187.73 156.414 1197.58 144.964 1210.12 136.871C1222.67 128.716 1237.04 124.638 1253.22 124.638C1263.51 124.638 1272.96 126.238 1281.55 129.437C1290.15 132.574 1297.74 137.028 1304.32 142.8C1310.97 148.509 1316.43 155.159 1320.7 162.75C1325.03 170.342 1327.98 178.591 1329.54 187.5ZM1378.83 320V127.273H1490.63V143.082H1396.43V215.637H1484.7V231.447H1396.43V304.19H1492.51V320H1378.83ZM1532.45 143.082V127.273H1672.2V143.082H1611.13V320H1593.53V143.082H1532.45Z"
-          fill="white"
-        />
-      </g>
-    </svg>
-  ),
-);
-VjcetPart.displayName = "VjcetPart";
+import { SVGGrid } from "@/app/components/ui/SVGGrid";
 
 interface CombinedLoadingHeroProps {
   scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
   onLoadStateChange?: (isLoaded: boolean) => void;
   onContainerRefReady?: (ref: React.RefObject<HTMLDivElement | null>) => void;
 }
+
+const animationConfig = {
+  initial: {
+    left: 0,
+    top: 0,
+    scale: 1,
+  },
+  final: {
+    left: 0,
+    top: 0,
+    scale: 1,
+  },
+};
 
 export const CombinedLoadingHero = ({
   scrollContainerRef,
@@ -73,11 +30,6 @@ export const CombinedLoadingHero = ({
 }: CombinedLoadingHeroProps) => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
   const [parallaxTransform, setParallaxTransform] = useState({ x: 0, y: 0 });
-  const [responsiveValues, setResponsiveValues] = useState({
-    initialLeft: 900,
-    initialTop: 20,
-    initialScale: INITIAL_SCALE
-  });
 
   // Refs for animation targets
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,35 +37,13 @@ export const CombinedLoadingHero = ({
   const heroImageRef = useRef<HTMLDivElement>(null);
   const heroImageInnerRef = useRef<HTMLImageElement>(null);
   const tedxLogoRef = useRef<HTMLDivElement>(null);
-  const tedxLogoImageRef = useRef<HTMLImageElement>(null);
+  const colorGroupRef = useRef<SVGGElement>(null);
   const xLogoRef = useRef<HTMLImageElement>(null);
   const loadingScreenInnerRef = useRef<HTMLDivElement>(null);
-
 
   useEffect(() => {
     onContainerRefReady?.(containerRef);
   }, [onContainerRefReady]);
-
-  // Set responsive values after mounting to avoid hydration mismatch
-  useEffect(() => {
-    const updateResponsiveValues = () => {
-      const isMobile = window.innerWidth < 768;
-      setResponsiveValues({
-        initialLeft: isMobile ? 470 : 900,
-        initialTop: isMobile ? -110 : 20,
-        initialScale: isMobile ? 17 : INITIAL_SCALE
-      });
-    };
-
-    updateResponsiveValues();
-    window.addEventListener('resize', updateResponsiveValues);
-
-    return () => {
-      window.removeEventListener('resize', updateResponsiveValues);
-    };
-  }, []);
-
-
 
   // Mouse parallax effect
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -130,17 +60,17 @@ export const CombinedLoadingHero = ({
     const parallaxIntensity = 20;
     setParallaxTransform({
       x: x * parallaxIntensity,
-      y: y * parallaxIntensity
+      y: y * parallaxIntensity,
     });
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [handleMouseMove]);
 
@@ -170,20 +100,8 @@ export const CombinedLoadingHero = ({
 
     const oneHundredVh = window.innerHeight;
     const maxAnimationRange = oneHundredVh * 3; // End of all animations
-    let animationComplete = false;
     let animationId: number | null = null;
     let isAnimating = false;
-
-
-
-    // Convert linear progress to exponential scale for smoother transitions
-    const getScaleFromProgress = (progress: number): number => {
-      // Use exponential interpolation for smoother scaling at lower values
-      const minScale = Math.log(FINAL_SCALE);
-      const maxScale = Math.log(INITIAL_SCALE);
-      const logScale = maxScale - (progress * (maxScale - minScale));
-      return Math.exp(logScale);
-    };
 
     const updateAnimations = () => {
       if (!loadingScreenRef.current || !scrollContainerRef?.current) {
@@ -194,7 +112,7 @@ export const CombinedLoadingHero = ({
       const scrollTop = scrollContainerRef.current.scrollTop;
 
       // Early exit if we're way past all animations (efficiency optimization)
-      if (scrollTop > maxAnimationRange + oneHundredVh) {
+      if (scrollTop > maxAnimationRange) {
         isAnimating = false;
         return;
       }
@@ -206,118 +124,38 @@ export const CombinedLoadingHero = ({
 
         loadingScreenRef.current.style.height = `${height}vh`;
 
-        // Apply scale reduction to first child div
-        if (loadingScreenInnerRef.current) {
-          const scale = 1 - (progress * 0.15); // Reduce scale by 15% as we scroll
-          loadingScreenInnerRef.current.style.transform = `scale(${scale})`;
-          loadingScreenInnerRef.current.style.transformOrigin = 'center center';
-        }
-
         // X logo fade animation - faster fade
         if (xLogoRef.current) {
-          const xOpacity = 1 - (progress * 2.5); // Much faster fade out
+          const xOpacity = 1 - progress * 2.5; // Much faster fade out
           xLogoRef.current.style.opacity = `${Math.max(0, xOpacity)}`;
         }
 
         // Hero image opacity animation
         if (heroImageRef.current) {
-          const imageOpacity = 0.5 + (progress * 0.5); // From 0.5 to 1.0
+          const imageOpacity = 0.5 + progress * 0.5; // From 0.5 to 1.0
           heroImageRef.current.style.opacity = `${imageOpacity}`;
-        }
-
-        // Check if animation is complete
-        if (progress >= 1 && !animationComplete) {
-          animationComplete = true;
-          console.log("Loading screen animation completed!");
-        }
-
-        if (progress < 1) {
-          animationComplete = false;
         }
       }
 
       // TEDx logo animation (1vh to 2vh)
-      if (tedxLogoRef.current && scrollTop >= 0 && scrollTop <= maxAnimationRange) {
-        const startScroll = oneHundredVh;
-        const endScroll = oneHundredVh * 2;
+      if (
+        scrollTop >= oneHundredVh &&
+        scrollTop <= oneHundredVh * 2
+      ) {
+        // const progress = Math.min((scrollTop - oneHundredVh) / oneHundredVh, 1);
 
-        if (scrollTop >= startScroll && scrollTop <= endScroll) {
-          const logoProgress = (scrollTop - startScroll) / (endScroll - startScroll);
-
-          // Use responsive values from state
-          const { initialLeft, initialTop, initialScale } = responsiveValues;
-
-          // Three-phase animation
-          let logoOpacity = 0;
-          let leftPosition = initialLeft;
-          let topPosition = initialTop;
-          let currentScale = initialScale;
-          let backgroundOpacity = 0;
-
-          if (logoProgress <= 1/3) {
-            // Phase 1: Opacity 0 to 1 in first 1/3
-            const opacityProgress = logoProgress / (1/3);
-            logoOpacity = opacityProgress;
-            backgroundOpacity = opacityProgress;
-            currentScale = initialScale; // Keep initial scale
-          } else if (logoProgress <= 2/3) {
-            // Phase 2: Position animation in second 1/3
-            logoOpacity = 1; // Keep full opacity
-            backgroundOpacity = 1; // Keep full background opacity
-            const positionProgress = (logoProgress - 1/3) / (1/3);
-            leftPosition = initialLeft - (positionProgress * initialLeft);
-            topPosition = initialTop - (positionProgress * initialTop);
-            currentScale = initialScale; // Keep initial scale
-          } else {
-            // Phase 3: Scale animation in final 1/3
-            logoOpacity = 1; // Keep full opacity
-            backgroundOpacity = 1; // Keep full background opacity
-            leftPosition = 0; // Keep final position
-            topPosition = 0; // Keep final position
-            const scaleProgress = (logoProgress - 2/3) / (1/3);
-            currentScale = getScaleFromProgress(scaleProgress);
-          }
-
-          tedxLogoRef.current.style.transform = `scale(${currentScale})`;
-          tedxLogoRef.current.style.backgroundColor = `rgba(5, 5, 5, ${backgroundOpacity})`;
-          tedxLogoRef.current.style.left = `${leftPosition}px`;
-          tedxLogoRef.current.style.top = `${topPosition}px`;
-          tedxLogoRef.current.style.opacity = `${logoOpacity}`;
-        } else if (scrollTop < startScroll) {
-          const { initialLeft, initialTop, initialScale } = responsiveValues;
-
-          tedxLogoRef.current.style.display = `flex`;
-          tedxLogoRef.current.style.transform = `scale(${initialScale})`;
-          tedxLogoRef.current.style.backgroundColor = `transparent`;
-          tedxLogoRef.current.style.left = `${initialLeft}px`;
-          tedxLogoRef.current.style.top = `${initialTop}px`;
-          tedxLogoRef.current.style.opacity = `0`;
-        } else if (scrollTop > endScroll) {
-          tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
-          tedxLogoRef.current.style.backgroundColor = `#050505`;
-          tedxLogoRef.current.style.left = `0px`;
-          tedxLogoRef.current.style.top = `0px`;
-          tedxLogoRef.current.style.opacity = `1`;
-        }
+        // // X logo fade animation - faster fade
+        // if (colorGroupRef.current) {
+        //   colorGroupRef.current.style.opacity = `${progress}`;
+        // }
       }
 
       // TEDx logo fade animation (2vh to 3vh)
-      if (tedxLogoImageRef.current && scrollTop >= oneHundredVh * 2 && scrollTop <= maxAnimationRange) {
-        const fadeStartScroll = oneHundredVh * 2;
-        const fadeEndScroll = oneHundredVh * 2.5;
+      if (
+        scrollTop >= oneHundredVh * 2 &&
+        scrollTop <= maxAnimationRange
+      ) {
 
-        const fadeProgress = (scrollTop - fadeStartScroll) / (fadeEndScroll - fadeStartScroll);
-        const logoFadeOpacity = 1 - fadeProgress;
-
-        tedxLogoImageRef.current.style.opacity = `${Math.max(0, logoFadeOpacity)}`;
-
-        // Keep container properties at final state
-        if (tedxLogoRef.current) {
-          tedxLogoRef.current.style.transform = `scale(${FINAL_SCALE})`;
-          tedxLogoRef.current.style.backgroundColor = `#050505`;
-          tedxLogoRef.current.style.left = `0px`;
-          tedxLogoRef.current.style.top = `0px`;
-        }
       }
 
       isAnimating = false;
@@ -346,18 +184,20 @@ export const CombinedLoadingHero = ({
 
     // Add scroll listener to the container - keep it active for scroll-up detection
     if (currentScrollContainer) {
-      currentScrollContainer.addEventListener('scroll', onScroll, { passive: true });
+      currentScrollContainer.addEventListener("scroll", onScroll, {
+        passive: true,
+      });
     }
 
     return () => {
       if (currentScrollContainer) {
-        currentScrollContainer.removeEventListener('scroll', onScroll);
+        currentScrollContainer.removeEventListener("scroll", onScroll);
       }
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
     };
-  }, [scrollContainerRef, isPageLoaded, responsiveValues]);
+  }, [scrollContainerRef, isPageLoaded]);
 
   return (
     <>
@@ -369,17 +209,10 @@ export const CombinedLoadingHero = ({
       >
         <SVGGrid opacity={0.3} gridSize={40} strokeWidth={0.4} dotSize={0.8} />
 
-        <div ref={loadingScreenInnerRef} className="w-full h-screen flex items-center justify-around flex-col">
-          {/*<div className="w-full pt-10">
-            <Image
-              src="/dot-grid.png"
-              alt="Dot Grid"
-              width={400}
-              height={100}
-              className="w-[200px] md:w-sm rotate-180 grayscale-30 md:-translate-x-10"
-            />
-          </div>*/}
-
+        <div
+          ref={loadingScreenInnerRef}
+          className="w-full h-screen flex items-center justify-around flex-col"
+        >
           <Image
             ref={xLogoRef}
             src="/weird_x.png"
@@ -393,21 +226,11 @@ export const CombinedLoadingHero = ({
                 "heartbeat 1.5s ease-in-out infinite, heartbeatGlow 1.5s ease-in-out infinite",
             }}
           />
-
-          {/*<div className="w-dvw pb-10">
-            <Image
-              src="/dot-grid.png"
-              alt="Dot Grid"
-              width={400}
-              height={100}
-              className="w-[200px] md:w-sm ml-auto grayscale-30 md:translate-x-10"
-            />
-          </div>*/}
         </div>
       </div>
 
       {/* Hero Section Image Layer - Hidden behind loading screen initially */}
-      <div
+      {/*<div
         ref={heroImageRef}
         className="fixed top-0 opacity-50 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center overflow-hidden"
       >
@@ -419,13 +242,12 @@ export const CombinedLoadingHero = ({
           height={1080}
           className="w-dvw h-dvh object-center md:object-[0%_23%] object-cover pointer-events-none transition-transform duration-100 ease-out"
           style={{
-            transform: `translate(${parallaxTransform.x}px, ${parallaxTransform.y}px) scale(1.1)`
+            transform: `translate(${parallaxTransform.x}px, ${parallaxTransform.y}px) scale(1.1)`,
           }}
           priority
         />
-        {/* Mobile gradient overlay - top-left to bottom-right */}
         <div className="absolute inset-0 md:hidden bg-linear-to-br from-black/70 via-black/20 to-transparent pointer-events-none" />
-      </div>
+      </div>*/}
 
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
       {/* Hidden h1 for accessibility */}
@@ -433,21 +255,75 @@ export const CombinedLoadingHero = ({
 
       <div
         ref={tedxLogoRef}
-        className={`fixed pointer-events-none inset-0 scale-${INITIAL_SCALE} origin-center w-full h-dvh z-4 hidden items-center justify-center`}
-        style={{
-          left: `${responsiveValues.initialLeft}px`,
-          top: `${responsiveValues.initialTop}px`,
-          opacity: 0
-        }}
+        className={`fixed top-0 left-0 pointer-events-none inset-0 w-full h-dvh z-2 items-center justify-center`}
+
       >
-        <Image
-          ref={tedxLogoImageRef}
-          src="/tedx-vjcet.svg"
-          alt="TEDx Logo"
-          width={400}
-          height={100}
-          className="w-[350px] md:w-2xl pointer-events-none"
-        />
+        <svg
+          id="scrollSvg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 3000 3000"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute pointer-events-none"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <defs>
+            <pattern
+              id="collegePattern"
+              patternUnits="userSpaceOnUse"
+              width="3000"
+              height="3000"
+            >
+              <image
+                href="/college-x.png"
+                x="0"
+                y="0"
+                width="3000" // Match the viewBox width
+                height="3000" // Match the viewBox height
+                preserveAspectRatio="xMidYMid slice" // This centers and crops the image
+                style={{ pointerEvents: 'none' }}
+              />
+            </pattern>
+
+            <mask id="holeMask">
+              <rect width="100%" height="100%" fill="white" />
+              <g id="maskPaths" fill="black">
+                <path d="M787 1597V1449H732V1399H904V1449H848V1597H787" />
+                <path d="M914 1597V1399H1081V1449H974V1475H1081V1521H974V1547H1081V1597H914" />
+                <path d="M1092 1597L1092 1399H1192.47C1223.09 1399 1246.49 1409.28 1262.03 1429.57C1278.54 1451.11 1282 1478.51 1282 1497.71C1282 1528.86 1273.67 1553.24 1257.23 1570.17C1239.94 1587.97 1214.1 1597 1180.41 1597H1092ZM1151.91 1547.66H1177.02C1216.24 1547.66 1222.1 1515.82 1222.1 1496.85C1222.1 1451.85 1184.15 1448.34 1172.52 1448.34H1151.91V1547.66Z" />
+                <path d="M1290 1521L1332.26 1458.62L1291.6 1399H1334.46L1351.75 1429.92L1369.53 1399H1412.39L1371.74 1458.62L1414 1521L1371.11 1521L1351.75 1488.77L1332.87 1521H1290" />
+                <path d="M1534.55 1598.24L1462 1402.75H1481.19L1528.11 1531.2C1530.48 1537.85 1533.28 1545.98 1536.53 1555.6C1539.77 1565.22 1543.49 1576.6 1547.7 1589.72H1543.1C1547.22 1576.42 1550.9 1565.01 1554.14 1555.47C1557.38 1545.94 1560.19 1537.85 1562.55 1531.2L1608.69 1402.75H1627.88L1555.85 1598.24H1534.55Z" />
+                <path d="M1695.99 1601.11C1679.26 1601.11 1665.72 1596.13 1655.38 1586.16C1645.13 1576.1 1640 1562.06 1640 1544.04V1534.07H1658.27V1544.04C1658.27 1557.07 1661.64 1567.13 1668.39 1574.22C1675.23 1581.3 1684.43 1584.85 1695.99 1584.85C1707.47 1584.85 1716.63 1581.3 1723.46 1574.22C1730.3 1567.13 1733.72 1557.07 1733.72 1544.04V1403H1751.86V1544.04C1751.86 1562.06 1746.73 1576.1 1736.48 1586.16C1726.22 1596.13 1712.73 1601.11 1695.99 1601.11Z" />
+                <path d="M1870.43 1602C1853.43 1602 1838.44 1597.8 1825.48 1589.4C1812.51 1581.01 1802.34 1569.29 1794.98 1554.24C1787.71 1539.2 1784.07 1521.66 1784.07 1501.63C1784.07 1481.51 1787.71 1463.93 1794.98 1448.89C1802.25 1433.76 1812.38 1421.99 1825.34 1413.6C1838.4 1405.2 1853.43 1401 1870.43 1401C1880.94 1401 1890.63 1402.66 1899.48 1405.99C1908.41 1409.31 1916.26 1413.95 1923 1419.89C1929.84 1425.75 1935.4 1432.62 1939.7 1440.49C1944.08 1448.28 1947.06 1456.72 1948.63 1465.81H1930.23C1928.83 1458.9 1926.42 1452.56 1923 1446.79C1919.59 1441.02 1915.29 1435.99 1910.12 1431.7C1904.95 1427.33 1898.99 1423.96 1892.25 1421.6C1885.59 1419.24 1878.31 1418.06 1870.43 1418.06C1857.37 1418.06 1845.67 1421.38 1835.33 1428.03C1825.08 1434.68 1816.98 1444.25 1811.02 1456.76C1805.06 1469.18 1802.08 1484.14 1802.08 1501.63C1802.08 1519.13 1805.06 1534.08 1811.02 1546.5C1816.98 1558.92 1825.08 1568.46 1835.33 1575.1C1845.67 1581.66 1857.37 1584.94 1870.43 1584.94C1878.31 1584.94 1885.59 1583.76 1892.25 1581.4C1898.91 1578.95 1904.82 1575.59 1909.99 1571.3C1915.16 1567.01 1919.46 1561.98 1922.87 1556.21C1926.38 1550.44 1928.87 1544.14 1930.36 1537.32H1948.63C1947.15 1546.33 1944.21 1554.77 1939.83 1562.64C1935.45 1570.42 1929.84 1577.29 1923 1583.24C1916.26 1589.1 1908.46 1593.69 1899.61 1597.01C1890.76 1600.34 1881.03 1602 1870.43 1602Z" />
+                <path d="M1980.91 1598.24V1402.75H2100.79V1419.02H1999.05V1490.79H2093.42V1507.06H1999.05V1581.98H2101.57V1598.24L1980.91 1598.24Z" />
+                <path d="M2121.23 1420.02V1403.75H2267V1420.02H2203.25V1599.24H2185.11V1420.02H2121.23Z" />
+              </g>
+            </mask>
+          </defs>
+
+          {/* The main black background with holes */}
+          <rect width="100%" height="100%" fill="black" mask="url(#holeMask)" />
+
+          {/* The image visible only through the holes */}
+          <rect width="100%" height="100%" fill="url(#collegePattern)" mask="url(#holeMask)" />
+
+          {/* The color layer on top. Opacity controlled by scroll */}
+          <g id="colorGroup" ref={colorGroupRef} style={{ opacity: 1 }}>
+            <g fill="#EB0028">
+              <path d="M787 1597V1449H732V1399H904V1449H848V1597H787" />
+              <path d="M914 1597V1399H1081V1449H974V1475H1081V1521H974V1547H1081V1597H914" />
+              <path d="M1092 1597L1092 1399H1192.47C1223.09 1399 1246.49 1409.28 1262.03 1429.57C1278.54 1451.11 1282 1478.51 1282 1497.71C1282 1528.86 1273.67 1553.24 1257.23 1570.17C1239.94 1587.97 1214.1 1597 1180.41 1597H1092ZM1151.91 1547.66H1177.02C1216.24 1547.66 1222.1 1515.82 1222.1 1496.85C1222.1 1451.85 1184.15 1448.34 1172.52 1448.34H1151.91V1547.66Z" />
+              <path d="M1290 1521L1332.26 1458.62L1291.6 1399H1334.46L1351.75 1429.92L1369.53 1399H1412.39L1371.74 1458.62L1414 1521L1371.11 1521L1351.75 1488.77L1332.87 1521H1290" />
+            </g>
+            <g fill="white">
+              <path d="M1534.55 1598.24L1462 1402.75H1481.19L1528.11 1531.2C1530.48 1537.85 1533.28 1545.98 1536.53 1555.6C1539.77 1565.22 1543.49 1576.6 1547.7 1589.72H1543.1C1547.22 1576.42 1550.9 1565.01 1554.14 1555.47C1557.38 1545.94 1560.19 1537.85 1562.55 1531.2L1608.69 1402.75H1627.88L1555.85 1598.24H1534.55Z" />
+              <path d="M1695.99 1601.11C1679.26 1601.11 1665.72 1596.13 1655.38 1586.16C1645.13 1576.1 1640 1562.06 1640 1544.04V1534.07H1658.27V1544.04C1658.27 1557.07 1661.64 1567.13 1668.39 1574.22C1675.23 1581.3 1684.43 1584.85 1695.99 1584.85C1707.47 1584.85 1716.63 1581.3 1723.46 1574.22C1730.3 1567.13 1733.72 1557.07 1733.72 1544.04V1403H1751.86V1544.04C1751.86 1562.06 1746.73 1576.1 1736.48 1586.16C1726.22 1596.13 1712.73 1601.11 1695.99 1601.11Z" />
+              <path d="M1870.43 1602C1853.43 1602 1838.44 1597.8 1825.48 1589.4C1812.51 1581.01 1802.34 1569.29 1794.98 1554.24C1787.71 1539.2 1784.07 1521.66 1784.07 1501.63C1784.07 1481.51 1787.71 1463.93 1794.98 1448.89C1802.25 1433.76 1812.38 1421.99 1825.34 1413.6C1838.4 1405.2 1853.43 1401 1870.43 1401C1880.94 1401 1890.63 1402.66 1899.48 1405.99C1908.41 1409.31 1916.26 1413.95 1923 1419.89C1929.84 1425.75 1935.4 1432.62 1939.7 1440.49C1944.08 1448.28 1947.06 1456.72 1948.63 1465.81H1930.23C1928.83 1458.9 1926.42 1452.56 1923 1446.79C1919.59 1441.02 1915.29 1435.99 1910.12 1431.7C1904.95 1427.33 1898.99 1423.96 1892.25 1421.6C1885.59 1419.24 1878.31 1418.06 1870.43 1418.06C1857.37 1418.06 1845.67 1421.38 1835.33 1428.03C1825.08 1434.68 1816.98 1444.25 1811.02 1456.76C1805.06 1469.18 1802.08 1484.14 1802.08 1501.63C1802.08 1519.13 1805.06 1534.08 1811.02 1546.5C1816.98 1558.92 1825.08 1568.46 1835.33 1575.1C1845.67 1581.66 1857.37 1584.94 1870.43 1584.94C1878.31 1584.94 1885.59 1583.76 1892.25 1581.4C1898.91 1578.95 1904.82 1575.59 1909.99 1571.3C1915.16 1567.01 1919.46 1561.98 1922.87 1556.21C1926.38 1550.44 1928.87 1544.14 1930.36 1537.32H1948.63C1947.15 1546.33 1944.21 1554.77 1939.83 1562.64C1935.45 1570.42 1929.84 1577.29 1923 1583.24C1916.26 1589.1 1908.46 1593.69 1899.61 1597.01C1890.76 1600.34 1881.03 1602 1870.43 1602Z" />
+              <path d="M1980.91 1598.24V1402.75H2100.79V1419.02H1999.05V1490.79H2093.42V1507.06H1999.05V1581.98H2101.57V1598.24L1980.91 1598.24Z" />
+              <path d="M2121.23 1420.02V1403.75H2267V1420.02H2203.25V1599.24H2185.11V1420.02H2121.23Z" />
+            </g>
+          </g>
+        </svg>
       </div>
 
       <style jsx>{`
@@ -499,8 +375,6 @@ export const CombinedLoadingHero = ({
             transform: translateY(0);
           }
         }
-
-
       `}</style>
     </>
   );
