@@ -70,5 +70,6 @@ export const SPONSORS_DATA = {
     { name: 'OHCO Chocolate', website: 'https://ohco.in/', image: '/sponsors/curated/ohco-a.png' },
     { name: 'Kottaram Sweet House', website: 'https://www.kottaramsweets.com/', image: '/sponsors/curated/kottaram-a.png' },
     { name: 'Jack And Jerry Ice Cream', website: 'https://www.instagram.com/jack_and_jerry_ice_cream_/', image: '/sponsors/curated/jack_and_jerry_ice_creams.png' },
+    { name: 'Make My Pass', website: 'https://makemypass.com/', image: '/sponsors/curated/makemypass.png' }
   ],
 };
