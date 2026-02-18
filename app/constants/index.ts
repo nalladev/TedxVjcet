@@ -65,6 +65,7 @@ export const SPONSORS_DATA = {
   bronze: [
     { name: 'Joance Regency', website: 'https://joanceregency.com/', image: '/sponsors/curated/joance.png' },
     { name: 'Digiora', website: 'https://www.digiora.com/', image: '/sponsors/curated/digiora.png' },
+    { name: 'South Indian Bank', website: 'https://www.southindianbank.bank.in/', image: '/sponsors/curated/sib.png' },
   ],
   inKind: [
     { name: 'OHCO Chocolate', website: 'https://ohco.in/', image: '/sponsors/curated/ohco-a.png' },
